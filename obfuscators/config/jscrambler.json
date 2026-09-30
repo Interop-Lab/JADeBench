@@ -1,0 +1,17 @@
+{
+  "_comment": "TEMPLATE — the single fully-enabled Jscrambler config applied to every commercial-tier subject. The commercial tier does not run an ablation ladder (that is the open-source tier's job, §2.2); it turns on every protection at once to exercise the three capabilities a build-time open-source tool cannot: runtime protection (self-defending / debugging protection), usage/environment control (domain lock), and per-build polymorphism. Fill `accessKey`/`secretKey`/`applicationId` from your licensed Jscrambler account before running; keep this file out of any public release (it carries account keys). config/commercial.json points `build.config_file` here and records this file's hash with every build.",
+  "accessKey": "REQUIRED: from your Jscrambler account",
+  "secretKey": "REQUIRED: from your Jscrambler account",
+  "applicationId": "REQUIRED: the Jscrambler application id",
+  "params": [
+    { "name": "objectPropertiesSparsing" },
+    { "name": "variableMasking" },
+    { "name": "stringConcealing" },
+    { "name": "stringSplitting" },
+    { "name": "controlFlowFlattening" },
+    { "name": "deadCodeInjection" },
+    { "name": "selfDefending", "options": { "options": ["message-die"] } },
+    { "name": "debuggingProtection", "options": { "options": ["message-die"] } }
+  ],
+  "areSubscribersOrdered": false
+}

@@ -1,0 +1,40 @@
+{
+  "_comment": "LLM-generated obfuscation group for agent evaluation. Same subjects as corpus/original (the javascript-obfuscator/full comparison set). Builds must pass the same sandbox differential test as the open-source tier. The obfuscating model is disjoint from the evaluated deobfuscation systems (DeepSeek / Kimi / Opus / GLM / gpt-sol).",
+
+  "tool": "llm-t19",
+  "tier": "model-generated",
+  "config_id": "t19h",
+  "cli": {
+    "_comment": "Hardened T19: optional LLM alternative_reimplementation first (skipped if it fails or no API key), then mechanical rename, XOR string table, control-flow flattening, and opaque dead code. Oracle admission still gates the corpus.",
+    "dir": "tools/standalone-llm-obfuscate",
+    "techniques": [
+      "alternative_reimplementation",
+      "var_rename",
+      "string_splitting",
+      "control_flow_flatten",
+      "dead_code_insert"
+    ],
+    "temperature": 0.5,
+    "max_tokens": 32768,
+    "retries": 2,
+    "max_continues": 5,
+    "chunk_chars": 0,
+    "concurrency": 1
+  },
+  "provider": {
+    "vendor": "openrouter",
+    "model": "qwen/qwen3-coder",
+    "base_url": "https://openrouter.ai/api/v1",
+    "api_key_env": "OPENROUTER_API_KEY"
+  },
+  "selection": {
+    "_comment": "Restrict to corpus/original so the LLM group is comparable with jsob_corpus_full / vm_corpus_l1. max_bytes 0 = no size skip.",
+    "from_original": true,
+    "max_bytes": 0
+  },
+  "controls": {
+    "differential_test": "scripts/02_admit.py",
+    "regenerate_on_failure": true,
+    "max_attempts": 3
+  }
+}

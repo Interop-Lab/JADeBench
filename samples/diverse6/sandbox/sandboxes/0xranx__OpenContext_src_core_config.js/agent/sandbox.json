@@ -1,0 +1,9 @@
+{
+  "handle": "1a88e1c115d2f863",
+  "entry": "subject.cjs",
+  "runtime": "node",
+  "dependencies": {
+    "available": []
+  },
+  "browser": null
+}

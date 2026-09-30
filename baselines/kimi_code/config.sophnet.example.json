@@ -1,0 +1,11 @@
+{
+  "model": "DeepSeek-V4-Pro-0813",
+  "provider": "sophnet",
+  "provider_type": "openai",
+  "base_url": "https://www.sophnet.com/api/open-apis/v1",
+  "api_key_env": "SOPHNET_API_KEY",
+  "timeout_seconds": 1200,
+  "idle_after_final_seconds": 45,
+  "max_steps_per_turn": 64,
+  "enable_browsing": false
+}

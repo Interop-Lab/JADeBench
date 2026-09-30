@@ -1,0 +1,17 @@
+{
+  "name": "agentdeobfbench-static-tools",
+  "private": true,
+  "type": "module",
+  "description": "Pinned S1 traditional static deobfuscator baselines for AgentDeobfBench",
+  "engines": {
+    "node": ">=22 <23 || >=24 <25 || >=26 <27"
+  },
+  "scripts": {
+    "versions": "node runner.mjs --versions",
+    "smoke": "node runner.mjs --smoke"
+  },
+  "dependencies": {
+    "deobfuscator": "2.4.6",
+    "webcrack": "2.16.0"
+  }
+}

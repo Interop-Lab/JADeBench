@@ -1,0 +1,18 @@
+{
+  "schema_version": "agentdeobfbench-codenet-run-v1",
+  "run_id": "l0-glm/jsob-full",
+  "benchmark": "codenet100",
+  "system_slug": "l0-glm",
+  "system": "GLM-5.2@L0",
+  "model": "GLM-5.2",
+  "level": "L0",
+  "protection": "jsob-full",
+  "prediction_count": 100,
+  "score_count": 100,
+  "metric_schema": "JsDeObsBench-compatible",
+  "files": {
+    "predictions": "predictions.jsonl",
+    "scores": "scores.jsonl",
+    "outputs": "outputs/"
+  }
+}

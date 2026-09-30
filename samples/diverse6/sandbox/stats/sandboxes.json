@@ -1,0 +1,65 @@
+{
+  "built": 6,
+  "failed": 0,
+  "by_runtime": {
+    "agnostic": 2,
+    "browser": 2,
+    "node": 2
+  },
+  "results": [
+    {
+      "subject_id": "0xranx__OpenContext::src/core/config.js",
+      "ok": true,
+      "path": "sandboxes/0xranx__OpenContext_src_core_config.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "Midtrans__midtrans-nodejs-client::lib/apiConfig.js",
+      "ok": true,
+      "path": "sandboxes/Midtrans__midtrans-nodejs-client_lib_apiConfig.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "depjs__dep::lib/run.js",
+      "ok": true,
+      "path": "sandboxes/depjs__dep_lib_run.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/helpers/inline_style.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_helpers_inline_style.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "repplus__rep-chrome::js/core/utils/dom.js",
+      "ok": true,
+      "path": "sandboxes/repplus__rep-chrome_js_core_utils_dom.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "spite__ccapture.js::src/createMotionBlur.js",
+      "ok": true,
+      "path": "sandboxes/spite__ccapture.js_src_createMotionBlur.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    }
+  ]
+}

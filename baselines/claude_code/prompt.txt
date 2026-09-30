@@ -1,0 +1,65 @@
+Deobfuscate `{entry}` and write the recovered JavaScript to `answer.js`.
+
+`answer.js` is for a programmer who will read and change it. When you
+finish, the file should be ordinary source: names that say what a value
+is for, control flow a person can follow, and formatting you would accept
+in a code review. A maintainer should not need a decoder, a string table,
+or an interpreter to understand it. Keep runtime behavior, the module
+system, and public exports. Resolve string encodings, aliases, dispatch
+tables, flattened control flow, injected dead code, and misleading
+identifiers when the source supports it. Do not invent APIs that are not
+in the input.
+
+`answer.js` already contains a syntax-valid, behavior-preserving safety draft
+(often a copy of the obfuscated input). That draft is only a crash cushion:
+it is NOT an acceptable final answer. Leaving `answer.js` nearly identical to
+`{entry}`, or only adding comments/headers on top of the obfuscated body, is a
+failed task. You must replace the body with recovered code as soon as the
+string table is decoded. Do not end the session with "WIP", "initiated", or
+"ready for the next iteration" while the body is still obfuscated.
+
+Never delete `answer.js` or replace it with empty/incomplete syntax-invalid
+code. Improve it early; keep each promoted version `node --check` clean. The
+harness periodically saves syntax-valid versions and will reject finals that
+are still near-copies of the input. Write a short `CHECKPOINT.md` with what is
+decoded, what remains, and the next concrete action so a later run can
+continue. If decoder/helper files are already present, they came from a prior
+run: inspect and reuse them. `CHECKPOINT.md` is mid-run notes, not a substitute
+for a recovered `answer.js`.
+
+Recover only from `{entry}` in this workspace. Do not search the web,
+GitHub, npm, or any upstream repository. Looking up the original project
+and copying it is a failed task.
+
+`{entry}` is in this workspace and is the full obfuscated program (often
+one long minified line). The file is on disk; you have it. Do not use the
+Read tool on `{entry}`: that tool pastes the entire line into the next
+model request and the gateway can stall. Use bash/Node against the file
+instead. Scripts see the whole program. Keep stdout small: write decoded
+strings to a file and echo a count plus a few samples. Do not print the
+raw file, the string table, or an extracted function. For example
+`wc -c {entry}`, `head -c 4000 {entry}`, then a short decoder script that
+writes `decoded.json`. Do not wrap `{entry}` into another file and then
+execute that copy.
+The program contains anti-debug and infinite-loop traps. Extract a
+decoder first; do not run the full file as the first attempt. Do not
+`import` or execute `{entry}`, and do not import a decoder that loads
+the full file. The harness blocks `node -e`; write `_decode.mjs` and run
+`node _decode.mjs` instead. Write `decoded.json`. Executing `{entry}` can
+hang; do not retry that. Decoder and rewrite scripts are not the trap. On
+those shell calls set `timeout_ms` to {bash_timeout_ms}. Do not wrap them
+in `timeout 2s` or `timeout 5s`. If a script is still making progress, let
+it finish. A timeout means change the script, not abandon the file.
+
+Skip `package.json`, `sandbox.json`, and `CLAUDE.md`. Do not write
+outside this directory. Do not run `find /` or search the rest of the
+machine. After the string table is decoded (`decoded.json` or
+`_decoded_stage1.mjs`), rewrite `answer.js` and keep going in this same
+session until the file reads as maintained source. Inlining strings is
+only a step. Stop when you would hand the file to another programmer
+without an apology: the decoder and string table are gone, control flow
+is ordinary, and the names are ones a person chose. `node --check` and a
+shorter file do not make an unreadable program done. A long file needs
+the same kind of result as a short one. Do not keep editing the decoder
+or polishing CHECKPOINT.md instead. A summary with no recovered
+`answer.js` is a failed task.

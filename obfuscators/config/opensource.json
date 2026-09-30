@@ -1,0 +1,74 @@
+{
+  "_comment": "Open-source obfuscation tier (paper §3.4). Two tools, one shared configuration ladder. Each rung adds one family of transformations on top of the rung below, so an ablation reads a difference between two adjacent rungs as the effect of the transformation that separates them. The complete options object and the seed are recorded for every build, so any build is regenerable from this file alone. Thresholds that the paper says are continuous in [0,1] (flattening, dead code, string array) are swept separately — see the `sweep` block — instead of being toggled.",
+
+  "seed": 20260809,
+  "_seed_rationale": "One fixed seed for the whole tier makes every build reproducible: javascript-obfuscator consumes it directly, and js-confuser is made deterministic by seeding Math.random with it (tools/obfuscate.mjs). Per-subject seeds are derived as seed + index so two subjects do not share a random stream.",
+
+  "tools": {
+    "javascript-obfuscator": {
+      "version": "5.5.0",
+      "note": "The declared target of essentially every public JavaScript deobfuscator; carries the legacy setting.",
+      "base": {
+        "compact": true,
+        "target": "node",
+        "renameGlobals": false,
+        "renameProperties": false,
+        "sourceMap": false
+      },
+      "_base_rationale": "renameGlobals and renameProperties stay off across the whole ladder: the subject is a module whose exported names are its interface with the oracle test, and renaming them would break loading for reasons unrelated to the transformation under study. target:node matches the corpus (143 node / 28 browser subjects all load under node in the sandbox).",
+      "ladder": {
+        "default":     { "simplify": true, "stringArray": true, "stringArrayThreshold": 0.75 },
+        "rename":      { "identifierNamesGenerator": "hexadecimal" },
+        "strings":     { "stringArrayThreshold": 1.0, "stringArrayEncoding": ["base64"], "stringArrayRotate": true, "stringArrayShuffle": true, "splitStrings": true, "splitStringsChunkLength": 8, "stringArrayWrappersCount": 2, "stringArrayWrappersType": "function", "stringArrayCallsTransform": true },
+        "controlflow": { "controlFlowFlattening": true, "controlFlowFlatteningThreshold": 0.75 },
+        "deadcode":    { "deadCodeInjection": true, "deadCodeInjectionThreshold": 0.4 },
+        "anti":        { "selfDefending": true, "debugProtection": true },
+        "full":        { "controlFlowFlatteningThreshold": 1.0, "deadCodeInjectionThreshold": 0.6, "numbersToExpressions": true, "transformObjectKeys": true, "stringArrayEncoding": ["rc4"] }
+      },
+      "_ladder_note": "Each rung is merged onto base plus every rung above it in this list, so `full` is the union of all rows. `anti` adds selfDefending+debugProtection; both survive a non-instrumented suite run and only bite under L2 debugging, which is where the paper wants their effect to appear. Domain locking is a separate, environment-conditional option (see `domain_lock`), not part of the always-admitted ladder."
+    },
+
+    "js-confuser": {
+      "version": "2.1.3",
+      "note": "A maintained open-source obfuscator with no public deobfuscator written against it; separates 'reversible because weak' from 'reversible because the community invested in reversing js-obfuscator'.",
+      "max_subjects": 171,
+      "_max_subjects_rationale": "JSConfuser's heavy rungs (controlFlowFlattening, deadCode, stringConcealing at high thresholds) are super-linear on real code — tens of seconds per build, versus sub-second for javascript-obfuscator — so applying the full ladder to all 171 subjects is not tractable within a practical budget. This tool's role is the weak-vs-community-invested contrast, which a stratified sample serves; the ablation ladder itself is carried by javascript-obfuscator at full scale. The sample is deterministic (evenly spaced across subjects sorted by domain, runner, format, id) and is logged to stats/jsconfuser_sample.json. Raise this to 171 to cover the whole corpus if time permits.",
+      "base": {
+        "target": "node",
+        "compact": true,
+        "renameGlobals": false
+      },
+      "_determinism_note": "js-confuser 2.x has no seed option and is non-deterministic by default; tools/obfuscate.mjs seeds Math.random around the call to make it reproducible. Verified byte-identical across repeated runs at build time.",
+      "ladder": {
+        "default":     {},
+        "rename":      { "renameVariables": true },
+        "strings":     { "stringConcealing": true, "stringSplitting": true },
+        "controlflow": { "controlFlowFlattening": 0.75 },
+        "deadcode":    { "deadCode": 0.5 },
+        "anti":        { "lock": { "selfDefending": true, "antiDebug": true } },
+        "full":        { "controlFlowFlattening": 1.0, "deadCode": 0.6, "stringConcealing": true, "stringSplitting": true, "renameVariables": true }
+      },
+      "_ladder_note": "Matched rung-for-rung to javascript-obfuscator so the two tools are comparable at each step. rgf (function-to-eval wrapping) is deliberately excluded: it rewrites callable exports through a runtime generator and breaks the oracle interface for reasons unrelated to comprehension difficulty."
+    }
+  },
+
+  "domain_lock": {
+    "_comment": "Domain / environment locking is deliberately NOT semantics-preserving: the build is designed to fail outside its sanctioned environment (paper §3.4 'Admission and reporting'). It is therefore held apart from the always-admitted ladder. When built, admission must configure the sandbox to satisfy the declared environment, and any build discarded on this ground is recorded rather than dropped silently.",
+    "javascript-obfuscator": { "domainLock": ["localhost", "sandbox.local"], "domainLockRedirectUrl": "about:blank" },
+    "js-confuser": { "lock": { "domainLock": ["localhost", "sandbox.local"] } },
+    "declares_environment": { "origin": "https://sandbox.local/", "hosts": ["localhost", "sandbox.local"] }
+  },
+
+  "sweep": {
+    "_comment": "Strength within the ladder is continuous, not binary: the flattening, dead-code, and string-array thresholds are fractions in [0,1]. We sweep them on a sample of subjects to produce the threshold-sensitivity curve the paper asks for, instead of toggling them. Sweeping every subject × threshold × transformation would multiply the build count several-fold with no new information about the curve's shape, so we sample and log the sample.",
+    "tool": "javascript-obfuscator",
+    "points": [0.0, 0.25, 0.5, 0.75, 1.0],
+    "axes": {
+      "controlFlowFlatteningThreshold": { "controlFlowFlattening": true },
+      "deadCodeInjectionThreshold": { "deadCodeInjection": true },
+      "stringArrayThreshold": { "stringArray": true, "stringArrayEncoding": ["base64"] }
+    },
+    "sample_subjects": 20,
+    "_sample_rationale": "Deterministic sample: the first 20 subjects by subject_id with a usable oracle, so the sweep's admission is meaningful. The set is logged to stats/sweep.json."
+  }
+}

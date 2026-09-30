@@ -1,0 +1,101 @@
+{
+  "schema_version": 4,
+  "_comment": "Frozen evaluator configuration for AgentDeobfBench (paper §3.2). Every threshold and weight the evaluators use lives here, so a result can be reproduced from the artifact alone. Changing a value changes reported scores: bump schema_version and say so in README.md.",
+  "_changelog": {
+    "4": [
+      "Syntax correctness is parse-only. tree-sitter and node --check still both have to accept the program, but a missing or unreadable export name no longer sets the score to 0. Export names stay in the record for diagnosis. Obfuscated modules hide those names in string tables while still loading, and charging that to syntax contradicted an execution score of 1.0 on the same program."
+    ],
+    "3": [
+      "Execution correctness now runs against the sandbox's per-subject oracle view (sandbox/sandboxes/<box>/oracle) instead of mutating the shared project checkout under corpus/work. The rest of the pipeline — differential admission in obfuscators/02_admit.py, agent mounting in baselines/lib/mount.py — already operated there; the evaluators were the only consumer still writing into the corpus. Scores are expected to be unchanged where a subject is measurable in both, and that is checked rather than assumed; the measurable population itself may shift, so the migration reports every status transition per subject.",
+      "A returned program whose test run is defeated by the build's own anti-analysis code is no longer charged to the system. The differential harness substitutes a tracing shim, which is a source rewrite, and that is exactly what the `anti` and `full` rungs' self-defending and debug-protection code exists to detect: the `identity` oracle scored execution 0.0 with status `timeout` on a program byte-identical to an admitted build. Such runs now carry status `defense_triggered` with a null score, matching the vocabulary obfuscators/02_admit.py already uses. This is a heuristic keyed on the rung and must be reported separately, never averaged into behaviour_match.",
+      "The syntax evaluator no longer guesses an export surface it cannot read. `module.exports = <identifier>` was recorded as `default`, asserting the module had exactly one export when the truth was unknown; on a reference with named exports that reported every one of them missing. webcrack's `full` answers are of exactly this shape, and one scored syntax 0 and execution 1.0 simultaneously. An identifier is now resolved against the module's own scope where possible (a class or function plus its module-scope statics, an object literal plus the same), and only a genuinely unresolvable value falls back to `*`. `*` in the reference's surface means the contract is unreadable and the check abstains, recorded as exports_unresolved.",
+      "simplification.weights: max_depth drops to 0. It carries no signal under this obfuscation suite — on 26 of 57 scored records the obfuscated build was no deeper than the original, and its median inflation is 1.17x against 6.10x for ast_nodes — so a third of the weight went to a near-constant term. The effect on system-level results is small and is reported honestly rather than claimed: on the pilot the per-system median anchored moves by at most 0.02 and the gap between the two traditional deobfuscators goes from 0.781 to 0.763. What changes visibly is the over-deletion case, where the empty program's overshoot falls from 3.45 to 1.86 (still above 1, still flagged over_simplified). max_depth is still measured and reported, so a stored score can be re-weighted without re-parsing.",
+      "simplification.size_ratio is derived from bytes rather than lines. Every build in the suite is emitted with `compact: true`, so its loc is 1 and the ratio measured the compactor: it ranged from 44 to 24384 across the scored predictions. Bytes matches the obfuscation stage's own size_inflation.",
+      "Every score produced under schema_version 1 or 2 must be regenerated."
+    ],
+    "2": [
+      "Execution traces no longer carry renameable identifiers. A function value serialised as '@fn:<name>' made a returned function's identifier part of its observable behaviour, so a behaviourally perfect answer scored as divergent unless it happened to reproduce the developer's original name — scoring identifier recovery inside the primary measure, and scoring it backwards. Function values are now '@fn/<arity>'; a constructor name is kept only when the constructor is ambient (globalThis[name] === ctor), which is true of built-ins an obfuscator cannot rename and false of a class the subject declares.",
+      "Reference-run caches are additionally keyed on the tracer checksum, so a serialisation change invalidates them instead of silently comparing a new-format candidate trace against an old-format cached reference.",
+      "The syntax evaluator's export-surface check now reads CommonJS exports as well as ESM. It recognised only 'export' statements, which made it a no-op on 131 of the 171 subjects — every CommonJS bundle had an empty expected surface, so the check passed vacuously and syntax correctness silently meant only 'it parses'.",
+      "Every score produced under schema_version 1 must be regenerated."
+    ]
+  },
+
+  "toolchain": {
+    "python": "3.9",
+    "tree_sitter": "0.22.3",
+    "tree_sitter_javascript": "0.21.1",
+    "node": "22",
+    "esbuild": "corpus/tools/node_modules/esbuild (^0.24.0)"
+  },
+
+  "syntax": {
+    "_comment": "A returned program counts as syntactically correct when it parses. tree-sitter must report no ERROR or MISSING node, and node --check must accept it. Export names are still recorded when require_export_surface is true, and they do not affect the score.",
+    "cross_check_with_node": true,
+    "node_check_timeout_sec": 30,
+    "require_export_surface": true
+  },
+
+  "simplification": {
+    "_comment": "Complexity vector V = (ast_nodes, cyclomatic, max_nesting_depth), each scaled by the obfuscated build's value so that C(obfuscated) = 1. jsdeobs is JsDeObsBench Equation 1 (1 - HLoC_cand/HLoC_obf, syntax-gated). rel_obf/anchored keep the reduction-vector formulation. See README.md §Simplification.",
+    "weights": {"ast_nodes": 0.5, "cyclomatic": 0.5, "max_depth": 0.0},
+    "_weights_comment": "max_depth is measured and reported but weighted 0: this obfuscation suite barely moves it (no increase at all on 26 of 57 scored records; median inflation 1.17x against 6.10x for ast_nodes), so at an equal third it acted as a near-constant term in both numerator and denominator and compressed anchored's usable range by close to half. Restore it to 1/3 to reproduce schema_version 2 numbers.",
+    "epsilon": 1e-9
+  },
+
+  "similarity": {
+    "_comment": "CodeBLEU minus its dataflow component (codebleu3). Components are reported separately so a different weighting can be applied post hoc without rescoring.",
+    "weights": {"bleu": 0.3334, "weighted_bleu": 0.3333, "ast_match": 0.3333},
+    "max_ngram": 4,
+    "keyword_weight": 4.0,
+    "ast_ngram_orders": [1, 2, 3, 4]
+  },
+
+  "execution": {
+    "_comment": "Differential comparison of observable behaviour: the subject's own test file drives both the reference bundle and the candidate, and the two traces are compared. trace_match is the primary score.",
+    "timeout_sec": 300,
+    "anti_rungs": ["anti", "full"],
+    "defense_timeout_sec": 15,
+    "_defense_comment": "Rungs carrying selfDefending / debugProtection. The differential harness substitutes a tracing shim, which is a source rewrite, which is what those options exist to detect — so a candidate on these rungs that never exits or produces no events at all, while the reference run of the same subject through the same substitution was fine, is scored `defense_triggered` with a null score rather than charged to the system. Keyed on the rung, so it is a heuristic and must be reported separately, never averaged into behaviour_match. The short cap matches obfuscators/scripts/02_admit.py's CAP_ANTI: a self-defending build never exits, so waiting the full timeout_sec only lengthens the wait.",
+    "max_events": 5000,
+    "value_string_cap": 200,
+    "value_depth_cap": 4,
+    "value_array_cap": 20,
+    "value_key_cap": 30,
+    "value_budget": 2000,
+    "_budget_comment": "Characters of serialised value per recorded event. Real subjects are called with host objects (a markdown parser, a request, a DOM node) whose reachable graph is unbounded at any useful depth limit; without this an event reaches tens of kilobytes and the trace stops being diffable.",
+    "host_globals": [
+      "Date.now",
+      "Math.random",
+      "fetch",
+      "XMLHttpRequest",
+      "localStorage.getItem",
+      "localStorage.setItem",
+      "sessionStorage.getItem",
+      "sessionStorage.setItem",
+      "console.log",
+      "console.warn",
+      "console.error",
+      "setTimeout",
+      "setInterval",
+      "queueMicrotask",
+      "crypto.randomUUID",
+      "crypto.getRandomValues",
+      "process.exit"
+    ],
+    "_host_comment": "Recorded only while the tracer's call depth is above zero, so the test runner's own host traffic never enters a trace. Timers and randomness are recorded, never stubbed: stubbing them changes the program under test.",
+    "normalize": {
+      "_comment": "Applied to both traces identically before comparison. Without this, a trace differs from itself across runs and every candidate scores zero.",
+      "absolute_paths": true,
+      "timestamps": true,
+      "temp_dirs": true,
+      "stack_traces": true,
+      "ephemeral_ports": true
+    }
+  },
+
+  "identifier": {
+    "_comment": "Not implemented in this release. Variable alignment between the original and a returned program is unresolved (paper §3.2 TODO); the field stays null in scores.jsonl so the record schema does not change when it lands.",
+    "implemented": false
+  }
+}

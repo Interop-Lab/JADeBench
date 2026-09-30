@@ -1,0 +1,1 @@
+{"name":"adb-sandbox-shared","private":true,"description":"Shared host emulation packages for sandboxes whose project did not install one.","dependencies":{"jsdom":"^25.0.0"}}

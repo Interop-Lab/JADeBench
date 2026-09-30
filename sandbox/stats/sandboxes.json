@@ -1,0 +1,2550 @@
+{
+  "built": 271,
+  "failed": 0,
+  "by_runtime": {
+    "node": 180,
+    "agnostic": 61,
+    "browser": 30
+  },
+  "results": [
+    {
+      "subject_id": "0xranx__OpenContext::src/core/config.js",
+      "ok": true,
+      "path": "sandboxes/0xranx__OpenContext_src_core_config.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "0xranx__OpenContext::src/core/search/native-adapter.js",
+      "ok": true,
+      "path": "sandboxes/0xranx__OpenContext_src_core_search_native-adapter.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "0xranx__OpenContext::src/core/store-native.js",
+      "ok": true,
+      "path": "sandboxes/0xranx__OpenContext_src_core_store-native.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "CacheControl__json-rules-engine::src/almanac.js",
+      "ok": true,
+      "path": "sandboxes/CacheControl__json-rules-engine_src_almanac.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "CacheControl__json-rules-engine::src/condition.js",
+      "ok": true,
+      "path": "sandboxes/CacheControl__json-rules-engine_src_condition.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "CacheControl__json-rules-engine::src/rule.js",
+      "ok": true,
+      "path": "sandboxes/CacheControl__json-rules-engine_src_rule.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "CrazyTim__spin-wheel::src/item.js",
+      "ok": true,
+      "path": "sandboxes/CrazyTim__spin-wheel_src_item.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "CrazyTim__spin-wheel::src/util.js",
+      "ok": true,
+      "path": "sandboxes/CrazyTim__spin-wheel_src_util.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "CrazyTim__spin-wheel::src/wheel.js",
+      "ok": true,
+      "path": "sandboxes/CrazyTim__spin-wheel_src_wheel.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "LesterLyu__fast-formula-parser::formulas/error.js",
+      "ok": true,
+      "path": "sandboxes/LesterLyu__fast-formula-parser_formulas_error.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "LesterLyu__fast-formula-parser::grammar/dependency/hooks.js",
+      "ok": true,
+      "path": "sandboxes/LesterLyu__fast-formula-parser_grammar_dependency_hooks.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "Midtrans__midtrans-nodejs-client::lib/apiConfig.js",
+      "ok": true,
+      "path": "sandboxes/Midtrans__midtrans-nodejs-client_lib_apiConfig.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "Midtrans__midtrans-nodejs-client::lib/httpClient.js",
+      "ok": true,
+      "path": "sandboxes/Midtrans__midtrans-nodejs-client_lib_httpClient.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "SabakiHQ__Sabaki::src/modules/fileformats/index.js",
+      "ok": true,
+      "path": "sandboxes/SabakiHQ__Sabaki_src_modules_fileformats_index.js",
+      "runtime": "node",
+      "deps_required": 8,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "SabakiHQ__Sabaki::src/modules/gamesort.js",
+      "ok": true,
+      "path": "sandboxes/SabakiHQ__Sabaki_src_modules_gamesort.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "adobe__jsonschema2md::lib/markdownBuilder.js",
+      "ok": true,
+      "path": "sandboxes/adobe__jsonschema2md_lib_markdownBuilder.js",
+      "runtime": "agnostic",
+      "deps_required": 5,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::bin/dev-cli.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_bin_dev-cli.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/adapter-transforms.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_adapter-transforms.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/collectors/docs-patterns.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_collectors_docs-patterns.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 2,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/collectors/github.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_collectors_github.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/collectors/index.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_collectors_index.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 2,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/cross-platform/index.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_cross-platform_index.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/discovery/index.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_discovery_index.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/drift-detect/collectors.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_drift-detect_collectors.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 2,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/enhance/agent-analyzer.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_enhance_agent-analyzer.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "agent-sh__agentsys::lib/enhance/auto-suppression.js",
+      "ok": true,
+      "path": "sandboxes/agent-sh__agentsys_lib_enhance_auto-suppression.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "breakdance__breakdance::index.js",
+      "ok": true,
+      "path": "sandboxes/breakdance__breakdance_index.js",
+      "runtime": "agnostic",
+      "deps_required": 19,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "cli-table__cli-table3::src/cell.js",
+      "ok": true,
+      "path": "sandboxes/cli-table__cli-table3_src_cell.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "cli-table__cli-table3::src/table.js",
+      "ok": true,
+      "path": "sandboxes/cli-table__cli-table3_src_table.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "cli-table__cli-table3::src/utils.js",
+      "ok": true,
+      "path": "sandboxes/cli-table__cli-table3_src_utils.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "codenet::p00086_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00086_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00139_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00139_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p00140_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00140_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00195_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00195_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00196_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00196_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p00222_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00222_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00275_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00275_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00310_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00310_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00322_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00322_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00375_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00375_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p00592_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00592_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00735_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00735_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p00811_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p00811_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p01086_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p01086_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p01093_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p01093_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p01117_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p01117_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p01267_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p01267_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p01303_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p01303_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p01694_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p01694_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p01899_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p01899_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p01981_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p01981_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02163_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02163_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02202_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02202_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02234_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02234_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02249_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02249_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p02257_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02257_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02385_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02385_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02393_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02393_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02441_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02441_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02443_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02443_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02445_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02445_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p02607_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02607_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02609_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02609_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02616_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02616_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02660_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02660_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02708_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02708_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02724_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02724_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02779_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02779_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02788_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02788_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02792_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02792_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02802_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02802_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02831_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02831_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02838_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02838_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02847_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02847_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02856_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02856_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02862_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02862_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02941_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02941_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02954_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02954_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02984_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02984_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p02988_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p02988_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03005_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03005_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03006_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03006_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03047_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03047_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p03053_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03053_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03078_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03078_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03130_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03130_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03136_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03136_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03155_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03155_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03157_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03157_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03164_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03164_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03193_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03193_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03194_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03194_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03200_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03200_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03201_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03201_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03202_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03202_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03206_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03206_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03210_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03210_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03212_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03212_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03240_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03240_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03273_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03273_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03316_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03316_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03325_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03325_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03329_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03329_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03331_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03331_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03334_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03334_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03361_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03361_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03363_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03363_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03369_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03369_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03381_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03381_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03387_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03387_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03407_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03407_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03417_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03417_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03473_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03473_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03485_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03485_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p03545_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03545_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03587_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03587_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p03610_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03610_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03631_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03631_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03643_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03643_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03657_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03657_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03720_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03720_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample69 C77-0 script"
+    },
+    {
+      "subject_id": "codenet::p03723_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03723_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03737_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03737_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03778_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03778_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03799_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03799_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03805_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03805_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03840_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03840_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03888_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03888_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p03929_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p03929_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "codenet::p04030_1",
+      "ok": true,
+      "path": "sandboxes/codenet_p04030_1",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": false,
+      "note": "stub sandbox for sample100 full script"
+    },
+    {
+      "subject_id": "confuser__graphql-constraint-directive::index.js",
+      "ok": true,
+      "path": "sandboxes/confuser__graphql-constraint-directive_index.js",
+      "runtime": "agnostic",
+      "deps_required": 4,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "depjs__dep::lib/install/installer/bin.js",
+      "ok": true,
+      "path": "sandboxes/depjs__dep_lib_install_installer_bin.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "depjs__dep::lib/lock/locker.js",
+      "ok": true,
+      "path": "sandboxes/depjs__dep_lib_lock_locker.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "depjs__dep::lib/run.js",
+      "ok": true,
+      "path": "sandboxes/depjs__dep_lib_run.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "depjs__dep::lib/utils/cmd-shim.js",
+      "ok": true,
+      "path": "sandboxes/depjs__dep_lib_utils_cmd-shim.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "depjs__dep::lib/utils/lifecycle.js",
+      "ok": true,
+      "path": "sandboxes/depjs__dep_lib_utils_lifecycle.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "depjs__dep::lib/utils/node-gyp.js",
+      "ok": true,
+      "path": "sandboxes/depjs__dep_lib_utils_node-gyp.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "docsifyjs__docsify::src/core/router/history/base.js",
+      "ok": true,
+      "path": "sandboxes/docsifyjs__docsify_src_core_router_history_base.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "doyensec__electronegativity::src/locales/i18n.js",
+      "ok": true,
+      "path": "sandboxes/doyensec__electronegativity_src_locales_i18n.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "dropbox__dropbox-sdk-js::src/content-hasher.js",
+      "ok": true,
+      "path": "sandboxes/dropbox__dropbox-sdk-js_src_content-hasher.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "dropbox__dropbox-sdk-js::src/filedownload.js",
+      "ok": true,
+      "path": "sandboxes/dropbox__dropbox-sdk-js_src_filedownload.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "dropbox__dropbox-sdk-js::src/response.js",
+      "ok": true,
+      "path": "sandboxes/dropbox__dropbox-sdk-js_src_response.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "errsole__errsole.js::lib/main/logs/index.js",
+      "ok": true,
+      "path": "sandboxes/errsole__errsole.js_lib_main_logs_index.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "errsole__errsole.js::lib/main/server/controllers/appController.js",
+      "ok": true,
+      "path": "sandboxes/errsole__errsole.js_lib_main_server_controllers_appController.js",
+      "runtime": "agnostic",
+      "deps_required": 4,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "errsole__errsole.js::lib/main/server/controllers/logController.js",
+      "ok": true,
+      "path": "sandboxes/errsole__errsole.js_lib_main_server_controllers_logController.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "errsole__errsole.js::lib/main/server/controllers/userController.js",
+      "ok": true,
+      "path": "sandboxes/errsole__errsole.js_lib_main_server_controllers_userController.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "errsole__errsole.js::lib/main/server/middleware/auth.js",
+      "ok": true,
+      "path": "sandboxes/errsole__errsole.js_lib_main_server_middleware_auth.js",
+      "runtime": "agnostic",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "errsole__errsole.js::lib/main/server/routes/apiRoutes.js",
+      "ok": true,
+      "path": "sandboxes/errsole__errsole.js_lib_main_server_routes_apiRoutes.js",
+      "runtime": "node",
+      "deps_required": 6,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "errsole__errsole.js::lib/main/server/utils/alerts.js",
+      "ok": true,
+      "path": "sandboxes/errsole__errsole.js_lib_main_server_utils_alerts.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "eslint__markdown::src/index.js",
+      "ok": true,
+      "path": "sandboxes/eslint__markdown_src_index.js",
+      "runtime": "agnostic",
+      "deps_required": 10,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "eslint__markdown::src/language/markdown-language.js",
+      "ok": true,
+      "path": "sandboxes/eslint__markdown_src_language_markdown-language.js",
+      "runtime": "agnostic",
+      "deps_required": 8,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "eslint__markdown::src/language/markdown-source-code.js",
+      "ok": true,
+      "path": "sandboxes/eslint__markdown_src_language_markdown-source-code.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "expressjs__compression::index.js",
+      "ok": true,
+      "path": "sandboxes/expressjs__compression_index.js",
+      "runtime": "node",
+      "deps_required": 7,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "expressjs__morgan::index.js",
+      "ok": true,
+      "path": "sandboxes/expressjs__morgan_index.js",
+      "runtime": "node",
+      "deps_required": 5,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ferrislucas__promptr::src/Main.js",
+      "ok": true,
+      "path": "sandboxes/ferrislucas__promptr_src_Main.js",
+      "runtime": "node",
+      "deps_required": 4,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ferrislucas__promptr::src/services/ConfigService.js",
+      "ok": true,
+      "path": "sandboxes/ferrislucas__promptr_src_services_ConfigService.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ferrislucas__promptr::src/services/OpenAiGptService.js",
+      "ok": true,
+      "path": "sandboxes/ferrislucas__promptr_src_services_OpenAiGptService.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ferrislucas__promptr::src/services/PromptContext.js",
+      "ok": true,
+      "path": "sandboxes/ferrislucas__promptr_src_services_PromptContext.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ferrislucas__promptr::src/services/PromptrService.js",
+      "ok": true,
+      "path": "sandboxes/ferrislucas__promptr_src_services_PromptrService.js",
+      "runtime": "node",
+      "deps_required": 4,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ferrislucas__promptr::src/services/TemplateLoader.js",
+      "ok": true,
+      "path": "sandboxes/ferrislucas__promptr_src_services_TemplateLoader.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "gulpjs__liftoff::index.js",
+      "ok": true,
+      "path": "sandboxes/gulpjs__liftoff_index.js",
+      "runtime": "node",
+      "deps_required": 7,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "gulpjs__liftoff::lib/find_config.js",
+      "ok": true,
+      "path": "sandboxes/gulpjs__liftoff_lib_find_config.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "iuccio__csvToJson::index.js",
+      "ok": true,
+      "path": "sandboxes/iuccio__csvToJson_index.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "iuccio__csvToJson::src/csvToJsonAsync.js",
+      "ok": true,
+      "path": "sandboxes/iuccio__csvToJson_src_csvToJsonAsync.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "iuccio__csvToJson::src/util/fileUtils.js",
+      "ok": true,
+      "path": "sandboxes/iuccio__csvToJson_src_util_fileUtils.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "jatinkrmalik__LLMFeeder::extension/token-counter.js",
+      "ok": true,
+      "path": "sandboxes/jatinkrmalik__LLMFeeder_extension_token-counter.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "jonschlinkert__gray-matter::index.js",
+      "ok": true,
+      "path": "sandboxes/jonschlinkert__gray-matter_index.js",
+      "runtime": "node",
+      "deps_required": 4,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "klis87__redux-requests::packages/redux-requests/src/default-config.js",
+      "ok": true,
+      "path": "sandboxes/klis87__redux-requests_packages_redux-requests_src_default-config.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "klis87__redux-requests::packages/redux-requests/src/middleware/create-polling-middleware.js",
+      "ok": true,
+      "path": "sandboxes/klis87__redux-requests_packages_redux-requests_src_middleware_create-polling-middleware.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "klis87__redux-requests::packages/redux-requests/src/middleware/create-subscriptions-middleware.js",
+      "ok": true,
+      "path": "sandboxes/klis87__redux-requests_packages_redux-requests_src_middleware_create-subscriptions-middleware.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "klis87__redux-requests::packages/redux-requests/src/normalizers/normalize.js",
+      "ok": true,
+      "path": "sandboxes/klis87__redux-requests_packages_redux-requests_src_normalizers_normalize.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "klis87__redux-requests::packages/redux-requests/src/normalizers/update-normalized-data.js",
+      "ok": true,
+      "path": "sandboxes/klis87__redux-requests_packages_redux-requests_src_normalizers_update-normalized-data.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "klis87__redux-requests::packages/redux-requests/src/reducers/cache-reducer.js",
+      "ok": true,
+      "path": "sandboxes/klis87__redux-requests_packages_redux-requests_src_reducers_cache-reducer.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "klis87__redux-requests::packages/redux-requests/src/reducers/queries-reducer.js",
+      "ok": true,
+      "path": "sandboxes/klis87__redux-requests_packages_redux-requests_src_reducers_queries-reducer.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "klis87__redux-requests::packages/redux-requests/src/reducers/requests-keys-reducer.js",
+      "ok": true,
+      "path": "sandboxes/klis87__redux-requests_packages_redux-requests_src_reducers_requests-keys-reducer.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "koalazak__dorita980::index.js",
+      "ok": true,
+      "path": "sandboxes/koalazak__dorita980_index.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mapbox__pbf::index.js",
+      "ok": true,
+      "path": "sandboxes/mapbox__pbf_index.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/helpers/inline_style.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_helpers_inline_style.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/comment.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_comment.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/container.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_container.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/directives/apply.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_directives_apply.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/directives/parse.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_directives_parse.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/directives/yaml.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_directives_yaml.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/header_and_footer.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_header_and_footer.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/heading_divider.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_heading_divider.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/inline_svg.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_inline_svg.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "marp-team__marpit::src/markdown/slide.js",
+      "ok": true,
+      "path": "sandboxes/marp-team__marpit_src_markdown_slide.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "metalsmith__metalsmith::lib/debug.js",
+      "ok": true,
+      "path": "sandboxes/metalsmith__metalsmith_lib_debug.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mixpanel__mixpanel-js::src/autocapture/deadclick.js",
+      "ok": true,
+      "path": "sandboxes/mixpanel__mixpanel-js_src_autocapture_deadclick.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mixpanel__mixpanel-js::src/autocapture/rageclick.js",
+      "ok": true,
+      "path": "sandboxes/mixpanel__mixpanel-js_src_autocapture_rageclick.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mixpanel__mixpanel-js::src/autocapture/utils.js",
+      "ok": true,
+      "path": "sandboxes/mixpanel__mixpanel-js_src_autocapture_utils.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mixpanel__mixpanel-js::src/flags/flags-persistence.js",
+      "ok": true,
+      "path": "sandboxes/mixpanel__mixpanel-js_src_flags_flags-persistence.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mixpanel__mixpanel-js::src/flags/index.js",
+      "ok": true,
+      "path": "sandboxes/mixpanel__mixpanel-js_src_flags_index.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mixpanel__mixpanel-js::src/recorder/masking.js",
+      "ok": true,
+      "path": "sandboxes/mixpanel__mixpanel-js_src_recorder_masking.js",
+      "runtime": "browser",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mixpanel__mixpanel-js::src/recorder/rrweb-network-plugin.js",
+      "ok": true,
+      "path": "sandboxes/mixpanel__mixpanel-js_src_recorder_rrweb-network-plugin.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mixpanel__mixpanel-js::src/recorder/utils.js",
+      "ok": true,
+      "path": "sandboxes/mixpanel__mixpanel-js_src_recorder_utils.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mtth__avsc::lib/specs.js",
+      "ok": true,
+      "path": "sandboxes/mtth__avsc_lib_specs.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "mtth__avsc::lib/utils.js",
+      "ok": true,
+      "path": "sandboxes/mtth__avsc_lib_utils.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "nodevault__node-vault::src/index.js",
+      "ok": true,
+      "path": "sandboxes/nodevault__node-vault_src_index.js",
+      "runtime": "node",
+      "deps_required": 4,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "octokatherine__readme.so::components/CustomSection.js",
+      "ok": true,
+      "path": "sandboxes/octokatherine__readme.so_components_CustomSection.js",
+      "runtime": "browser",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "octokatherine__readme.so::components/DownloadModal.js",
+      "ok": true,
+      "path": "sandboxes/octokatherine__readme.so_components_DownloadModal.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "octokatherine__readme.so::components/EditorColumn.js",
+      "ok": true,
+      "path": "sandboxes/octokatherine__readme.so_components_EditorColumn.js",
+      "runtime": "browser",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "octokatherine__readme.so::components/Nav.js",
+      "ok": true,
+      "path": "sandboxes/octokatherine__readme.so_components_Nav.js",
+      "runtime": "browser",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "octokatherine__readme.so::components/RawPreview.js",
+      "ok": true,
+      "path": "sandboxes/octokatherine__readme.so_components_RawPreview.js",
+      "runtime": "browser",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "octokatherine__readme.so::components/SectionsColumn.js",
+      "ok": true,
+      "path": "sandboxes/octokatherine__readme.so_components_SectionsColumn.js",
+      "runtime": "browser",
+      "deps_required": 6,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "octokatherine__readme.so::components/SortableItem.js",
+      "ok": true,
+      "path": "sandboxes/octokatherine__readme.so_components_SortableItem.js",
+      "runtime": "browser",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "octokatherine__readme.so::components/Tabs.js",
+      "ok": true,
+      "path": "sandboxes/octokatherine__readme.so_components_Tabs.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pchuri__confluence-cli::bin/commands/export.js",
+      "ok": true,
+      "path": "sandboxes/pchuri__confluence-cli_bin_commands_export.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pchuri__confluence-cli::lib/analytics.js",
+      "ok": true,
+      "path": "sandboxes/pchuri__confluence-cli_lib_analytics.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pchuri__confluence-cli::lib/config.js",
+      "ok": true,
+      "path": "sandboxes/pchuri__confluence-cli_lib_config.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pchuri__confluence-cli::lib/html-to-storage.js",
+      "ok": true,
+      "path": "sandboxes/pchuri__confluence-cli_lib_html-to-storage.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pchuri__confluence-cli::lib/macro-converter.js",
+      "ok": true,
+      "path": "sandboxes/pchuri__confluence-cli_lib_macro-converter.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pchuri__confluence-cli::lib/netrc.js",
+      "ok": true,
+      "path": "sandboxes/pchuri__confluence-cli_lib_netrc.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pchuri__confluence-cli::lib/storage-walker.js",
+      "ok": true,
+      "path": "sandboxes/pchuri__confluence-cli_lib_storage-walker.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pompelmi__pompelmi::packages/fastify/index.js",
+      "ok": true,
+      "path": "sandboxes/pompelmi__pompelmi_packages_fastify_index.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pompelmi__pompelmi::packages/hono/index.js",
+      "ok": true,
+      "path": "sandboxes/pompelmi__pompelmi_packages_hono_index.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pompelmi__pompelmi::packages/nestjs/src/pompelmi.module.js",
+      "ok": true,
+      "path": "sandboxes/pompelmi__pompelmi_packages_nestjs_src_pompelmi.module.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pompelmi__pompelmi::packages/nextjs/index.js",
+      "ok": true,
+      "path": "sandboxes/pompelmi__pompelmi_packages_nextjs_index.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pompelmi__pompelmi::packages/remix/index.js",
+      "ok": true,
+      "path": "sandboxes/pompelmi__pompelmi_packages_remix_index.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pompelmi__pompelmi::packages/sveltekit/index.js",
+      "ok": true,
+      "path": "sandboxes/pompelmi__pompelmi_packages_sveltekit_index.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pompelmi__pompelmi::packages/testing/index.js",
+      "ok": true,
+      "path": "sandboxes/pompelmi__pompelmi_packages_testing_index.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pompelmi__pompelmi::src/BufferScanner.js",
+      "ok": true,
+      "path": "sandboxes/pompelmi__pompelmi_src_BufferScanner.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "posthtml__posthtml::lib/index.js",
+      "ok": true,
+      "path": "sandboxes/posthtml__posthtml_lib_index.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "pqina__filepond::src/js/app/actions.js",
+      "ok": true,
+      "path": "sandboxes/pqina__filepond_src_js_app_actions.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "protectwise__troika::packages/troika-animation/src/MultiTween.js",
+      "ok": true,
+      "path": "sandboxes/protectwise__troika_packages_troika-animation_src_MultiTween.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "protectwise__troika::packages/troika-animation/src/SpringTween.js",
+      "ok": true,
+      "path": "sandboxes/protectwise__troika_packages_troika-animation_src_SpringTween.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "protectwise__troika::packages/troika-animation/src/Tween.js",
+      "ok": true,
+      "path": "sandboxes/protectwise__troika_packages_troika-animation_src_Tween.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "protectwise__troika::packages/troika-worker-utils/src/WorkerModules.js",
+      "ok": true,
+      "path": "sandboxes/protectwise__troika_packages_troika-worker-utils_src_WorkerModules.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "repplus__rep-chrome::js/core/state/index.js",
+      "ok": true,
+      "path": "sandboxes/repplus__rep-chrome_js_core_state_index.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "repplus__rep-chrome::js/core/utils/dom.js",
+      "ok": true,
+      "path": "sandboxes/repplus__rep-chrome_js_core_utils_dom.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "repplus__rep-chrome::js/core/utils/misc.js",
+      "ok": true,
+      "path": "sandboxes/repplus__rep-chrome_js_core_utils_misc.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "repplus__rep-chrome::js/features/extractors/secrets.js",
+      "ok": true,
+      "path": "sandboxes/repplus__rep-chrome_js_features_extractors_secrets.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ryanlelek__Raneto::app/core/contents.js",
+      "ok": true,
+      "path": "sandboxes/ryanlelek__Raneto_app_core_contents.js",
+      "runtime": "node",
+      "deps_required": 5,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ryanlelek__Raneto::app/core/page.js",
+      "ok": true,
+      "path": "sandboxes/ryanlelek__Raneto_app_core_page.js",
+      "runtime": "node",
+      "deps_required": 6,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ryanlelek__Raneto::app/core/search.js",
+      "ok": true,
+      "path": "sandboxes/ryanlelek__Raneto_app_core_search.js",
+      "runtime": "node",
+      "deps_required": 9,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ryanlelek__Raneto::app/functions/contentProcessors.js",
+      "ok": true,
+      "path": "sandboxes/ryanlelek__Raneto_app_functions_contentProcessors.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ryanlelek__Raneto::app/functions/getFilepath.js",
+      "ok": true,
+      "path": "sandboxes/ryanlelek__Raneto_app_functions_getFilepath.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "ryanlelek__Raneto::app/routes/categoryCreate.route.js",
+      "ok": true,
+      "path": "sandboxes/ryanlelek__Raneto_app_routes_categoryCreate.route.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "seppevs__migrate-mongo::lib/actions/create.js",
+      "ok": true,
+      "path": "sandboxes/seppevs__migrate-mongo_lib_actions_create.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "seppevs__migrate-mongo::lib/actions/up.js",
+      "ok": true,
+      "path": "sandboxes/seppevs__migrate-mongo_lib_actions_up.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "seppevs__migrate-mongo::lib/env/config.js",
+      "ok": true,
+      "path": "sandboxes/seppevs__migrate-mongo_lib_env_config.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "sockjs__sockjs-client::lib/transport/receiver/eventsource.js",
+      "ok": true,
+      "path": "sandboxes/sockjs__sockjs-client_lib_transport_receiver_eventsource.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "sockjs__sockjs-client::lib/transport/receiver/jsonp.js",
+      "ok": true,
+      "path": "sandboxes/sockjs__sockjs-client_lib_transport_receiver_jsonp.js",
+      "runtime": "node",
+      "deps_required": 3,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "sockjs__sockjs-client::lib/transport/receiver/xhr.js",
+      "ok": true,
+      "path": "sandboxes/sockjs__sockjs-client_lib_transport_receiver_xhr.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "sockjs__sockjs-client::lib/utils/event.js",
+      "ok": true,
+      "path": "sandboxes/sockjs__sockjs-client_lib_utils_event.js",
+      "runtime": "node",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "sonnyp__aria2.js::src/Aria2.js",
+      "ok": true,
+      "path": "sandboxes/sonnyp__aria2.js_src_Aria2.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "sonnyp__aria2.js::src/JSONRPCClient.js",
+      "ok": true,
+      "path": "sandboxes/sonnyp__aria2.js_src_JSONRPCClient.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "spite__ccapture.js::src/createMotionBlur.js",
+      "ok": true,
+      "path": "sandboxes/spite__ccapture.js_src_createMotionBlur.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "spite__ccapture.js::src/encoders/WebMEncoder.js",
+      "ok": true,
+      "path": "sandboxes/spite__ccapture.js_src_encoders_WebMEncoder.js",
+      "runtime": "browser",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "svgdotjs__svgdom::src/other/CssQuery.js",
+      "ok": true,
+      "path": "sandboxes/svgdotjs__svgdom_src_other_CssQuery.js",
+      "runtime": "agnostic",
+      "deps_required": 0,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "svgdotjs__svgdom::src/utils/bboxUtils.js",
+      "ok": true,
+      "path": "sandboxes/svgdotjs__svgdom_src_utils_bboxUtils.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::index.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_index.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::lib/buffer-util.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_lib_buffer-util.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::lib/extension.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_lib_extension.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::lib/permessage-deflate.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_lib_permessage-deflate.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::lib/receiver.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_lib_receiver.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::lib/sender.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_lib_sender.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::lib/stream.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_lib_stream.js",
+      "runtime": "node",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::lib/subprotocol.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_lib_subprotocol.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "websockets__ws::lib/validation.js",
+      "ok": true,
+      "path": "sandboxes/websockets__ws_lib_validation.js",
+      "runtime": "node",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Annotation/Annotation.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Annotation_Annotation.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Axis/Axis.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Axis_Axis.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Axis/AxisTitle.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Axis_AxisTitle.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Chart/Chart.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Chart_Chart.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Legend/Legend.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Legend_Legend.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Legend/LegendTitle.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Legend_LegendTitle.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Loading/Loading.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Loading_Loading.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Options3d/Options3d.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Options3d_Options3d.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/PlotBandLine/PlotBandLineLabel.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_PlotBandLine_PlotBandLineLabel.js",
+      "runtime": "agnostic",
+      "deps_required": 1,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/PlotBandLine/PlotLine.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_PlotBandLine_PlotLine.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    },
+    {
+      "subject_id": "whawker__react-jsx-highcharts::packages/react-jsx-highcharts/src/components/Series/Series.js",
+      "ok": true,
+      "path": "sandboxes/whawker__react-jsx-highcharts_packages_react-jsx-highcharts_src_components_Series_Series.js",
+      "runtime": "agnostic",
+      "deps_required": 2,
+      "deps_unresolved": 0,
+      "oracle": true
+    }
+  ]
+}

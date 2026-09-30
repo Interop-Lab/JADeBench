@@ -1,0 +1,94 @@
+# Editors and operating systems
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*~
+*.swp
+
+# Credentials and local configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+credentials.json
+secrets.json
+config.local.json
+
+# Python
+.venv/
+.venv-*/
+/venv/
+/env/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+.npm/
+.pnpm-store/
+.yarn/
+*.tsbuildinfo
+
+# Generated benchmark state
+runs/
+logs/
+transcripts/
+outputs/
+checkpoints/
+scratch/
+*.log
+*.tmp
+*.bak
+.adb-eval/
+.adb-baseline/
+
+# Full artifacts are distributed separately
+corpus/work/
+corpus/subjects/
+corpus/raw/gh_cache/
+sandbox/sandboxes/
+obfuscators/builds/opensource/
+obfuscators/builds/commercial/
+obfuscators/builds/modelgen/
+obfuscators/builds/llm/
+obfuscators/builds/codex_agent/
+
+# The curated sample is intentionally versioned
+!samples/diverse6/corpus/work/
+!samples/diverse6/corpus/work/**
+!samples/diverse6/corpus/subjects/
+!samples/diverse6/corpus/subjects/**
+!samples/diverse6/sandbox/sandboxes/
+!samples/diverse6/sandbox/sandboxes/**
+
+# Canonical released result evidence is intentionally versioned
+!results/
+!results/**
+results/**/logs/
+results/**/transcripts/
+results/**/checkpoints/
+results/**/_archive/
+
+# Never publish internal workspaces from this release tree
+paper/
+archive/
+experiments/
+third_party/JsDeObsBench/
+third_party/JSIMPLIFIER/
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Final safeguards: sample allow-rules must never re-include generated trees
+**/node_modules/
+**/__pycache__/
+**/.adb-eval/
+**/.adb-baseline/

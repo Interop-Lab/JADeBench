@@ -1,0 +1,68 @@
+[
+  {
+    "subject_id": "0xranx__OpenContext::src/core/config.js",
+    "runtime": "node",
+    "ran": true,
+    "exit_code": 0,
+    "passed": true,
+    "suite_started": true,
+    "oracle_usable": true,
+    "reference_recorded": true,
+    "output_tail_omitted": true
+  },
+  {
+    "subject_id": "Midtrans__midtrans-nodejs-client::lib/apiConfig.js",
+    "runtime": "agnostic",
+    "ran": true,
+    "exit_code": 0,
+    "passed": true,
+    "suite_started": true,
+    "oracle_usable": true,
+    "reference_recorded": true,
+    "output_tail_omitted": true
+  },
+  {
+    "subject_id": "depjs__dep::lib/run.js",
+    "runtime": "node",
+    "ran": true,
+    "exit_code": 0,
+    "passed": true,
+    "suite_started": true,
+    "oracle_usable": true,
+    "reference_recorded": true,
+    "output_tail_omitted": true
+  },
+  {
+    "subject_id": "marp-team__marpit::src/helpers/inline_style.js",
+    "runtime": "agnostic",
+    "ran": true,
+    "exit_code": 0,
+    "passed": true,
+    "suite_started": true,
+    "oracle_usable": true,
+    "reference_recorded": true,
+    "output_tail_omitted": true
+  },
+  {
+    "subject_id": "repplus__rep-chrome::js/core/utils/dom.js",
+    "runtime": "browser",
+    "ran": true,
+    "exit_code": 0,
+    "passed": true,
+    "suite_started": true,
+    "oracle_usable": true,
+    "reference_recorded": true,
+    "output_tail_omitted": true
+  },
+  {
+    "subject_id": "spite__ccapture.js::src/createMotionBlur.js",
+    "runtime": "browser",
+    "ran": true,
+    "exit_code": 1,
+    "passed": false,
+    "suite_started": true,
+    "oracle_usable": true,
+    "reference_recorded": true,
+    "output_tail_omitted": true
+  }
+]

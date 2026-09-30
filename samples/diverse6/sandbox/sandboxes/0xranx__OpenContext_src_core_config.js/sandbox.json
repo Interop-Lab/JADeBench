@@ -1,0 +1,54 @@
+{
+  "subject_id": "0xranx__OpenContext::src/core/config.js",
+  "agent_handle": "1a88e1c115d2f863",
+  "project": "0xranx/OpenContext",
+  "module": "src/core/config.js",
+  "commit": "0649e7134346f6f5038a9b29cc5c824ae6a54f3f",
+  "entry": "subject.cjs",
+  "agent_dir": "agent",
+  "oracle_dir": "oracle",
+  "runtime": "node",
+  "domain": "platform",
+  "dependencies": {
+    "required": [],
+    "linked": [],
+    "unresolved": []
+  },
+  "oracle": {
+    "available": true,
+    "test_file": "tests/core/config.test.js",
+    "extra_files": 1,
+    "runner": "node:test",
+    "invocation": "node --test tests/core/*.test.js",
+    "entry": "src/core/config.js"
+  },
+  "metrics": {
+    "loc": 173,
+    "host_api_call_sites": 29,
+    "host_globals_used": [
+      "fs",
+      "os",
+      "path",
+      "process",
+      "require"
+    ],
+    "third_party_bindings": [
+      "fs",
+      "os",
+      "path"
+    ],
+    "first_party_modules_inlined": 0,
+    "declared_identifiers": 27,
+    "domain_identifiers": 18,
+    "domain_identifier_ratio": 0.6667,
+    "async_constructs": 0
+  },
+  "coverage": {
+    "statement": 0.8626,
+    "branch": 0.7,
+    "function": 0.7,
+    "line": 0.8626,
+    "tests_exit_code": 0
+  },
+  "browser": null
+}

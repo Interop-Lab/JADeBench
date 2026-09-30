@@ -1,0 +1,41 @@
+{
+  "_comment": "The three obfuscation tiers (paper §3.4, Table 2). They differ in how much of a tool's output a model could have seen during pre-training, and therefore in how much of the tier can carry controlled contrasts versus being reported as a wild condition. This file is the index; each tier's parameters live in its own config file.",
+
+  "tiers": {
+    "open-source": {
+      "public_exposure": "high",
+      "reproducible": "yes, from a seed",
+      "prior_use": true,
+      "config": "opensource.json",
+      "status": "built and run",
+      "role": "Reproduces the legacy setting and carries the study's ablations: the only tier whose transformations can be enabled one at a time and whose builds regenerate from a recorded seed."
+    },
+    "commercial": {
+      "public_exposure": "low (licensed, polymorphic per build)",
+      "reproducible": "build-time products only; online services are a wild condition",
+      "prior_use": false,
+      "config": "commercial.json",
+      "status": "scaffolding (requires licensed products)",
+      "role": "Contributes the three capabilities no build-time tool provides: runtime protection, usage/environment control, and per-build polymorphism. Reproducible products carry controlled contrasts; non-reproducible services enter as a wild condition sampled once and archived."
+    },
+    "model-generated": {
+      "public_exposure": "none (generated per build)",
+      "reproducible": "yes, from a pinned model snapshot + prompts (released as artifacts)",
+      "prior_use": false,
+      "config": "modelgen.json",
+      "status": "scaffolding (requires an obfuscating-model API key)",
+      "role": "A control against memorization: the model chooses the realization, so the transformation space is open-ended and cannot have been seen during pre-training. Also the only tier that makes polymorphism releasable, since repeated generation yields distinct builds that can be archived."
+    }
+  },
+
+  "admission": {
+    "_comment": "Every build in every tier passes the same check before entering builds.jsonl: it and the original are run against the subject's workload in the sandbox and their observable behavior compared; divergent builds are discarded and recorded. Implemented for the open-source tier in scripts/02_admit.py, reused by the other tiers.",
+    "mechanism": "sandbox/scripts/score.py (differential test) for subjects with a usable oracle; interface-level export comparison (L1) otherwise",
+    "environment_conditional": "Domain-lock and self-defending builds are deliberately not semantics-preserving; admission configures the sandbox to satisfy a build's declared environment, and records every build discarded on this ground instead of dropping it silently."
+  },
+
+  "reporting": {
+    "_comment": "For each admitted build the pipeline reports size inflation and a structural complexity score (tools/complexity.mjs), so tiers are compared on measured strength rather than on tool names.",
+    "outputs": ["stats/summary.json", "stats/admission.json", "stats/strength.json", "stats/sweep.json"]
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "handle": "37c96f087e2ed5f8",
+  "entry": "subject.mjs",
+  "runtime": "browser",
+  "dependencies": {
+    "available": [
+      "jsdom(shared)"
+    ]
+  },
+  "browser": {
+    "url": "https://sandbox.local/",
+    "html": "<!doctype html><html><body></body></html>"
+  }
+}

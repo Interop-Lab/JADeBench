@@ -1,0 +1,12 @@
+{
+  "model": "DeepSeek-V4-Pro-0813",
+  "provider": "sophnet",
+  "base_url": "https://www.sophnet.com/api/open-apis/v1",
+  "api_key_env": "SOPHNET_API_KEY",
+  "requires_openai_auth": false,
+  "timeout_seconds": 1200,
+  "bash_timeout_ms": 120000,
+  "sandbox": "workspace-write",
+  "network_access": false,
+  "approval_policy": "never"
+}

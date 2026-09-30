@@ -1,0 +1,19 @@
+{
+  "schema_version": "agentdeobfbench-run-v1",
+  "run_id": "openhands/vm-l1",
+  "benchmark": "realworld104",
+  "system_slug": "openhands",
+  "system": "openai/gpt-5.6-sol@openhands_vm",
+  "model": "openai/gpt-5.6-sol",
+  "level": "openhands",
+  "protection": "vm-l1",
+  "prediction_count": 104,
+  "score_count": 104,
+  "unscored_sample_ids": [],
+  "evaluator_schema": 4,
+  "files": {
+    "predictions": "predictions.jsonl",
+    "scores": "scores.jsonl",
+    "outputs": "outputs/"
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "model": "opus[1m]",
+  "provider": "openrouter",
+  "base_url": "https://openrouter.ai/api",
+  "api_key_env": "OPENROUTER_API_KEY",
+  "model_aliases": {
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "anthropic/claude-haiku-4.5",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "anthropic/claude-haiku-4.5",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "anthropic/claude-haiku-4.5",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "anthropic/claude-haiku-4.5",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "anthropic/claude-haiku-4.5"
+  },
+  "timeout_seconds": 1200,
+  "bash_timeout_ms": 120000,
+  "api_timeout_ms": 180000,
+  "bash_max_output_length": 8000,
+  "max_thinking_tokens": 0,
+  "max_output_tokens": 32768,
+  "permission_mode": "bypassPermissions"
+}

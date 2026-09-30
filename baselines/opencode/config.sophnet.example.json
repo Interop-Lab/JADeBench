@@ -1,0 +1,16 @@
+{
+  "model": "DeepSeek-V4-Pro-0813",
+  "provider": "sophnet",
+  "base_url": "https://www.sophnet.com/api/open-apis/v1",
+  "api_key_env": "SOPHNET_API_KEY",
+  "timeout_seconds": 1200,
+  "max_steps": 64,
+  "bash_timeout_ms": 120000,
+  "api_timeout_ms": 180000,
+  "bash_max_output_length": 8000,
+  "max_input_tokens": 900000,
+  "max_output_tokens": 32768,
+  "thinking": {
+    "type": "disabled"
+  }
+}

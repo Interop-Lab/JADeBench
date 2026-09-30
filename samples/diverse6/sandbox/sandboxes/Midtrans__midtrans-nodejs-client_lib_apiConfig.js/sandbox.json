@@ -1,0 +1,53 @@
+{
+  "subject_id": "Midtrans__midtrans-nodejs-client::lib/apiConfig.js",
+  "agent_handle": "8c18d607b56cabfe",
+  "project": "Midtrans/midtrans-nodejs-client",
+  "module": "lib/apiConfig.js",
+  "commit": "dc13b08d48fcda5389251c03e8e267102e494385",
+  "entry": "subject.cjs",
+  "agent_dir": "agent",
+  "oracle_dir": "oracle",
+  "runtime": "agnostic",
+  "domain": "network-api",
+  "dependencies": {
+    "required": [
+      "lodash"
+    ],
+    "linked": [
+      "lodash"
+    ],
+    "unresolved": []
+  },
+  "oracle": {
+    "available": true,
+    "test_file": "test/apiConfig.test.js",
+    "extra_files": 1,
+    "runner": "mocha",
+    "invocation": "mocha",
+    "entry": "lib/apiConfig.js"
+  },
+  "metrics": {
+    "loc": 46,
+    "host_api_call_sites": 3,
+    "host_globals_used": [
+      "_",
+      "require"
+    ],
+    "third_party_bindings": [
+      "_"
+    ],
+    "first_party_modules_inlined": 0,
+    "declared_identifiers": 11,
+    "domain_identifiers": 8,
+    "domain_identifier_ratio": 0.7273,
+    "async_constructs": 0
+  },
+  "coverage": {
+    "statement": 0.9655,
+    "branch": 1.0,
+    "function": 0.8333,
+    "line": 0.9655,
+    "tests_exit_code": 0
+  },
+  "browser": null
+}

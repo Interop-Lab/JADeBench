@@ -1,0 +1,1406 @@
+[
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 312,
+    "by_domain": {
+      "client-app": 63,
+      "network-api": 65,
+      "data-processing": 100,
+      "platform": 84
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 208,
+    "by_domain": {
+      "client-app": 43,
+      "network-api": 48,
+      "data-processing": 63,
+      "platform": 54
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 312,
+    "by_domain": {
+      "client-app": 63,
+      "network-api": 65,
+      "data-processing": 100,
+      "platform": 84
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 208,
+    "by_domain": {
+      "client-app": 43,
+      "network-api": 48,
+      "data-processing": 63,
+      "platform": 54
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 311,
+    "by_domain": {
+      "client-app": 63,
+      "network-api": 65,
+      "data-processing": 100,
+      "platform": 83
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 207,
+    "by_domain": {
+      "client-app": 43,
+      "network-api": 48,
+      "data-processing": 63,
+      "platform": 53
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 291,
+    "by_domain": {
+      "client-app": 57,
+      "network-api": 61,
+      "data-processing": 90,
+      "platform": 83
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 155,
+    "by_domain": {
+      "client-app": 37,
+      "network-api": 37,
+      "data-processing": 47,
+      "platform": 34
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 291,
+    "by_domain": {
+      "client-app": 57,
+      "network-api": 61,
+      "data-processing": 90,
+      "platform": 83
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 155,
+    "by_domain": {
+      "client-app": 37,
+      "network-api": 37,
+      "data-processing": 47,
+      "platform": 34
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 289,
+    "by_domain": {
+      "client-app": 57,
+      "network-api": 61,
+      "data-processing": 90,
+      "platform": 81
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 155,
+    "by_domain": {
+      "client-app": 37,
+      "network-api": 37,
+      "data-processing": 47,
+      "platform": 34
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 275,
+    "by_domain": {
+      "client-app": 55,
+      "network-api": 57,
+      "data-processing": 81,
+      "platform": 82
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 101,
+    "by_domain": {
+      "client-app": 25,
+      "network-api": 27,
+      "data-processing": 31,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 275,
+    "by_domain": {
+      "client-app": 55,
+      "network-api": 57,
+      "data-processing": 81,
+      "platform": 82
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 101,
+    "by_domain": {
+      "client-app": 25,
+      "network-api": 27,
+      "data-processing": 31,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 273,
+    "by_domain": {
+      "client-app": 55,
+      "network-api": 57,
+      "data-processing": 81,
+      "platform": 80
+    }
+  },
+  {
+    "host_api_call_sites": 1,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 101,
+    "by_domain": {
+      "client-app": 25,
+      "network-api": 27,
+      "data-processing": 31,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 294,
+    "by_domain": {
+      "client-app": 56,
+      "network-api": 63,
+      "data-processing": 94,
+      "platform": 81
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 194,
+    "by_domain": {
+      "client-app": 39,
+      "network-api": 43,
+      "data-processing": 60,
+      "platform": 52
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 294,
+    "by_domain": {
+      "client-app": 56,
+      "network-api": 63,
+      "data-processing": 94,
+      "platform": 81
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 194,
+    "by_domain": {
+      "client-app": 39,
+      "network-api": 43,
+      "data-processing": 60,
+      "platform": 52
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 293,
+    "by_domain": {
+      "client-app": 56,
+      "network-api": 63,
+      "data-processing": 94,
+      "platform": 80
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 193,
+    "by_domain": {
+      "client-app": 39,
+      "network-api": 43,
+      "data-processing": 60,
+      "platform": 51
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 265,
+    "by_domain": {
+      "client-app": 48,
+      "network-api": 57,
+      "data-processing": 82,
+      "platform": 78
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 149,
+    "by_domain": {
+      "client-app": 35,
+      "network-api": 34,
+      "data-processing": 46,
+      "platform": 34
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 265,
+    "by_domain": {
+      "client-app": 48,
+      "network-api": 57,
+      "data-processing": 82,
+      "platform": 78
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 149,
+    "by_domain": {
+      "client-app": 35,
+      "network-api": 34,
+      "data-processing": 46,
+      "platform": 34
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 263,
+    "by_domain": {
+      "client-app": 48,
+      "network-api": 57,
+      "data-processing": 82,
+      "platform": 76
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 149,
+    "by_domain": {
+      "client-app": 35,
+      "network-api": 34,
+      "data-processing": 46,
+      "platform": 34
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 247,
+    "by_domain": {
+      "client-app": 45,
+      "network-api": 52,
+      "data-processing": 73,
+      "platform": 77
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 97,
+    "by_domain": {
+      "client-app": 24,
+      "network-api": 25,
+      "data-processing": 30,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 247,
+    "by_domain": {
+      "client-app": 45,
+      "network-api": 52,
+      "data-processing": 73,
+      "platform": 77
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 97,
+    "by_domain": {
+      "client-app": 24,
+      "network-api": 25,
+      "data-processing": 30,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 245,
+    "by_domain": {
+      "client-app": 45,
+      "network-api": 52,
+      "data-processing": 73,
+      "platform": 75
+    }
+  },
+  {
+    "host_api_call_sites": 3,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 97,
+    "by_domain": {
+      "client-app": 24,
+      "network-api": 25,
+      "data-processing": 30,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 282,
+    "by_domain": {
+      "client-app": 54,
+      "network-api": 60,
+      "data-processing": 89,
+      "platform": 79
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 164,
+    "by_domain": {
+      "client-app": 31,
+      "network-api": 38,
+      "data-processing": 47,
+      "platform": 48
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 282,
+    "by_domain": {
+      "client-app": 54,
+      "network-api": 60,
+      "data-processing": 89,
+      "platform": 79
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 164,
+    "by_domain": {
+      "client-app": 31,
+      "network-api": 38,
+      "data-processing": 47,
+      "platform": 48
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 281,
+    "by_domain": {
+      "client-app": 54,
+      "network-api": 60,
+      "data-processing": 89,
+      "platform": 78
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 163,
+    "by_domain": {
+      "client-app": 31,
+      "network-api": 38,
+      "data-processing": 47,
+      "platform": 47
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 242,
+    "by_domain": {
+      "client-app": 44,
+      "network-api": 52,
+      "data-processing": 72,
+      "platform": 74
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 130,
+    "by_domain": {
+      "client-app": 29,
+      "network-api": 31,
+      "data-processing": 38,
+      "platform": 32
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 242,
+    "by_domain": {
+      "client-app": 44,
+      "network-api": 52,
+      "data-processing": 72,
+      "platform": 74
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 130,
+    "by_domain": {
+      "client-app": 29,
+      "network-api": 31,
+      "data-processing": 38,
+      "platform": 32
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 240,
+    "by_domain": {
+      "client-app": 44,
+      "network-api": 52,
+      "data-processing": 72,
+      "platform": 72
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 130,
+    "by_domain": {
+      "client-app": 29,
+      "network-api": 31,
+      "data-processing": 38,
+      "platform": 32
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 213,
+    "by_domain": {
+      "client-app": 38,
+      "network-api": 45,
+      "data-processing": 59,
+      "platform": 71
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 89,
+    "by_domain": {
+      "client-app": 21,
+      "network-api": 24,
+      "data-processing": 26,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 213,
+    "by_domain": {
+      "client-app": 38,
+      "network-api": 45,
+      "data-processing": 59,
+      "platform": 71
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 89,
+    "by_domain": {
+      "client-app": 21,
+      "network-api": 24,
+      "data-processing": 26,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 355,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 211,
+    "by_domain": {
+      "client-app": 38,
+      "network-api": 45,
+      "data-processing": 59,
+      "platform": 69
+    }
+  },
+  {
+    "host_api_call_sites": 5,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 89,
+    "by_domain": {
+      "client-app": 21,
+      "network-api": 24,
+      "data-processing": 26,
+      "platform": 18
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 268,
+    "by_domain": {
+      "client-app": 53,
+      "network-api": 57,
+      "data-processing": 87,
+      "platform": 71
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 136,
+    "by_domain": {
+      "client-app": 26,
+      "network-api": 32,
+      "data-processing": 42,
+      "platform": 36
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 268,
+    "by_domain": {
+      "client-app": 53,
+      "network-api": 57,
+      "data-processing": 87,
+      "platform": 71
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 136,
+    "by_domain": {
+      "client-app": 26,
+      "network-api": 32,
+      "data-processing": 42,
+      "platform": 36
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 354,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 92
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 268,
+    "by_domain": {
+      "client-app": 53,
+      "network-api": 57,
+      "data-processing": 87,
+      "platform": 71
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 1,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 135,
+    "by_domain": {
+      "client-app": 26,
+      "network-api": 32,
+      "data-processing": 42,
+      "platform": 35
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 218,
+    "by_domain": {
+      "client-app": 43,
+      "network-api": 47,
+      "data-processing": 69,
+      "platform": 59
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 112,
+    "by_domain": {
+      "client-app": 24,
+      "network-api": 27,
+      "data-processing": 34,
+      "platform": 27
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 218,
+    "by_domain": {
+      "client-app": 43,
+      "network-api": 47,
+      "data-processing": 69,
+      "platform": 59
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 112,
+    "by_domain": {
+      "client-app": 24,
+      "network-api": 27,
+      "data-processing": 34,
+      "platform": 27
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 354,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 92
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 217,
+    "by_domain": {
+      "client-app": 43,
+      "network-api": 47,
+      "data-processing": 69,
+      "platform": 58
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 2,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 112,
+    "by_domain": {
+      "client-app": 24,
+      "network-api": 27,
+      "data-processing": 34,
+      "platform": 27
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 2,
+    "subjects_kept": 177,
+    "by_domain": {
+      "client-app": 35,
+      "network-api": 36,
+      "data-processing": 54,
+      "platform": 52
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.15,
+    "min_criteria_met": 3,
+    "subjects_kept": 83,
+    "by_domain": {
+      "client-app": 18,
+      "network-api": 24,
+      "data-processing": 24,
+      "platform": 17
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 1,
+    "subjects_kept": 357,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 73,
+      "data-processing": 116,
+      "platform": 93
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 2,
+    "subjects_kept": 177,
+    "by_domain": {
+      "client-app": 35,
+      "network-api": 36,
+      "data-processing": 54,
+      "platform": 52
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.3,
+    "min_criteria_met": 3,
+    "subjects_kept": 83,
+    "by_domain": {
+      "client-app": 18,
+      "network-api": 24,
+      "data-processing": 24,
+      "platform": 17
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 1,
+    "subjects_kept": 354,
+    "by_domain": {
+      "client-app": 75,
+      "network-api": 72,
+      "data-processing": 115,
+      "platform": 92
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 2,
+    "subjects_kept": 176,
+    "by_domain": {
+      "client-app": 35,
+      "network-api": 36,
+      "data-processing": 54,
+      "platform": 51
+    }
+  },
+  {
+    "host_api_call_sites": 10,
+    "first_party_modules_inlined": 4,
+    "domain_identifier_ratio": 0.45,
+    "min_criteria_met": 3,
+    "subjects_kept": 83,
+    "by_domain": {
+      "client-app": 18,
+      "network-api": 24,
+      "data-processing": 24,
+      "platform": 17
+    }
+  }
+]

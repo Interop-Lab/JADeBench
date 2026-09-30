@@ -1,0 +1,56 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: corpus/tools/package-lock.json
+      - run: python3 -m pip install -r evaluators/requirements.txt
+      - run: npm ci --prefix corpus/tools
+      - run: python3 scripts/check_repository.py
+      - run: python3 scripts/check_release_safety.py
+      - run: python3 scripts/reproduce_results.py --check
+      - run: python3 scripts/reproduce_codenet_results.py --check
+      - run: python3 -m compileall -q baselines corpus evaluators obfuscators sandbox scripts
+      - run: python3 evaluators/tests/test_metrics.py
+      - run: python3 evaluators/tests/test_suite_recall.py
+      - run: python3 evaluators/tests/test_trace_mask.py
+      - name: Baseline adapter tests
+        run: |
+          python3 baselines/L0/test_run.py
+          python3 baselines/codex/test_run.py
+          python3 baselines/claude_code/test_run.py
+          python3 baselines/opencode/test_run.py
+          python3 baselines/openhands/test_run.py
+          python3 baselines/kimi_code/test_run.py
+      - name: Execution classifier checks
+        env:
+          ADB_CORPUS: ${{ github.workspace }}/samples/diverse6/corpus
+          ADB_SANDBOX: ${{ github.workspace }}/samples/diverse6/sandbox
+        run: python3 evaluators/tests/test_execution.py
+      - name: Static evaluator smoke test
+        env:
+          ADB_CORPUS: ${{ github.workspace }}/samples/diverse6/corpus
+        run: |
+          python3 evaluators/score.py \
+            --manifest samples/diverse6/corpus/manifest.jsonl \
+            --builds samples/diverse6/builds.jsonl \
+            --predictions samples/diverse6/predictions/identity.jsonl \
+            --out /tmp/agentdeobfbench-smoke.jsonl \
+            --no-execution

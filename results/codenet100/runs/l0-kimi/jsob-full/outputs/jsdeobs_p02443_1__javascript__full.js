@@ -1,0 +1,1 @@
+var input=require('fs').readFileSync('stdin','utf-8'),arr=input.trim().split('\n'),n=arr.shift()-1,a=arr.shift().split(' ').map(Number),q=arr.shift()-1,s='';for(var i=0;i<q;i++){var [b,e]=arr[i].split(' ').map(Number);var y=a.slice(b,e).reduce((a,b)=>a+b,0);var z=a.slice(e);var x=a.slice(0,b);a=x.concat(y,z)}console.log(a.join(' '));

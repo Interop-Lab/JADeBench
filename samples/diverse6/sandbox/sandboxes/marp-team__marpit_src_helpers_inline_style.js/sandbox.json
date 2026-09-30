@@ -1,0 +1,53 @@
+{
+  "subject_id": "marp-team__marpit::src/helpers/inline_style.js",
+  "agent_handle": "f4b306279ec4b183",
+  "project": "marp-team/marpit",
+  "module": "src/helpers/inline_style.js",
+  "commit": "2a51860799c1d113cb6a70458a51b949ff941303",
+  "entry": "subject.cjs",
+  "agent_dir": "agent",
+  "oracle_dir": "oracle",
+  "runtime": "agnostic",
+  "domain": "data-processing",
+  "dependencies": {
+    "required": [
+      "postcss"
+    ],
+    "linked": [
+      "postcss"
+    ],
+    "unresolved": []
+  },
+  "oracle": {
+    "available": true,
+    "test_file": "test/helpers/inline_style.js",
+    "extra_files": 0,
+    "runner": "jest",
+    "invocation": "jest",
+    "entry": "src/helpers/inline_style.js"
+  },
+  "metrics": {
+    "loc": 63,
+    "host_api_call_sites": 3,
+    "host_globals_used": [
+      "import_postcss",
+      "require"
+    ],
+    "third_party_bindings": [
+      "import_postcss"
+    ],
+    "first_party_modules_inlined": 0,
+    "declared_identifiers": 20,
+    "domain_identifiers": 15,
+    "domain_identifier_ratio": 0.75,
+    "async_constructs": 0
+  },
+  "coverage": {
+    "statement": 1.0,
+    "branch": 1.0,
+    "function": 1.0,
+    "line": 1.0,
+    "tests_exit_code": 0
+  },
+  "browser": null
+}

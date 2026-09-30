@@ -1,0 +1,13 @@
+{
+  "model": "anthropic/claude-opus-4.8",
+  "provider": "openrouter",
+  "base_url": "https://openrouter.ai/api/v1",
+  "api_key_env": "OPENROUTER_API_KEY",
+  "temperature": 0.2,
+  "top_p": 0.95,
+  "max_input_tokens": 900000,
+  "max_output_tokens": 32768,
+  "thinking": {
+    "type": "disabled"
+  }
+}

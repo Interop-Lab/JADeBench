@@ -1,0 +1,59 @@
+{
+  "_comment": "Model-generated obfuscation tier (paper §3.4). The obfuscating model rewrites a subject so that a named property of the source becomes unavailable, while behavior is preserved. Two modes: `specified` fixes the target property so builds line up rung-for-rung with the open-source ladder; `adaptive` tells the model the analyst is an agent that can execute and inspect the program, and asks it to maximize reconstruction difficulty under that assumption. The obfuscating model is disjoint from the models under evaluation, and is pinned and released so the tier is reproducible from artifacts.",
+
+  "provider": {
+    "_comment": "The obfuscating model. Left unpinned here because pinning it is a study decision, not a pipeline default. scripts/modelgen.py reads ADB_OBF_MODEL / ADB_OBF_API_KEY at run time; without them it does a dry run (prints the prompts it would send and writes nothing).",
+    "vendor": "anthropic",
+    "model": "REQUIRED: pin an exact snapshot, e.g. claude-<snapshot-date>",
+    "api_key_env": "ADB_OBF_API_KEY",
+    "decoding": { "temperature": 0.7, "max_tokens": 16000, "top_p": 1.0 },
+    "_decoding_rationale": "A non-zero temperature is deliberate: it is what makes repeated generation yield structurally distinct builds of one program, which is how this tier makes polymorphism studiable. The snapshot and these parameters are pinned so the released builds are reproducible as artifacts even though the generator is stochastic."
+  },
+
+  "target_properties": {
+    "_comment": "Drawn from the same taxonomy the template tiers use (paper §2.1), so specified-mode builds are comparable to open-source ladder rungs. Each names a property of the source that the rewrite must make unavailable while preserving behavior.",
+    "identifiers": "Rename every developer identifier to a semantically empty token; no name may hint at role or type.",
+    "strings": "Move every string and property/API name into a run-time-resolved form so no literal is readable in the source.",
+    "control_flow": "Aggregate and reorder computation (dispatcher/opaque predicates) so structured control flow is not readable from the source.",
+    "dead_code": "Inject plausible unreachable computation indistinguishable from live code by inspection.",
+    "composite": "none of its identifiers, its strings and API names, its control-flow structure, or its live/dead-code boundary can be recovered from the source (identifiers + strings + control_flow + dead_code together; compares to the open-source `full` rung)."
+  },
+
+  "modes": {
+    "specified": {
+      "_comment": "One build per (subject, target_property). Comparable rung-by-rung to the open-source ladder.",
+      "properties": ["identifiers", "strings", "control_flow", "dead_code", "composite"],
+      "spec": "Rewrite the following JavaScript so that <PROPERTY_DESCRIPTION>. Preserve observable behavior exactly: same exports, same return values, same thrown exceptions, same host-API calls and outbound requests on every input. Do not add I/O. Do not rely on a network. Return only the rewritten program.",
+      "variants_per_subject": 1
+    },
+    "adaptive": {
+      "_comment": "The mode with no counterpart in prior work: obfuscation written against an executing analyst rather than a static reader. Generated in several variants per subject to exercise polymorphism.",
+      "spec": "You are hardening this JavaScript against an analyst who can RUN it on inputs of their choice, observe its return values, exceptions, host-API calls, and network requests, AND attach a debugger to read in-scope variables, resolve dynamic call targets, and inspect a decoder's output the moment it runs. Rewrite the program to make reconstructing its original logic and names as hard as possible for THAT analyst, not merely for a static reader. Preserve observable behavior exactly on every input. Return only the rewritten program.",
+      "variants_per_subject": 3
+    }
+  },
+
+  "controls": {
+    "_comment": "Three controls make the tier evidence rather than anecdote (paper §3.4).",
+    "semantics": {
+      "differential_test": "Every build passes the same sandbox differential test as the open-source tier (scripts/02_admit.py machinery).",
+      "regenerate_on_failure": true,
+      "max_attempts": 4,
+      "report": "acceptance rate = admitted / generated, reported per mode and property"
+    },
+    "strength_calibration": {
+      "_comment": "Select builds whose structural complexity and size inflation match the open-source ladder's distribution, so a deobfuscation difference is not confounded by builds that happen to be harder or easier.",
+      "match_against": "stats/strength.json (open-source tier)",
+      "metric": "tools/complexity.mjs complexity + size_inflation",
+      "tolerance": "within the open-source rung's [p25, p75]"
+    },
+    "novelty_audit": {
+      "_comment": "Measure how far each build's structural patterns overlap the open-source tier's; a model that memorized javascript-obfuscator may merely imitate it, which would void the tier's purpose.",
+      "feature_vector": "tools/complexity.mjs `features`",
+      "overlap_metric": "cosine similarity of feature vectors against nearest open-source build; report distribution and flag builds above a stated threshold",
+      "threshold": 0.95
+    }
+  },
+
+  "dual_use": "This tier produces obfuscation for the sole purpose of evaluating deobfuscation under controlled conditions. Builds are paired with originals and tests and released as a benchmark; the pipeline adds no capability for concealing malicious behavior beyond what the cited open-source tools already provide."
+}

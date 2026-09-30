@@ -1,0 +1,21 @@
+'use strict';
+const main = (_0x33266f) => {
+  _0x33266f = _0x33266f.trim().split('\n');
+  const _0x21f276 = _0x33266f[0] * 1;
+  const _0x1a68ea = _0x33266f[1].split(' ').map(_0x24f93d => _0x24f93d * 1);
+  const _0x593cea = new Array(_0x21f276).fill(0);
+  for (let _0x359131 = 0; _0x359131 < _0x21f276; _0x359131++) {
+    _0x593cea[_0x359131] += (_0x593cea[_0x359131 - 1] || 0) + _0x1a68ea[_0x359131];
+  }
+  let _0x1144f5 = {};
+  _0x1144f5[0] = 1;
+  for (let _0x5bb847 = 0; _0x5bb847 < _0x21f276; _0x5bb847++) {
+    _0x1144f5[_0x593cea[_0x5bb847]] = (_0x1144f5[_0x593cea[_0x5bb847]] || 0) + 1;
+  }
+  let _0x3db6d9 = 0;
+  Object.keys(_0x1144f5).forEach(_0x4bf322 => {
+    _0x3db6d9 += (_0x1144f5[_0x4bf322] * (_0x1144f5[_0x4bf322] - 1)) / 2;
+  });
+  console.log(_0x3db6d9);
+};
+main(require('fs').readFileSync('/dev/stdin', 'utf8'));

@@ -1,0 +1,11 @@
+{
+  "handle": "8c18d607b56cabfe",
+  "entry": "subject.cjs",
+  "runtime": "agnostic",
+  "dependencies": {
+    "available": [
+      "lodash"
+    ]
+  },
+  "browser": null
+}

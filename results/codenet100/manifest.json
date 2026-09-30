@@ -1,0 +1,240 @@
+{
+  "schema_version": "agentdeobfbench-codenet-results-v1",
+  "benchmark": "codenet100",
+  "runs": [
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "l0-deepseek/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "l0-deepseek",
+      "system": "DeepSeek-V4-Pro-0813@L0",
+      "model": "DeepSeek-V4-Pro-0813",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "l0-deepseek-rerun/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "l0-deepseek-rerun",
+      "system": "DeepSeek-V4-Pro-0813@L0",
+      "model": "DeepSeek-V4-Pro-0813",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "l0-deepseek-c77/c77-0",
+      "benchmark": "codenet100",
+      "system_slug": "l0-deepseek-c77",
+      "system": "DeepSeek-V4-Pro-0813@L0",
+      "model": "DeepSeek-V4-Pro-0813",
+      "level": "L0",
+      "protection": "c77-0",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "l0-glm/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "l0-glm",
+      "system": "GLM-5.2@L0",
+      "model": "GLM-5.2",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "l0-glm-rerun/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "l0-glm-rerun",
+      "system": "GLM-5.2@L0",
+      "model": "GLM-5.2",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "l0-kimi/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "l0-kimi",
+      "system": "Kimi-K2.5@L0",
+      "model": "Kimi-K2.5",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "l0-gpt-sol/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "l0-gpt-sol",
+      "system": "gpt-5.6-sol@L0",
+      "model": "gpt-5.6-sol",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "l0-gpt-sol-c77/c77-0",
+      "benchmark": "codenet100",
+      "system_slug": "l0-gpt-sol-c77",
+      "system": "gpt-5.6-sol@L0",
+      "model": "gpt-5.6-sol",
+      "level": "L0",
+      "protection": "c77-0",
+      "prediction_count": 69,
+      "score_count": 69,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "codex/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "codex",
+      "system": "openai/gpt-5.6-sol@codex",
+      "model": "openai/gpt-5.6-sol",
+      "level": "codex",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "claude-code/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "claude-code",
+      "system": "openai/gpt-5.6-sol@claude_code",
+      "model": "opus[1m]",
+      "level": "claude_code",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "kimi-code/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "kimi-code",
+      "system": "openai/gpt-5.6-sol@kimi_code",
+      "model": "openai/gpt-5.6-sol",
+      "level": "kimi_code",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "opencode/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "opencode",
+      "system": "openai/gpt-5.6-sol@opencode",
+      "model": "openai/gpt-5.6-sol",
+      "level": "opencode",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-codenet-run-v1",
+      "run_id": "openhands/jsob-full",
+      "benchmark": "codenet100",
+      "system_slug": "openhands",
+      "system": "openai/gpt-5.6-sol@openhands",
+      "model": "openai/gpt-5.6-sol",
+      "level": "openhands",
+      "protection": "jsob-full",
+      "prediction_count": 100,
+      "score_count": 100,
+      "metric_schema": "JsDeObsBench-compatible",
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    }
+  ]
+}

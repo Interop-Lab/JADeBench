@@ -1,0 +1,126 @@
+'use strict';
+
+const { Duplex } = require('stream');
+
+function emitClose(stream) {
+  if (stream.listenerCount('close') > 0) {
+    stream.emit('close');
+  }
+}
+
+function duplexOnEnd() {
+  if (!this.destroyed && this._writableState && this._writableState.finished) {
+    this.destroy();
+  }
+}
+
+function duplexOnError(err) {
+  if (this.listenerCount('error') === 0) {
+    this.destroy(err);
+  }
+}
+
+function createWebSocketStream(ws, options) {
+  let terminateOnDestroy = true;
+
+  const duplex = new Duplex({
+    ...options,
+    autoDestroy: false,
+    emitClose: false,
+    objectMode: false,
+    writableObjectMode: false,
+    readableObjectMode: false
+  });
+
+  ws.on('message', function message(msg, isBinary) {
+    const data = !isBinary && duplex._readableState.objectMode ? msg.toString() : msg;
+
+    if (!duplex.push(data)) ws.pause();
+  });
+
+  ws.once('error', function error(err) {
+    if (duplex.destroyed) return;
+
+    terminateOnDestroy = false;
+    duplex.destroy(err);
+  });
+
+  ws.once('close', function close() {
+    if (duplex.destroyed) return;
+
+    duplex.push(null);
+  });
+
+  duplex._destroy = function (err, callback) {
+    if (ws.readyState === ws.CLOSED) {
+      if (err) {
+        callback(err);
+      } else {
+        callback();
+      }
+
+      return;
+    }
+
+    let called = false;
+
+    ws.once('error', function error(err) {
+      called = true;
+      callback(err);
+    });
+
+    ws.once('close', function close() {
+      if (!called) {
+        callback(err);
+      }
+    });
+
+    if (terminateOnDestroy) ws.terminate();
+  };
+
+  duplex._final = function (callback) {
+    if (ws.readyState === ws.CONNECTING) {
+      ws.once('open', function open() {
+        duplex._final(callback);
+      });
+
+      return;
+    }
+
+    if (ws._socket === null) return;
+
+    if (ws._socket._writableState.finished) {
+      callback();
+      if (duplex._readableState.endEmitted) duplex.destroy();
+    } else {
+      ws._socket.once('finish', function finish() {
+        callback();
+      });
+
+      ws.close();
+    }
+  };
+
+  duplex._read = function () {
+    if (ws.isPaused) ws.resume();
+  };
+
+  duplex._write = function (chunk, encoding, callback) {
+    if (ws.readyState === ws.CONNECTING) {
+      ws.once('open', function open() {
+        duplex._write(chunk, encoding, callback);
+      });
+
+      return;
+    }
+
+    ws.send(chunk, callback);
+  };
+
+  duplex.on('end', duplexOnEnd);
+  duplex.on('error', duplexOnError);
+
+  return duplex;
+}
+
+module.exports = createWebSocketStream;

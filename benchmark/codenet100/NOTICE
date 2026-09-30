@@ -1,0 +1,42 @@
+AgentDeobfBench — CodeNet100 reference benchmark
+================================================
+
+Program text and test cases
+---------------------------
+
+Source: IBM Project CodeNet, https://github.com/IBM/Project_CodeNet
+
+Paper: Puri et al., "Project CodeNet: A Large-Scale AI for Code Dataset for
+Learning a Diversity of Coding Tasks", NeurIPS 2021 Datasets and Benchmarks.
+
+License: Community Data License Agreement — Permissive — Version 2.0
+(CDLA-Permissive-2.0), https://cdla.dev/permissive-2-0/
+
+This release uses Project CodeNet data, not its Apache-2.0 tooling. The original
+programs, input/expected-output test cases, generated protected programs, and
+deobfuscation outputs retain the applicable data terms. Redistributions must
+retain this notice and license link.
+
+Selection and comparison
+------------------------
+
+The reference selection follows JsDeObsBench:
+https://github.com/Ch3nYe/JsDeObsBench, reviewed at commit
+8b2e1c35dc4ae25a46ea580ea5dcb6b5de5edbe9 (2025-07-26).
+
+Paper: Chen, Jin, and Lin, "JsDeObsBench: Measuring and Benchmarking LLMs for
+JavaScript Deobfuscation", ACM CCS 2025, doi:10.1145/3719027.3744871
+
+That repository's reviewed snapshot contained no root LICENSE. Consequently,
+this release vendors no JsDeObsBench implementation code. `selection.json` and
+`sample_ids.jsonl` record factual selection and ordering metadata for
+reproducibility; the selected program text remains Project CodeNet data under
+the terms above.
+
+AgentDeobfBench artifacts
+-------------------------
+
+The protected builds, metadata, released predictions, aggregation scripts, and
+documentation were produced for AgentDeobfBench. The root MIT license covers
+repository-authored code and documentation but does not replace the Project
+CodeNet data terms.

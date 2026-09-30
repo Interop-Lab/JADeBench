@@ -1,0 +1,75 @@
+{
+  "_comment": "Commercial obfuscation tier (paper §3.4). Licensed protectors do not beat a fully-enabled open-source build on transformation depth; their advantage is three capabilities no build-time tool provides — runtime protection, usage/environment control, and per-build polymorphism. This tier cannot run without the licensed products, so this file is a scaffold: it fixes the schema for product profiles and the wild-sampling protocol, and scripts/commercial.py validates and dry-runs against it. Capability claims here are vendor self-descriptions to be recorded, never presented as measurements.",
+
+  "products": [
+    {
+      "id": "jscrambler",
+      "kind": "build-time",
+      "reproducible": true,
+      "status": "not-run: fill build.product_version + set tos_checked once a license is confirmed",
+      "config_id": "protected",
+      "self_defending": true,
+      "max_subjects": 40,
+      "documented_protections": ["identifier renaming", "string encoding", "control-flow flattening", "self-defending", "debug protection", "domain lock", "per-build polymorphism"],
+      "build": {
+        "_comment": "How a build is produced from a subject. The pipeline substitutes {input} (clean bundle), {output} (target file), {output_dir} (its parent) and {config} (config_file) into `command`, runs it via the shell, then runs the same differential admission as every tier. Jscrambler's CLI writes into an output directory keyed by the input's basename, so the runner copies the produced file to {output}; adjust `command`/`produced` for another product.",
+        "command": "npx jscrambler -c {config} -o {output_dir} {input}",
+        "produced": "{output_dir}/{input_basename}",
+        "config_file": "config/jscrambler.json",
+        "product_version": "REQUIRED: pin the exact CLI/@jscrambler/jscrambler version once installed, e.g. 8.6.1",
+        "records": ["product version", "config hash", "build date"]
+      },
+      "tos_checked": false,
+      "redistribution_allowed": "UNKNOWN: verify the license before releasing any output; if outputs may not be redistributed, release build scripts and configs instead of artifacts (paper §Threats)."
+    },
+    {
+      "id": "jsdefender",
+      "kind": "build-time",
+      "reproducible": true,
+      "status": "not-run: fallback build-time product (easier trial than Jscrambler); fill build.product_version + set tos_checked once a license is confirmed",
+      "config_id": "protected",
+      "self_defending": true,
+      "max_subjects": 40,
+      "documented_protections": ["identifier renaming", "string encoding", "control-flow flattening", "number encryption", "debug/tamper detection", "domain lock", "per-build polymorphism"],
+      "build": {
+        "_comment": "PreEmptive JSDefender CLI writes directly to the file given by its output flag, so no `produced` copy step is needed — {output} is the final path. Substitutes {input}/{output}/{config}. VERIFY the exact command and flag names against your installed @preemptive/jsdefender version's docs before a real run; the template below is a plausible default, not a pinned invocation.",
+        "command": "npx jsdefender {input} --out {output} --config {config}",
+        "config_file": "config/jsdefender.json",
+        "product_version": "REQUIRED: pin the exact @preemptive/jsdefender version once installed, e.g. 2.5.0",
+        "records": ["product version", "config hash", "build date"]
+      },
+      "tos_checked": false,
+      "redistribution_allowed": "UNKNOWN: verify the license before releasing any output; if outputs may not be redistributed, release build scripts and configs instead of artifacts (paper §Threats)."
+    },
+    {
+      "id": "EXAMPLE_online_service",
+      "kind": "online-service",
+      "reproducible": false,
+      "status": "not-run: wild condition",
+      "documented_protections": ["polymorphic per request"],
+      "wild": {
+        "_comment": "Online services may change without notice and some return different output for identical input by design, so they cannot carry controlled contrasts. They are sampled once, archived, and reported separately.",
+        "sampled_once_at": "REQUIRED: ISO timestamp of the single sampling run",
+        "service_version_or_banner": "REQUIRED: whatever version identifier the service exposes",
+        "archive_path": "builds/commercial/wild/<service-id>/",
+        "note": "Also covers widely used services whose outputs are common in deployed code but absent from the English-language literature."
+      },
+      "tos_checked": false,
+      "redistribution_allowed": "UNKNOWN"
+    }
+  ],
+
+  "admission": {
+    "_comment": "Same differential test as every tier, with one addition: environment-conditional builds (domain lock, self-defending, usage control) are deliberately not semantics-preserving, so admission configures the sandbox to satisfy the conditions a build declares and records every build discarded on this ground.",
+    "declares_environment_field": "declares_environment",
+    "record_discarded": true
+  },
+
+  "anti_debug_reporting": {
+    "_comment": "A commercial build that disables the debugger must be reported as a defense that worked, not as a model that failed (paper §3.6, §Threats). The sandbox logs detected anti-debugging events; this tier reports, per product, the fraction of L2 debugging sessions degraded to L1.",
+    "metric": "degraded_L2_sessions / total_L2_sessions",
+    "source": "sandbox debug harness anti-debug event log"
+  },
+
+  "reporting_note": "Report the vendor profiles used and structural effects measured locally (size inflation, complexity via tools/complexity.mjs). Never present a documented_protection as a measured one."
+}

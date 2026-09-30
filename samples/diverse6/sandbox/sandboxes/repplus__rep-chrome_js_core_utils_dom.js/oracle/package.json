@@ -1,0 +1,11 @@
+{
+  "name": "rep-plus",
+  "version": "1.0.0",
+  "description": "Chrome DevTools extension for HTTP request manipulation",
+  "type": "module",
+  "devDependencies": {
+    "vitest": "^1.0.0",
+    "jsdom": "^23.0.0"
+  },
+  "private": true
+}

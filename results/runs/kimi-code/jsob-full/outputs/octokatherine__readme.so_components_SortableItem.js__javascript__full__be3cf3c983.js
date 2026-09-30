@@ -1,0 +1,138 @@
+var __defProp = Object.defineProperty;
+var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
+var __getOwnPropNames = Object.getOwnPropertyNames;
+var __hasOwnProp = Object.prototype.hasOwnProperty;
+var __export = (target, exports) => {
+  for (var name in exports) {
+    __defProp(target, name, { get: exports[name], enumerable: true });
+  }
+};
+var __copyProps = (target, source, except, descriptor) => {
+  if (source && (typeof source === "object" || typeof source === "function")) {
+    for (let key of __getOwnPropNames(source)) {
+      if (!__hasOwnProp.call(target, key) && key !== except) {
+        __defProp(target, key, {
+          get: () => source[key],
+          enumerable: !(descriptor = __getOwnPropDesc(source, key)) || descriptor.enumerable,
+        });
+      }
+    }
+  }
+  return target;
+};
+var __toCommonJS = (module) =>
+  __copyProps(__defProp({}, "__esModule", { value: true }), module);
+
+var SortableItem_exports = {};
+__export(SortableItem_exports, {
+  SortableItem: () => SortableItem,
+});
+module.exports = __toCommonJS(SortableItem_exports);
+
+var React = require("react");
+var { useSortable } = require("@dnd-kit/sortable");
+var { CSS } = require("@dnd-kit/utilities");
+
+var SortableItem = React.memo(function SortableItem({
+  id,
+  section,
+  focusedSectionSlug,
+  setFocusedSection,
+  onResetSection,
+  onDeleteSection,
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id });
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  const focusSection = () => {
+    localStorage.setItem("current-focused-slug", id);
+    setFocusedSection(id);
+  };
+
+  const deleteSection = (event) => {
+    onDeleteSection(event, section.slug);
+  };
+
+  const resetSection = (event) => {
+    const confirmed = window.confirm(
+      "The section will be reset to default template; to continue, click OK",
+    );
+    if (confirmed === true) {
+      onResetSection(event, section.slug);
+    }
+  };
+
+  const handleKeyUp = (event) => {
+    if (event.key.toLowerCase() === "enter") {
+      focusSection();
+    }
+  };
+
+  const isFocused = section.slug === focusedSectionSlug;
+  const itemClassName = `bg-white shadow rounded-md pl-1 pr-14 py-2 flex items-center cursor-pointer hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 relative select-none transition-colors ${isFocused ? "ring-2 ring-emerald-400" : ""}`;
+
+  return React.createElement(
+    "li",
+    {
+      ref: setNodeRef,
+      style,
+      ...attributes,
+      onClick: focusSection,
+      onKeyUp: handleKeyUp,
+      className: itemClassName,
+    },
+    React.createElement(
+      "button",
+      {
+        type: "button",
+        className:
+          "p-2 -m-1 mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400",
+        ...listeners,
+      },
+      React.createElement("img", {
+        className: "w-5 h-5",
+        src: "drag.svg",
+        alt: "Drag to reorder",
+      }),
+    ),
+    React.createElement("p", null, section.name),
+    section.slug === focusedSectionSlug &&
+      React.createElement(
+        React.Fragment,
+        null,
+        React.createElement(
+          "button",
+          {
+            className:
+              "p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 absolute right-8",
+            type: "button",
+            "aria-label": "Reset section",
+            onClick: resetSection,
+          },
+          React.createElement("img", {
+            className: "w-auto h-5",
+            src: "reset.svg",
+            alt: "Reset section",
+          }),
+        ),
+        React.createElement(
+          "button",
+          {
+            className:
+              "p-2 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 absolute right-1",
+            type: "button",
+            "aria-label": "Delete section",
+            onClick: deleteSection,
+          },
+          React.createElement("img", {
+            className: "w-auto h-5",
+            src: "trash.svg",
+            alt: "Delete section",
+          }),
+        ),
+      ),
+  );
+});

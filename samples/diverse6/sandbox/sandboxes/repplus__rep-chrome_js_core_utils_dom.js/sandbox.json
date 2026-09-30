@@ -1,0 +1,54 @@
+{
+  "subject_id": "repplus__rep-chrome::js/core/utils/dom.js",
+  "agent_handle": "5e5819fab3417772",
+  "project": "repplus/rep-chrome",
+  "module": "js/core/utils/dom.js",
+  "commit": "fc0cea7e51f9f689ec12879b3b05e311795f3b9f",
+  "entry": "subject.mjs",
+  "agent_dir": "agent",
+  "oracle_dir": "oracle",
+  "runtime": "browser",
+  "domain": "data-processing",
+  "dependencies": {
+    "required": [],
+    "linked": [
+      "jsdom"
+    ],
+    "unresolved": []
+  },
+  "oracle": {
+    "available": true,
+    "test_file": "tests/dom.test.js",
+    "extra_files": 0,
+    "runner": "vitest",
+    "invocation": "vitest run",
+    "entry": "js/core/utils/dom.js"
+  },
+  "metrics": {
+    "loc": 125,
+    "host_api_call_sites": 27,
+    "host_globals_used": [
+      "Blob",
+      "document",
+      "navigator",
+      "window"
+    ],
+    "third_party_bindings": [],
+    "first_party_modules_inlined": 0,
+    "declared_identifiers": 29,
+    "domain_identifiers": 18,
+    "domain_identifier_ratio": 0.6207,
+    "async_constructs": 2
+  },
+  "coverage": {
+    "statement": 0.4172,
+    "branch": 1.0,
+    "function": 0.5,
+    "line": 0.4172,
+    "tests_exit_code": 0
+  },
+  "browser": {
+    "url": "https://sandbox.local/",
+    "html": "<!doctype html><html><body></body></html>"
+  }
+}

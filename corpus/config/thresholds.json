@@ -1,0 +1,311 @@
+{
+  "_comment": "论文 §3.3 的 repo 筛选门槛与 realism screening 阈值。sensitivity_grid 用于满足论文 TODO 中要求的阈值敏感性分析。",
+  "schema_version": 1,
+  "repo_filter": {
+    "_comment": "Collection 阶段的项目准入门槛。permissive_licenses 之外的一律拒绝，理由记入 attrition。",
+    "permissive_licenses": [
+      "mit",
+      "apache-2.0",
+      "bsd-3-clause",
+      "bsd-2-clause",
+      "isc",
+      "0bsd",
+      "unlicense"
+    ],
+    "min_stars": 200,
+    "max_stars": 60000,
+    "_max_stars_rationale": "过高星标项目（如 lodash/axios）几乎必然在预训练语料中大量出现，且其源码常被逐字复制到教程里，污染风险最高。",
+    "pushed_within_days": 540,
+    "min_repo_age_days": 180,
+    "max_repo_size_kb": 120000,
+    "require_topics_match": false,
+    "exclude_name_patterns": [
+      "awesome-",
+      "-examples?$",
+      "^examples?-",
+      "tutorial",
+      "boilerplate",
+      "starter",
+      "template",
+      "playground",
+      "^learn",
+      "interview",
+      "leetcode",
+      "algorithms?$",
+      "katas?$",
+      "exercises?$",
+      "demo$",
+      "sandbox"
+    ],
+    "_exclude_rationale": "教学/样例/算法练习类仓库正是 CodeNet 式分布，纳入会削弱本语料与参照子集的对比。"
+  },
+  "build_verify": {
+    "_comment": "Filtering 阶段。此处只要求：依赖装得上、测试套件能跑起来、且有足够多用例通过。不要求整套全绿——oracle 只需要 subject 自己那个测试文件可信，整套里其他模块的陈旧快照与之无关。逐 subject 的绿灯检查在 stage 5。",
+    "accepted_test_runners": [
+      "jest",
+      "vitest",
+      "mocha",
+      "ava",
+      "tap",
+      "node:test",
+      "uvu",
+      "jasmine",
+      "node-script"
+    ],
+    "install_timeout_sec": 600,
+    "test_timeout_sec": 900,
+    "node_version": "22",
+    "require_test_script": true,
+    "min_passing_tests": 10,
+    "require_suite_all_green": false,
+    "_min_passing_rationale": "套件能产出这么多通过用例，说明依赖与运行时装配正确；个别失败留给逐 subject 检查。",
+    "package_managers": {
+      "_comment": "按 lockfile 与 workspace 协议选择包管理器。monorepo 用 npm 装不上（EUNSUPPORTEDPROTOCOL）。",
+      "pnpm-lock.yaml": "pnpm install --frozen-lockfile",
+      "yarn.lock": "yarn install --frozen-lockfile",
+      "package-lock.json": "npm ci",
+      "_workspace_protocol": "pnpm install --frozen-lockfile",
+      "_fallback": "npm install --no-audit --no-fund"
+    },
+    "_lockfile_fidelity": "优先按 lockfile 安装。回退到无锁 install 会解析出更新的 ESM-only 依赖，在 CJS 项目里触发 ERR_REQUIRE_ESM——这不是项目的问题，是安装方式的问题。",
+    "_node_script_note": "无框架的 node test/*.js 脚本：能跑、以退出码报告结果，对 oracle 而言足够。"
+  },
+  "subject_extraction": {
+    "_comment": "模块打包单元。一方依赖内联，三方依赖保持外部引用，与 §2.1『先打包再混淆』一致。",
+    "min_loc": 15,
+    "max_loc": 1200,
+    "_loc_rationale": "作用于**根模块源码**。下界仅用于排除纯 re-export 与常量文件；不宜设高——高度模块化的项目（如 preact）源码模块普遍只有几十行，但打包后是合格规模的 subject。上界保证根模块本身不过大。",
+    "max_subjects_per_project": 12,
+    "_cap_rationale": "防止单一大项目主导聚合分数；论文 Threats 的 corpus bias 缓解措施之一。",
+    "bundle": {
+      "first_party_inline": true,
+      "third_party_external": true,
+      "format": "esm",
+      "platform_by_domain": {
+        "client-app": "browser",
+        "network-api": "neutral",
+        "data-processing": "neutral",
+        "platform": "node"
+      },
+      "minify": false,
+      "keep_names": true,
+      "_keep_names_rationale": "打包不得损坏 ground-truth 标识符；混淆必须是唯一的名字破坏来源。",
+      "jsx_in_js": true,
+      "_jsx_rationale": "React 生态普遍在 .js 文件里写 JSX；esbuild 默认不对 .js 启用 JSX loader，导致 48 个候选打包失败。",
+      "asset_loaders": {
+        "_comment": "静态资源导入按空模块处理，使打包不因样式/数据文件中断。",
+        ".css": "empty",
+        ".scss": "empty",
+        ".less": "empty",
+        ".svg": "empty",
+        ".png": "empty",
+        ".jpg": "empty",
+        ".gif": "empty",
+        ".woff": "empty",
+        ".woff2": "empty",
+        ".txt": "text",
+        ".html": "text"
+      }
+    },
+    "test_mapping_patterns": [
+      "test/{rel}.test.{ext}",
+      "tests/{rel}.test.{ext}",
+      "__tests__/{rel}.{ext}",
+      "test/{base}.test.{ext}",
+      "tests/{base}.test.{ext}",
+      "test/{base}.spec.{ext}",
+      "tests/{base}.spec.{ext}",
+      "test/{base}.{ext}",
+      "tests/{base}.{ext}",
+      "spec/{base}.spec.{ext}",
+      "__tests__/{base}.test.{ext}",
+      "__tests__/{base}.{ext}",
+      "{dir}/{base}.test.{ext}",
+      "{dir}/{base}.spec.{ext}",
+      "{dir}/__tests__/{base}.{ext}"
+    ],
+    "max_bundled_loc": 4000,
+    "_bundled_loc_rationale": "作用于**打包产物**，即真正被混淆和评分的 artifact。下界 40 行由实测分布确定：被拒候选的 LOC 中位数为 44，下界设为 80 会连同大量合格模块一起排除；低于 40 行的模块承载的逻辑过少，混淆与反混淆的信号都不足。上界须比根模块宽得多，否则会排除所有有模块图的模块——而模块图正是 realism screen 要找的属性。",
+    "min_bundled_loc": 40
+  },
+  "realism_screen": {
+    "_comment": "论文 §3.3 Realism screening 的可复核自动判定。subject 需满足 min_criteria_met 条准则才准入。",
+    "min_criteria_met": 2,
+    "criteria": {
+      "host_api": {
+        "metric": "host_api_call_sites",
+        "threshold": 3,
+        "description": "对宿主平台或三方库 API 的调用点数量。CodeNet 提交此值恒为 0（仅 stdin/stdout）。"
+      },
+      "module_graph": {
+        "metric": "first_party_modules_inlined",
+        "threshold": 2,
+        "description": "被内联的一方依赖模块数。CodeNet 提交为单文件，恒为 0。"
+      },
+      "domain_identifiers": {
+        "metric": "domain_identifier_ratio",
+        "threshold": 0.3,
+        "description": "领域词标识符占已声明标识符的比例。领域词=多子词(camelCase/snake_case)且不在 generic_stoplist 中。"
+      },
+      "async": {
+        "metric": "async_constructs",
+        "threshold": 2,
+        "description": "await / Promise / .then / 回调注册点数量。可选准则，不计入 min_criteria_met 的必要项。"
+      }
+    },
+    "sensitivity_grid": {
+      "_comment": "论文要求报告阈值敏感性。对每个网格点重跑准入判定，报告语料规模与领域构成的变化。",
+      "host_api_call_sites": [
+        1,
+        3,
+        5,
+        10
+      ],
+      "first_party_modules_inlined": [
+        1,
+        2,
+        4
+      ],
+      "domain_identifier_ratio": [
+        0.15,
+        0.3,
+        0.45
+      ],
+      "min_criteria_met": [
+        1,
+        2,
+        3
+      ]
+    },
+    "generic_stoplist": [
+      "i",
+      "j",
+      "k",
+      "n",
+      "m",
+      "x",
+      "y",
+      "z",
+      "a",
+      "b",
+      "c",
+      "d",
+      "e",
+      "f",
+      "tmp",
+      "temp",
+      "val",
+      "value",
+      "values",
+      "res",
+      "result",
+      "results",
+      "ret",
+      "sum",
+      "ans",
+      "answer",
+      "cnt",
+      "count",
+      "idx",
+      "index",
+      "arr",
+      "array",
+      "list",
+      "str",
+      "string",
+      "num",
+      "number",
+      "obj",
+      "object",
+      "data",
+      "item",
+      "items",
+      "el",
+      "elem",
+      "element",
+      "fn",
+      "func",
+      "cb",
+      "callback",
+      "args",
+      "arg",
+      "params",
+      "param",
+      "opts",
+      "options",
+      "out",
+      "input",
+      "output",
+      "buf",
+      "buffer",
+      "len",
+      "length",
+      "size",
+      "max",
+      "min",
+      "curr",
+      "current",
+      "prev",
+      "next",
+      "first",
+      "last",
+      "left",
+      "right",
+      "start",
+      "end",
+      "flag",
+      "ok",
+      "err",
+      "error",
+      "self",
+      "that",
+      "_",
+      "__",
+      "key",
+      "keys",
+      "acc",
+      "prop",
+      "props",
+      "ctx",
+      "context"
+    ]
+  },
+  "dedup": {
+    "_comment": "Filtering and deduplication 阶段。跨项目与项目内都做，防止流行工具函数主导效应。",
+    "method": "winnowing-minhash",
+    "ngram_size": 5,
+    "shingle_on": "normalized_token_stream",
+    "_normalization": "标识符名与字面量替换为占位符后再做 shingle，使换名后的复制体仍能被识别。",
+    "jaccard_threshold": 0.8,
+    "keep_policy": "lowest_star_project",
+    "_keep_policy_rationale": "重复对中保留星标较低的项目，降低预训练污染的整体暴露度。",
+    "compare_on": "root_module_source",
+    "_compare_on_rationale": "必须比对根模块源码而非打包产物。同一项目的两个 subject 常内联同一批一方工具，使打包产物高度雷同而根模块毫不相关——实测把两个无关模块判成 93% 相似。"
+  },
+  "coverage": {
+    "_comment": "Workload and coverage 阶段，同时是 oracle 的真正闸门：只运行该 subject 对应的测试文件，要求全绿，再记录覆盖率。",
+    "tool": "c8",
+    "min_statement_coverage": 0.4,
+    "_min_cov_rationale": "覆盖率过低的 subject，其失败无法区分『没恢复出来』与『根本没执行到』，会污染 RQ2 的解读。",
+    "record": [
+      "statement",
+      "branch",
+      "function",
+      "line"
+    ],
+    "require_subject_tests_green": true
+  },
+  "contamination": {
+    "_comment": "论文 §3.3 污染控制。post-cutoff 子集用于检验结论是否由记忆驱动。",
+    "record_fields": [
+      "repo_created_at",
+      "repo_pushed_at",
+      "subject_first_commit",
+      "subject_last_commit"
+    ],
+    "cutoff_dates": {
+      "_comment": "填入各评测模型的公开训练截止日期；subject_last_commit 晚于该日期者进入 post-cutoff 子集。",
+      "TODO": "pilot 后按最终模型清单填写"
+    }
+  }
+}

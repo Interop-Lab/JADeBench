@@ -1,0 +1,18 @@
+{
+  "schema_version": "agentdeobfbench-codenet-run-v1",
+  "run_id": "l0-gpt-sol-c77/c77-0",
+  "benchmark": "codenet100",
+  "system_slug": "l0-gpt-sol-c77",
+  "system": "gpt-5.6-sol@L0",
+  "model": "gpt-5.6-sol",
+  "level": "L0",
+  "protection": "c77-0",
+  "prediction_count": 69,
+  "score_count": 69,
+  "metric_schema": "JsDeObsBench-compatible",
+  "files": {
+    "predictions": "predictions.jsonl",
+    "scores": "scores.jsonl",
+    "outputs": "outputs/"
+  }
+}

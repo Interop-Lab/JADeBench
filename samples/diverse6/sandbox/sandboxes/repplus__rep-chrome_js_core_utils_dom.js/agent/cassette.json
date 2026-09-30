@@ -1,0 +1,11 @@
+{
+  "_comment": "Recorded host interactions. Network responses are keyed 'METHOD url'; the clock and PRNG are fixed so repeated runs of one input agree.",
+  "network": {},
+  "clock": {
+    "start": 1735689600000,
+    "step": 1
+  },
+  "random": {
+    "seed": 42
+  }
+}

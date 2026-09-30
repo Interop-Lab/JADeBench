@@ -1,0 +1,215 @@
+{
+  "schema_version": "agentdeobfbench-codenet-leaderboard-v1",
+  "benchmark": "codenet100",
+  "primary_metric": "execution",
+  "runs": [
+    {
+      "run_id": "claude-code/jsob-full",
+      "system_slug": "claude-code",
+      "system": "openai/gpt-5.6-sol@claude_code",
+      "model": "opus[1m]",
+      "level": "claude_code",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.94,
+      "execution": 0.81,
+      "codebleu": 0.2905,
+      "statuses": {
+        "ok": 100
+      }
+    },
+    {
+      "run_id": "codex/jsob-full",
+      "system_slug": "codex",
+      "system": "openai/gpt-5.6-sol@codex",
+      "model": "openai/gpt-5.6-sol",
+      "level": "codex",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.97,
+      "execution": 0.86,
+      "codebleu": 0.2823,
+      "statuses": {
+        "ok": 100
+      }
+    },
+    {
+      "run_id": "kimi-code/jsob-full",
+      "system_slug": "kimi-code",
+      "system": "openai/gpt-5.6-sol@kimi_code",
+      "model": "openai/gpt-5.6-sol",
+      "level": "kimi_code",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.95,
+      "execution": 0.74,
+      "codebleu": 0.2789,
+      "statuses": {
+        "ok": 100
+      }
+    },
+    {
+      "run_id": "l0-deepseek/jsob-full",
+      "system_slug": "l0-deepseek",
+      "system": "DeepSeek-V4-Pro-0813@L0",
+      "model": "DeepSeek-V4-Pro-0813",
+      "level": "L0",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.98,
+      "execution": 0.07,
+      "codebleu": 0.3711,
+      "statuses": {
+        "ok": 100
+      }
+    },
+    {
+      "run_id": "l0-deepseek-c77/c77-0",
+      "system_slug": "l0-deepseek-c77",
+      "system": "DeepSeek-V4-Pro-0813@L0",
+      "model": "DeepSeek-V4-Pro-0813",
+      "level": "L0",
+      "protection": "c77-0",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.99,
+      "execution": 0.56,
+      "codebleu": 0.4144,
+      "statuses": {
+        "None": 100
+      }
+    },
+    {
+      "run_id": "l0-deepseek-rerun/jsob-full",
+      "system_slug": "l0-deepseek-rerun",
+      "system": "DeepSeek-V4-Pro-0813@L0",
+      "model": "DeepSeek-V4-Pro-0813",
+      "level": "L0",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.99,
+      "execution": 0.06,
+      "codebleu": 0.3766,
+      "statuses": {
+        "None": 100
+      }
+    },
+    {
+      "run_id": "l0-glm/jsob-full",
+      "system_slug": "l0-glm",
+      "system": "GLM-5.2@L0",
+      "model": "GLM-5.2",
+      "level": "L0",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.97,
+      "execution": 0.2,
+      "codebleu": 0.4631,
+      "statuses": {
+        "ok": 100
+      }
+    },
+    {
+      "run_id": "l0-glm-rerun/jsob-full",
+      "system_slug": "l0-glm-rerun",
+      "system": "GLM-5.2@L0",
+      "model": "GLM-5.2",
+      "level": "L0",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.99,
+      "execution": 0.2,
+      "codebleu": 0.456,
+      "statuses": {
+        "None": 100
+      }
+    },
+    {
+      "run_id": "l0-gpt-sol/jsob-full",
+      "system_slug": "l0-gpt-sol",
+      "system": "gpt-5.6-sol@L0",
+      "model": "gpt-5.6-sol",
+      "level": "L0",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.98,
+      "execution": 0.78,
+      "codebleu": 0.3903,
+      "statuses": {
+        "ok": 100
+      }
+    },
+    {
+      "run_id": "l0-gpt-sol-c77/c77-0",
+      "system_slug": "l0-gpt-sol-c77",
+      "system": "gpt-5.6-sol@L0",
+      "model": "gpt-5.6-sol",
+      "level": "L0",
+      "protection": "c77-0",
+      "predictions": 69,
+      "scored": 69,
+      "syntax": 1.0,
+      "execution": 0.9565,
+      "codebleu": 0.4013,
+      "statuses": {
+        "ok": 69
+      }
+    },
+    {
+      "run_id": "l0-kimi/jsob-full",
+      "system_slug": "l0-kimi",
+      "system": "Kimi-K2.5@L0",
+      "model": "Kimi-K2.5",
+      "level": "L0",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.96,
+      "execution": 0.02,
+      "codebleu": 0.4145,
+      "statuses": {
+        "ok": 100
+      }
+    },
+    {
+      "run_id": "opencode/jsob-full",
+      "system_slug": "opencode",
+      "system": "openai/gpt-5.6-sol@opencode",
+      "model": "openai/gpt-5.6-sol",
+      "level": "opencode",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.94,
+      "execution": 0.88,
+      "codebleu": 0.2875,
+      "statuses": {
+        "ok": 100
+      }
+    },
+    {
+      "run_id": "openhands/jsob-full",
+      "system_slug": "openhands",
+      "system": "openai/gpt-5.6-sol@openhands",
+      "model": "openai/gpt-5.6-sol",
+      "level": "openhands",
+      "protection": "jsob-full",
+      "predictions": 100,
+      "scored": 100,
+      "syntax": 0.93,
+      "execution": 0.86,
+      "codebleu": 0.2781,
+      "statuses": {
+        "ok": 100
+      }
+    }
+  ]
+}

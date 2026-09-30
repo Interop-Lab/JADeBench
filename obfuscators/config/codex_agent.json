@@ -1,0 +1,35 @@
+{
+  "_comment": "Agent obfuscation group: Codex CLI with DeepSeek Pro (Sophnet) as the kernel. Same T19 stack and sandbox admission as standalone-llm-obfuscate, but the model iterates with node --check and check.mjs instead of a one-shot prompt dump. Default subjects are corpus/original (the 69-file comparison set).",
+
+  "tool": "codex-agent",
+  "tier": "model-generated",
+  "config_id": "t19",
+  "cli": {
+    "_comment": "Unit42-style stacked rewrites. alternative_reimplementation is omitted because it is the main source of silent semantic drift.",
+    "techniques": ["var_rename", "string_splitting", "dead_code_insert"]
+  },
+  "provider": {
+    "vendor": "sophnet",
+    "model": "DeepSeek-V4-Pro-0813",
+    "base_url": "https://www.sophnet.com/api/open-apis/v1",
+    "api_key_env": "SOPHNET_API_KEY",
+    "requires_openai_auth": false
+  },
+  "codex": {
+    "timeout_seconds": 1200,
+    "sandbox": "workspace-write",
+    "network_access": false,
+    "approval_policy": "never",
+    "executable": "codex"
+  },
+  "selection": {
+    "_comment": "Restrict to corpus/original so the agent group is comparable with jsob_corpus_full / vm_corpus_l1 / llm_obfuscated. max_bytes 0 = no size skip; the agent reads original.js from disk in slices.",
+    "from_original": true,
+    "max_bytes": 0
+  },
+  "controls": {
+    "differential_test": "scripts/02_admit.py",
+    "regenerate_on_failure": true,
+    "max_attempts": 2
+  }
+}

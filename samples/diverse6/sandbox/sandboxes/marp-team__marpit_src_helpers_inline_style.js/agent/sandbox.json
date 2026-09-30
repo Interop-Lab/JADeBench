@@ -1,0 +1,11 @@
+{
+  "handle": "f4b306279ec4b183",
+  "entry": "subject.cjs",
+  "runtime": "agnostic",
+  "dependencies": {
+    "available": [
+      "postcss"
+    ]
+  },
+  "browser": null
+}

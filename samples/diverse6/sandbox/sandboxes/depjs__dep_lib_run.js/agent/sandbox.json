@@ -1,0 +1,9 @@
+{
+  "handle": "7c1d566dcfbe9ba5",
+  "entry": "subject.mjs",
+  "runtime": "node",
+  "dependencies": {
+    "available": []
+  },
+  "browser": null
+}

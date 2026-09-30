@@ -1,0 +1,13 @@
+{
+  "model": "GLM-5.3",
+  "provider": "sophnet",
+  "base_url": "https://www.sophnet.com/api/open-apis/v1",
+  "api_key_env": "SOPHNET_API_KEY",
+  "temperature": 0.2,
+  "top_p": 0.95,
+  "max_input_tokens": 900000,
+  "max_output_tokens": 32768,
+  "thinking": {
+    "type": "disabled"
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "01_discover": {
+    "archived_or_disabled": 31,
+    "license_not_permissive": 347,
+    "unmaintained": 73,
+    "repo_too_large": 54,
+    "too_new": 29,
+    "excluded_pattern_teaching_or_algorithmic": 15
+  },
+  "02_build_verify": {
+    "no_supported_test_runner": 251,
+    "install_failed": 24,
+    "suite_did_not_run_or_too_few_passing": 115,
+    "no_package_json": 66,
+    "clone_failed": 15
+  },
+  "03_extract_subjects": {
+    "bundle_not_loadable": 70,
+    "bundle_too_small": 42,
+    "realism_screen": 92,
+    "bundle_too_large": 18,
+    "bundle_failed": 10,
+    "extractor_failed": 2
+  },
+  "05_coverage": {
+    "coverage_below_threshold": 26,
+    "subject_tests_failed": 66,
+    "no_coverage_report": 2
+  }
+}

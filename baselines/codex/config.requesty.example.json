@@ -1,0 +1,12 @@
+{
+  "model": "openai-responses/gpt-5.6-sol",
+  "provider": "requesty",
+  "base_url": "https://router.requesty.ai/v1",
+  "api_key_env": "REQUESTY_API_KEY",
+  "requires_openai_auth": false,
+  "timeout_seconds": 1200,
+  "bash_timeout_ms": 120000,
+  "sandbox": "workspace-write",
+  "network_access": false,
+  "approval_policy": "never"
+}

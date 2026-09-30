@@ -1,0 +1,51 @@
+{
+  "subject_id": "spite__ccapture.js::src/createMotionBlur.js",
+  "agent_handle": "37c96f087e2ed5f8",
+  "project": "spite/ccapture.js",
+  "module": "src/createMotionBlur.js",
+  "commit": "f4e25a7fca6216740f57c58907d8eda8c882a0ba",
+  "entry": "subject.mjs",
+  "agent_dir": "agent",
+  "oracle_dir": "oracle",
+  "runtime": "browser",
+  "domain": "client-app",
+  "dependencies": {
+    "required": [],
+    "linked": [
+      "jsdom(shared)"
+    ],
+    "unresolved": []
+  },
+  "oracle": {
+    "available": true,
+    "test_file": "test/MotionBlur.test.js",
+    "extra_files": 1,
+    "runner": "node-script",
+    "invocation": "node test/TimeWarp.test.js",
+    "entry": "src/createMotionBlur.js"
+  },
+  "metrics": {
+    "loc": 241,
+    "host_api_call_sites": 3,
+    "host_globals_used": [
+      "document"
+    ],
+    "third_party_bindings": [],
+    "first_party_modules_inlined": 2,
+    "declared_identifiers": 34,
+    "domain_identifiers": 21,
+    "domain_identifier_ratio": 0.6176,
+    "async_constructs": 0
+  },
+  "coverage": {
+    "statement": 0.7692,
+    "branch": 0.9412,
+    "function": 0.6667,
+    "line": 0.7692,
+    "tests_exit_code": 0
+  },
+  "browser": {
+    "url": "https://sandbox.local/",
+    "html": "<!doctype html><html><body></body></html>"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "_comment": "TEMPLATE — the single fully-enabled PreEmptive JSDefender config applied to every commercial-tier subject when running --product jsdefender. Like the Jscrambler config, the commercial tier turns on every protection at once (not an ablation ladder) to exercise the three capabilities a build-time open-source tool cannot: runtime protection (debug/tamper detection), usage/environment control (domain lock), and per-build polymorphism. VERIFY the toggle names and structure against your installed @preemptive/jsdefender version's documentation before a real run — JSDefender's config schema differs across versions and this is a plausible default, not a pinned config. Fill any account/license fields your CLI requires. config/commercial.json points build.config_file here and records this file's hash with every build.",
+  "globalTransforms": {
+    "controlFlow": true,
+    "controlFlowFlattening": true,
+    "stringEncryption": true,
+    "renaming": true,
+    "numberEncryption": true,
+    "debuggerRemoval": true,
+    "tamperDetection": true,
+    "domainLock": {
+      "_comment": "Environment-conditional: admission must configure the sandbox to satisfy declares_environment, and builds discarded on this ground are recorded (config/commercial.json admission block).",
+      "domains": ["REQUIRED: the domain(s) the build is locked to, matching the declared sandbox environment"]
+    }
+  }
+}

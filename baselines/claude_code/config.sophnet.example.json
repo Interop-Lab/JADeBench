@@ -1,0 +1,23 @@
+{
+  "model": "GLM-5.3",
+  "provider": "sophnet",
+  "base_url": "https://www.sophnet.com/api/open-apis/anthropic",
+  "api_key_env": "SOPHNET_API_KEY",
+  "model_aliases": {
+    "ANTHROPIC_DEFAULT_FABLE_MODEL": "GLM-5.3",
+    "ANTHROPIC_DEFAULT_HAIKU_MODEL": "GLM-5.3",
+    "ANTHROPIC_DEFAULT_OPUS_MODEL": "GLM-5.3",
+    "ANTHROPIC_DEFAULT_SONNET_MODEL": "GLM-5.3",
+    "CLAUDE_CODE_SUBAGENT_MODEL": "GLM-5.3"
+  },
+  "timeout_seconds": 1200,
+  "bash_timeout_ms": 120000,
+  "api_timeout_ms": 180000,
+  "bash_max_output_length": 8000,
+  "max_thinking_tokens": 0,
+  "thinking": {
+    "type": "disabled"
+  },
+  "max_output_tokens": 32768,
+  "permission_mode": "bypassPermissions"
+}

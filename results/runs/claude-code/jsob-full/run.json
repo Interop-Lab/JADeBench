@@ -1,0 +1,19 @@
+{
+  "schema_version": "agentdeobfbench-run-v1",
+  "run_id": "claude-code/jsob-full",
+  "benchmark": "realworld104",
+  "system_slug": "claude-code",
+  "system": "gpt-sol-latest@claude_code",
+  "model": "opus[1m]",
+  "level": "claude_code",
+  "protection": "jsob-full",
+  "prediction_count": 104,
+  "score_count": 104,
+  "unscored_sample_ids": [],
+  "evaluator_schema": 4,
+  "files": {
+    "predictions": "predictions.jsonl",
+    "scores": "scores.jsonl",
+    "outputs": "outputs/"
+  }
+}

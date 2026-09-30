@@ -1,0 +1,44 @@
+[
+  {
+    "project": "0xranx/OpenContext",
+    "source": "https://github.com/0xranx/OpenContext",
+    "commit": "0649e7134346f6f5038a9b29cc5c824ae6a54f3f",
+    "detected_license": "mit",
+    "license_file": "licenses/0xranx__OpenContext__LICENSE"
+  },
+  {
+    "project": "Midtrans/midtrans-nodejs-client",
+    "source": "https://github.com/Midtrans/midtrans-nodejs-client",
+    "commit": "dc13b08d48fcda5389251c03e8e267102e494385",
+    "detected_license": "mit",
+    "license_file": "licenses/Midtrans__midtrans-nodejs-client__LICENSE"
+  },
+  {
+    "project": "depjs/dep",
+    "source": "https://github.com/depjs/dep",
+    "commit": "0c9300864e8d05cca8f93df0c3c03346db650923",
+    "detected_license": "mit",
+    "license_file": "licenses/depjs__dep__LICENSE"
+  },
+  {
+    "project": "marp-team/marpit",
+    "source": "https://github.com/marp-team/marpit",
+    "commit": "2a51860799c1d113cb6a70458a51b949ff941303",
+    "detected_license": "mit",
+    "license_file": "licenses/marp-team__marpit__LICENSE"
+  },
+  {
+    "project": "repplus/rep-chrome",
+    "source": "https://github.com/repplus/rep-chrome",
+    "commit": "fc0cea7e51f9f689ec12879b3b05e311795f3b9f",
+    "detected_license": "mit",
+    "license_file": "licenses/repplus__rep-chrome__LICENSE"
+  },
+  {
+    "project": "spite/ccapture.js",
+    "source": "https://github.com/spite/ccapture.js",
+    "commit": "f4e25a7fca6216740f57c58907d8eda8c882a0ba",
+    "detected_license": "mit",
+    "license_file": "licenses/spite__ccapture.js__LICENSE"
+  }
+]

@@ -1,0 +1,57 @@
+{
+  "subject_id": "depjs__dep::lib/run.js",
+  "agent_handle": "7c1d566dcfbe9ba5",
+  "project": "depjs/dep",
+  "module": "lib/run.js",
+  "commit": "0c9300864e8d05cca8f93df0c3c03346db650923",
+  "entry": "subject.mjs",
+  "agent_dir": "agent",
+  "oracle_dir": "oracle",
+  "runtime": "node",
+  "domain": "platform",
+  "dependencies": {
+    "required": [],
+    "linked": [],
+    "unresolved": []
+  },
+  "oracle": {
+    "available": true,
+    "test_file": "test/55-run.js",
+    "extra_files": 1,
+    "runner": "node-script",
+    "invocation": "node scripts/test.js",
+    "entry": "lib/run.js"
+  },
+  "metrics": {
+    "loc": 97,
+    "host_api_call_sites": 20,
+    "host_globals_used": [
+      "fs",
+      "fs2",
+      "path",
+      "path2",
+      "process",
+      "spawn"
+    ],
+    "third_party_bindings": [
+      "fs",
+      "fs2",
+      "path",
+      "path2",
+      "spawn"
+    ],
+    "first_party_modules_inlined": 4,
+    "declared_identifiers": 24,
+    "domain_identifiers": 12,
+    "domain_identifier_ratio": 0.5,
+    "async_constructs": 8
+  },
+  "coverage": {
+    "statement": 0.96,
+    "branch": 0.6,
+    "function": 1.0,
+    "line": 0.96,
+    "tests_exit_code": 0
+  },
+  "browser": null
+}

@@ -1,0 +1,19 @@
+{
+  "schema_version": "agentdeobfbench-run-v1",
+  "run_id": "l0-glm/vm-l1",
+  "benchmark": "realworld104",
+  "system_slug": "l0-glm",
+  "system": "GLM-5.2@L0",
+  "model": "GLM-5.2",
+  "level": "L0",
+  "protection": "vm-l1",
+  "prediction_count": 104,
+  "score_count": 104,
+  "unscored_sample_ids": [],
+  "evaluator_schema": 4,
+  "files": {
+    "predictions": "predictions.jsonl",
+    "scores": "scores.jsonl",
+    "outputs": "outputs/"
+  }
+}

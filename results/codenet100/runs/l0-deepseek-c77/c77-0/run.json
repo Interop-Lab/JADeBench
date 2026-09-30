@@ -1,0 +1,18 @@
+{
+  "schema_version": "agentdeobfbench-codenet-run-v1",
+  "run_id": "l0-deepseek-c77/c77-0",
+  "benchmark": "codenet100",
+  "system_slug": "l0-deepseek-c77",
+  "system": "DeepSeek-V4-Pro-0813@L0",
+  "model": "DeepSeek-V4-Pro-0813",
+  "level": "L0",
+  "protection": "c77-0",
+  "prediction_count": 100,
+  "score_count": 100,
+  "metric_schema": "JsDeObsBench-compatible",
+  "files": {
+    "predictions": "predictions.jsonl",
+    "scores": "scores.jsonl",
+    "outputs": "outputs/"
+  }
+}

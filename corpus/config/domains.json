@@ -1,0 +1,132 @@
+{
+  "_comment": "论文 §3.3 Collection 阶段的领域清单。四个领域对应 obfuscation 实际部署的场景。每个领域的 target_projects 之和应达到论文声明的项目总数。",
+  "schema_version": 1,
+  "target_projects_total": 50,
+  "domains": [
+    {
+      "id": "client-app",
+      "name": "Client-side application logic",
+      "rationale": "浏览器端业务逻辑，是被商业混淆器保护的首要对象。带 DOM/事件/存储交互。",
+      "target_projects": 13,
+      "runtime": "browser",
+      "queries": [
+        "topic:dom language:JavaScript",
+        "topic:frontend topic:state-management language:JavaScript",
+        "topic:browser topic:widget language:JavaScript",
+        "topic:canvas language:JavaScript",
+        "topic:form-validation language:JavaScript",
+        "topic:dom-manipulation language:JavaScript",
+        "topic:ui-components language:JavaScript",
+        "topic:web-components language:JavaScript",
+        "topic:animation language:JavaScript",
+        "topic:datepicker language:JavaScript",
+        "topic:editor language:JavaScript",
+        "topic:charts language:JavaScript"
+      ],
+      "host_api_hints": [
+        "document",
+        "window",
+        "localStorage",
+        "sessionStorage",
+        "navigator",
+        "history",
+        "IntersectionObserver",
+        "MutationObserver",
+        "customElements"
+      ]
+    },
+    {
+      "id": "network-api",
+      "name": "Network and API clients",
+      "rationale": "SDK 与 HTTP 客户端。§2.1 指出字符串数组会隐藏 endpoint 与方法名，本领域是该效应最强的地方。",
+      "target_projects": 13,
+      "runtime": "both",
+      "queries": [
+        "topic:http-client language:JavaScript",
+        "topic:api-client language:JavaScript",
+        "topic:sdk language:JavaScript",
+        "topic:rest-client language:JavaScript",
+        "topic:graphql-client language:JavaScript",
+        "topic:fetch language:JavaScript",
+        "topic:websocket language:JavaScript",
+        "topic:oauth language:JavaScript",
+        "topic:webhook language:JavaScript",
+        "topic:grpc language:JavaScript",
+        "topic:retry language:JavaScript"
+      ],
+      "host_api_hints": [
+        "fetch",
+        "XMLHttpRequest",
+        "http",
+        "https",
+        "WebSocket",
+        "EventSource",
+        "AbortController"
+      ]
+    },
+    {
+      "id": "data-processing",
+      "name": "Data processing and encoding",
+      "rationale": "解析器、序列化、编解码、加密。算法密度高但仍带真实 API 与领域词汇，是与 CodeNet 最接近却仍可区分的领域。",
+      "target_projects": 12,
+      "runtime": "both",
+      "queries": [
+        "topic:parser language:JavaScript",
+        "topic:serialization language:JavaScript",
+        "topic:encoding language:JavaScript",
+        "topic:csv language:JavaScript",
+        "topic:yaml language:JavaScript",
+        "topic:compression language:JavaScript",
+        "topic:markdown language:JavaScript",
+        "topic:json language:JavaScript",
+        "topic:crypto language:JavaScript",
+        "topic:image-processing language:JavaScript",
+        "topic:validation language:JavaScript",
+        "topic:template-engine language:JavaScript",
+        "topic:tokenizer language:JavaScript"
+      ],
+      "host_api_hints": [
+        "TextEncoder",
+        "TextDecoder",
+        "Buffer",
+        "crypto",
+        "zlib",
+        "stream",
+        "Blob",
+        "ArrayBuffer"
+      ]
+    },
+    {
+      "id": "platform",
+      "name": "Platform integration",
+      "rationale": "Node 内建、文件系统、进程、CLI、扩展。覆盖论文要求的 Node.js 子集。",
+      "target_projects": 12,
+      "runtime": "node",
+      "queries": [
+        "topic:cli language:JavaScript",
+        "topic:filesystem language:JavaScript",
+        "topic:nodejs topic:utility language:JavaScript",
+        "topic:build-tool language:JavaScript",
+        "topic:browser-extension language:JavaScript",
+        "topic:npm language:JavaScript",
+        "topic:logger language:JavaScript",
+        "topic:config language:JavaScript",
+        "topic:process language:JavaScript",
+        "topic:electron language:JavaScript",
+        "topic:devtools language:JavaScript",
+        "topic:bundler language:JavaScript"
+      ],
+      "host_api_hints": [
+        "fs",
+        "path",
+        "process",
+        "child_process",
+        "os",
+        "url",
+        "worker_threads",
+        "chrome",
+        "browser"
+      ]
+    }
+  ]
+}

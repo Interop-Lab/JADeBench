@@ -1,0 +1,4 @@
+# Scoring output: regenerate with score.py / selfcheck.py.
+results/
+__pycache__/
+*.pyc

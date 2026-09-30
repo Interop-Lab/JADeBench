@@ -1,0 +1,14 @@
+{
+  "model": "claude-opus-5",
+  "provider": "soleapi",
+  "base_url": "https://api.soleapi.com/v1",
+  "api_key_env": "SOLEAPI_API_KEY",
+  "api_style": "anthropic",
+  "temperature": 0.2,
+  "max_input_tokens": 900000,
+  "max_output_tokens": 65536,
+  "stream": true,
+  "thinking": {
+    "type": "disabled"
+  }
+}

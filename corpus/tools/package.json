@@ -1,0 +1,7 @@
+{
+  "name": "adb-corpus-tools",
+  "private": true,
+  "dependencies": {
+    "esbuild": "^0.24.0"
+  }
+}
