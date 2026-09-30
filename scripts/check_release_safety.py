@@ -90,11 +90,12 @@ def release_files() -> list[Path]:
             ]
             files.extend(base / filename for filename in filenames)
         return sorted(set(files))
-    return sorted(
+    paths = [
         ROOT / value
         for value in output.decode("utf-8").split("\0")
         if value
-    )
+    ]
+    return sorted(path for path in paths if path.exists() or path.is_symlink())
 
 
 def safe_symlink(path: Path) -> bool:

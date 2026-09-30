@@ -12,7 +12,7 @@ from typing import Any, Iterable
 
 
 ROOT = Path(__file__).resolve().parents[1]
-BENCHMARK = ROOT / "benchmark" / "realworld104"
+BENCHMARK = ROOT / "benchmark" / "realworld93"
 RUNS = ROOT / "results" / "runs"
 LEADERBOARD_JSON = ROOT / "results" / "leaderboard.json"
 LEADERBOARD_MD = ROOT / "results" / "leaderboard.md"
@@ -52,8 +52,8 @@ def summarize(run_dir: Path, expected_ids: set[str]) -> dict[str, Any]:
 
     prediction_ids = [str(row.get("sample_id")) for row in predictions]
     score_ids = [str(row.get("sample_id")) for row in scores]
-    if len(prediction_ids) != 104 or set(prediction_ids) != expected_ids:
-        raise ValueError(f"{run_dir}: predictions do not cover realworld104")
+    if len(prediction_ids) != 93 or set(prediction_ids) != expected_ids:
+        raise ValueError(f"{run_dir}: predictions do not cover realworld93")
     if len(prediction_ids) != len(set(prediction_ids)):
         raise ValueError(f"{run_dir}: duplicate prediction sample IDs")
     if len(score_ids) != len(set(score_ids)) or not set(score_ids) <= expected_ids:
@@ -65,6 +65,16 @@ def summarize(run_dir: Path, expected_ids: set[str]) -> dict[str, Any]:
             output = run_dir / str(relative)
             if Path(str(relative)).is_absolute() or not output.is_file():
                 raise ValueError(f"{run_dir}: missing prediction output {relative!r}")
+    referenced_outputs = {
+        (run_dir / str(row["path"])).resolve()
+        for row in predictions
+        if row.get("path")
+    }
+    published_outputs = {
+        path.resolve() for path in (run_dir / "outputs").iterdir() if path.is_file()
+    }
+    if published_outputs != referenced_outputs:
+        raise ValueError(f"{run_dir}: outputs/ differs from predictions.jsonl")
 
     execution = values(scores, "execution", "score")
     behaviour = values(scores, "execution", "behaviour_match")
@@ -150,8 +160,10 @@ def format_score(value: float | None) -> str:
 def generated() -> tuple[str, str]:
     sample_rows = read_jsonl(BENCHMARK / "sample_ids.jsonl")
     expected_ids = {str(row["sample_id"]) for row in sample_rows}
-    if len(sample_rows) != 104 or len(expected_ids) != 104:
-        raise ValueError("benchmark/realworld104/sample_ids.jsonl must contain 104 IDs")
+    if len(sample_rows) != 93 or expected_ids != {
+        f"adb-{number:03d}" for number in range(1, 94)
+    }:
+        raise ValueError("benchmark/realworld93 must contain adb-001 through adb-093")
 
     summaries = [
         summarize(run_dir, expected_ids)
@@ -162,7 +174,7 @@ def generated() -> tuple[str, str]:
         raise ValueError(f"expected 24 released runs, found {len(summaries)}")
     payload = {
         "schema_version": "agentdeobfbench-leaderboard-v1",
-        "benchmark": "realworld104",
+        "benchmark": "realworld93",
         "primary_metric": "execution",
         "runs": summaries,
     }

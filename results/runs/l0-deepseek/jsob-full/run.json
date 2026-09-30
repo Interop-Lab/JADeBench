@@ -1,14 +1,14 @@
 {
   "schema_version": "agentdeobfbench-run-v1",
   "run_id": "l0-deepseek/jsob-full",
-  "benchmark": "realworld104",
+  "benchmark": "realworld93",
   "system_slug": "l0-deepseek",
   "system": "DeepSeek-V4-Pro-0813@L0",
   "model": "DeepSeek-V4-Pro-0813",
   "level": "L0",
   "protection": "jsob-full",
-  "prediction_count": 104,
-  "score_count": 104,
+  "prediction_count": 93,
+  "score_count": 93,
   "unscored_sample_ids": [],
   "evaluator_schema": 4,
   "files": {

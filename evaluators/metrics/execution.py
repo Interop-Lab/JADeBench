@@ -319,7 +319,7 @@ def module_flavour(subject):
     marpit leaves `type` unset while writing ESM compiled by babel-jest, and
     OpenContext declares `commonjs`. The manifest's `module_format` is a
     different fact entirely: it describes the *bundle*, and it says `cjs` while
-    the module's own source is ESM on 59 of the 171 subjects. The shim has to
+    the module's own source can disagree with the bundled module format. The shim has to
     match the file it replaces, because the project's tooling was configured for
     that file, so this stays anchored to the checkout even though the run now
     happens in the sandbox.

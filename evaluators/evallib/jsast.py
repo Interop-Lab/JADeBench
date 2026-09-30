@@ -349,7 +349,7 @@ def _assigned_surface(node, root=None):
     hypothetical — webcrack answers `module.exports = _0x5cddf9` on the `full`
     rung, and the module exports all ten names correctly at run time. Execution
     correctness scored 1.0 on the very artifact syntax correctness scored 0, and
-    99 of the 171 reference bundles carry named exports, which is exactly the
+    Many reference bundles carry named exports, which is exactly the
     population the false claim bites.
 
     Answering `*` for every identifier is sound but throws away a contract that

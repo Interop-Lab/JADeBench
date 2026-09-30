@@ -243,7 +243,7 @@ def specialize(invocation, runner, test_file):
     This lives here rather than in a stage because three consumers need it and
     a hand-copy had already appeared: the coverage stage that produced the
     manifest's numbers, `sandbox/scripts/score.py`, and the evaluators' own
-    execution harness. The copies agreed on all 171 subjects when they were
+    execution harness. The copies agreed on the reviewed corpus when they were
     merged, but they had already drifted in one respect — the copy did not
     re-quote a non-file token containing a space — and a command that is
     assembled two ways is a command whose provenance nobody can state.

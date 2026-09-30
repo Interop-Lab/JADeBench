@@ -11,7 +11,7 @@ python3 scripts/reproduce_codenet_results.py --check
 ```
 
 This validates all 24 run directories, checks that every prediction maps to
-`adb-001` through `adb-104`, verifies output files, and regenerates the
+`adb-001` through `adb-093`, verifies output files, and regenerates the
 leaderboard in memory. Remove `--check` to rewrite the generated JSON and
 Markdown summaries.
 
@@ -62,16 +62,16 @@ Remove `--dry-run` only after reviewing the selected inputs and output path.
 Model baselines can consume paid quota and must receive credentials only through
 environment variables.
 
-## Score the 104-subject benchmark
+## Score the 93-subject benchmark
 
 The original, JS-OB, and VM programs are included in
-`benchmark/realworld104`. Static evaluation is immediately reproducible:
+`benchmark/realworld93`. Static evaluation is immediately reproducible:
 
 ```bash
-ADB_CORPUS="$PWD/benchmark/realworld104" \
+ADB_CORPUS="$PWD/benchmark/realworld93" \
 python3 evaluators/score.py \
-  --manifest benchmark/realworld104/manifest.jsonl \
-  --builds benchmark/realworld104/builds-jsob.jsonl \
+  --manifest benchmark/realworld93/manifest.jsonl \
+  --builds benchmark/realworld93/builds-jsob.jsonl \
   --predictions path/to/predictions.jsonl \
   --out path/to/scores.jsonl \
   --no-execution
@@ -94,7 +94,7 @@ python3 scripts/reproduce_codenet_results.py --check
 Remove `--check` to regenerate
 `results/codenet100/leaderboard.{json,md}`. This aggregation uses the legacy
 `syntax_pass`, `exe_pass`, and `codebleu` fields and remains separate from the
-realworld104 evaluator.
+realworld93 evaluator.
 
 ## Execution reproduction
 
@@ -105,10 +105,11 @@ documented in `DATA_RELEASE.md`.
 
 ## Broader construction metadata
 
-The full manifests remain in `corpus/manifest.jsonl` and
-`obfuscators/builds/builds.jsonl`. They describe 171 construction subjects and
-1,295 admitted builds across configurations; they are not the denominator of
-the public 104-subject leaderboard.
+The construction manifests remain in `corpus/manifest.jsonl` and
+`obfuscators/builds/builds.jsonl`. They describe the 93 screened subjects and
+805 admitted builds across configurations for 85 of them; the public
+leaderboard still uses exactly the two materialized inputs per subject under
+`benchmark/realworld93`.
 
 Every reported result should record the repository revision, evaluator schema,
 manifest checksums, selected subject/build IDs, model or tool version, and raw

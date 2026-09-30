@@ -1,170 +1,18 @@
 {
   "schema_version": "agentdeobfbench-results-v1",
-  "benchmark": "realworld104",
+  "benchmark": "realworld93",
   "runs": [
     {
       "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "l0-deepseek/jsob-full",
-      "benchmark": "realworld104",
-      "system_slug": "l0-deepseek",
-      "system": "DeepSeek-V4-Pro-0813@L0",
-      "model": "DeepSeek-V4-Pro-0813",
-      "level": "L0",
-      "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "l0-deepseek/vm-l1",
-      "benchmark": "realworld104",
-      "system_slug": "l0-deepseek",
-      "system": "DeepSeek-V4-Pro-0813@L0",
-      "model": "DeepSeek-V4-Pro-0813",
-      "level": "L0",
-      "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "l0-glm/jsob-full",
-      "benchmark": "realworld104",
-      "system_slug": "l0-glm",
-      "system": "GLM-5.2@L0",
-      "model": "GLM-5.2",
-      "level": "L0",
-      "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "l0-glm/vm-l1",
-      "benchmark": "realworld104",
-      "system_slug": "l0-glm",
-      "system": "GLM-5.2@L0",
-      "model": "GLM-5.2",
-      "level": "L0",
-      "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "l0-gpt-sol/jsob-full",
-      "benchmark": "realworld104",
-      "system_slug": "l0-gpt-sol",
-      "system": "openai/gpt-5.6-sol@L0",
-      "model": "openai/gpt-5.6-sol",
-      "level": "L0",
-      "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "l0-gpt-sol/vm-l1",
-      "benchmark": "realworld104",
-      "system_slug": "l0-gpt-sol",
-      "system": "openai/gpt-5.6-sol@L0",
-      "model": "openai/gpt-5.6-sol",
-      "level": "L0",
-      "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "l0-kimi/jsob-full",
-      "benchmark": "realworld104",
-      "system_slug": "l0-kimi",
-      "system": "Kimi-K2.5@L0",
-      "model": "Kimi-K2.5",
-      "level": "L0",
-      "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "l0-kimi/vm-l1",
-      "benchmark": "realworld104",
-      "system_slug": "l0-kimi",
-      "system": "Kimi-K2.5@L0",
-      "model": "Kimi-K2.5",
-      "level": "L0",
-      "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
       "run_id": "claude-code/jsob-full",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "claude-code",
       "system": "gpt-sol-latest@claude_code",
       "model": "opus[1m]",
       "level": "claude_code",
       "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
+      "prediction_count": 93,
+      "score_count": 93,
       "unscored_sample_ids": [],
       "evaluator_schema": 4,
       "files": {
@@ -176,14 +24,14 @@
     {
       "schema_version": "agentdeobfbench-run-v1",
       "run_id": "claude-code/vm-l1",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "claude-code",
       "system": "openai/gpt-5.6-sol@claude_code_vm",
       "model": "opus[1m]",
       "level": "claude_code",
       "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
+      "prediction_count": 93,
+      "score_count": 93,
       "unscored_sample_ids": [],
       "evaluator_schema": 4,
       "files": {
@@ -195,14 +43,14 @@
     {
       "schema_version": "agentdeobfbench-run-v1",
       "run_id": "codex/jsob-full",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "codex",
       "system": "openai-responses/gpt-5.6-sol@codex",
       "model": "openai-responses/gpt-5.6-sol",
       "level": "codex",
       "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
+      "prediction_count": 93,
+      "score_count": 93,
       "unscored_sample_ids": [],
       "evaluator_schema": 4,
       "files": {
@@ -214,128 +62,14 @@
     {
       "schema_version": "agentdeobfbench-run-v1",
       "run_id": "codex/vm-l1",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "codex",
       "system": "gpt-5.6-sol@codex_vm",
       "model": "gpt-5.6-sol",
       "level": "codex",
       "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "kimi-code/jsob-full",
-      "benchmark": "realworld104",
-      "system_slug": "kimi-code",
-      "system": "openai/gpt-5.6-sol@kimi_code",
-      "model": "openai/gpt-5.6-sol",
-      "level": "kimi_code",
-      "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "kimi-code/vm-l1",
-      "benchmark": "realworld104",
-      "system_slug": "kimi-code",
-      "system": "openai/gpt-5.6-sol@kimi_code_vm",
-      "model": "openai/gpt-5.6-sol",
-      "level": "kimi_code",
-      "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "opencode/jsob-full",
-      "benchmark": "realworld104",
-      "system_slug": "opencode",
-      "system": "~openai/gpt-sol-latest@opencode",
-      "model": "~openai/gpt-sol-latest",
-      "level": "opencode",
-      "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "opencode/vm-l1",
-      "benchmark": "realworld104",
-      "system_slug": "opencode",
-      "system": "openai/gpt-5.6-sol@opencode_vm",
-      "model": "openai/gpt-5.6-sol",
-      "level": "opencode",
-      "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "openhands/jsob-full",
-      "benchmark": "realworld104",
-      "system_slug": "openhands",
-      "system": "openai/gpt-5.6-sol@openhands",
-      "model": "openai/gpt-5.6-sol",
-      "level": "openhands",
-      "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
-      "unscored_sample_ids": [],
-      "evaluator_schema": 4,
-      "files": {
-        "predictions": "predictions.jsonl",
-        "scores": "scores.jsonl",
-        "outputs": "outputs/"
-      }
-    },
-    {
-      "schema_version": "agentdeobfbench-run-v1",
-      "run_id": "openhands/vm-l1",
-      "benchmark": "realworld104",
-      "system_slug": "openhands",
-      "system": "openai/gpt-5.6-sol@openhands_vm",
-      "model": "openai/gpt-5.6-sol",
-      "level": "openhands",
-      "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
+      "prediction_count": 93,
+      "score_count": 93,
       "unscored_sample_ids": [],
       "evaluator_schema": 4,
       "files": {
@@ -347,17 +81,17 @@
     {
       "schema_version": "agentdeobfbench-run-v1",
       "run_id": "jsimplifier/jsob-full",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "jsimplifier",
       "system": "jsimplifier",
       "model": "none",
       "level": "traditional",
       "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 102,
+      "prediction_count": 93,
+      "score_count": 91,
       "unscored_sample_ids": [
         "adb-007",
-        "adb-041"
+        "adb-033"
       ],
       "evaluator_schema": 4,
       "files": {
@@ -369,17 +103,17 @@
     {
       "schema_version": "agentdeobfbench-run-v1",
       "run_id": "jsimplifier/vm-l1",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "jsimplifier",
       "system": "jsimplifier",
       "model": "none",
       "level": "traditional",
       "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 102,
+      "prediction_count": 93,
+      "score_count": 91,
       "unscored_sample_ids": [
         "adb-007",
-        "adb-041"
+        "adb-033"
       ],
       "evaluator_schema": 4,
       "files": {
@@ -390,15 +124,281 @@
     },
     {
       "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "kimi-code/jsob-full",
+      "benchmark": "realworld93",
+      "system_slug": "kimi-code",
+      "system": "openai/gpt-5.6-sol@kimi_code",
+      "model": "openai/gpt-5.6-sol",
+      "level": "kimi_code",
+      "protection": "jsob-full",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "kimi-code/vm-l1",
+      "benchmark": "realworld93",
+      "system_slug": "kimi-code",
+      "system": "openai/gpt-5.6-sol@kimi_code_vm",
+      "model": "openai/gpt-5.6-sol",
+      "level": "kimi_code",
+      "protection": "vm-l1",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "l0-deepseek/jsob-full",
+      "benchmark": "realworld93",
+      "system_slug": "l0-deepseek",
+      "system": "DeepSeek-V4-Pro-0813@L0",
+      "model": "DeepSeek-V4-Pro-0813",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "l0-deepseek/vm-l1",
+      "benchmark": "realworld93",
+      "system_slug": "l0-deepseek",
+      "system": "DeepSeek-V4-Pro-0813@L0",
+      "model": "DeepSeek-V4-Pro-0813",
+      "level": "L0",
+      "protection": "vm-l1",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "l0-glm/jsob-full",
+      "benchmark": "realworld93",
+      "system_slug": "l0-glm",
+      "system": "GLM-5.2@L0",
+      "model": "GLM-5.2",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "l0-glm/vm-l1",
+      "benchmark": "realworld93",
+      "system_slug": "l0-glm",
+      "system": "GLM-5.2@L0",
+      "model": "GLM-5.2",
+      "level": "L0",
+      "protection": "vm-l1",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "l0-gpt-sol/jsob-full",
+      "benchmark": "realworld93",
+      "system_slug": "l0-gpt-sol",
+      "system": "openai/gpt-5.6-sol@L0",
+      "model": "openai/gpt-5.6-sol",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "l0-gpt-sol/vm-l1",
+      "benchmark": "realworld93",
+      "system_slug": "l0-gpt-sol",
+      "system": "openai/gpt-5.6-sol@L0",
+      "model": "openai/gpt-5.6-sol",
+      "level": "L0",
+      "protection": "vm-l1",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "l0-kimi/jsob-full",
+      "benchmark": "realworld93",
+      "system_slug": "l0-kimi",
+      "system": "Kimi-K2.5@L0",
+      "model": "Kimi-K2.5",
+      "level": "L0",
+      "protection": "jsob-full",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "l0-kimi/vm-l1",
+      "benchmark": "realworld93",
+      "system_slug": "l0-kimi",
+      "system": "Kimi-K2.5@L0",
+      "model": "Kimi-K2.5",
+      "level": "L0",
+      "protection": "vm-l1",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "opencode/jsob-full",
+      "benchmark": "realworld93",
+      "system_slug": "opencode",
+      "system": "~openai/gpt-sol-latest@opencode",
+      "model": "~openai/gpt-sol-latest",
+      "level": "opencode",
+      "protection": "jsob-full",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "opencode/vm-l1",
+      "benchmark": "realworld93",
+      "system_slug": "opencode",
+      "system": "openai/gpt-5.6-sol@opencode_vm",
+      "model": "openai/gpt-5.6-sol",
+      "level": "opencode",
+      "protection": "vm-l1",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "openhands/jsob-full",
+      "benchmark": "realworld93",
+      "system_slug": "openhands",
+      "system": "openai/gpt-5.6-sol@openhands",
+      "model": "openai/gpt-5.6-sol",
+      "level": "openhands",
+      "protection": "jsob-full",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
+      "run_id": "openhands/vm-l1",
+      "benchmark": "realworld93",
+      "system_slug": "openhands",
+      "system": "openai/gpt-5.6-sol@openhands_vm",
+      "model": "openai/gpt-5.6-sol",
+      "level": "openhands",
+      "protection": "vm-l1",
+      "prediction_count": 93,
+      "score_count": 93,
+      "unscored_sample_ids": [],
+      "evaluator_schema": 4,
+      "files": {
+        "predictions": "predictions.jsonl",
+        "scores": "scores.jsonl",
+        "outputs": "outputs/"
+      }
+    },
+    {
+      "schema_version": "agentdeobfbench-run-v1",
       "run_id": "synchrony/jsob-full",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "synchrony",
       "system": "synchrony@S1",
       "model": null,
       "level": "traditional",
       "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
+      "prediction_count": 93,
+      "score_count": 93,
       "unscored_sample_ids": [],
       "evaluator_schema": 4,
       "files": {
@@ -410,14 +410,14 @@
     {
       "schema_version": "agentdeobfbench-run-v1",
       "run_id": "synchrony/vm-l1",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "synchrony",
       "system": "synchrony@S1",
       "model": null,
       "level": "traditional",
       "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
+      "prediction_count": 93,
+      "score_count": 93,
       "unscored_sample_ids": [],
       "evaluator_schema": 4,
       "files": {
@@ -429,14 +429,14 @@
     {
       "schema_version": "agentdeobfbench-run-v1",
       "run_id": "webcrack/jsob-full",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "webcrack",
       "system": "webcrack@S1",
       "model": null,
       "level": "traditional",
       "protection": "jsob-full",
-      "prediction_count": 104,
-      "score_count": 104,
+      "prediction_count": 93,
+      "score_count": 93,
       "unscored_sample_ids": [],
       "evaluator_schema": 4,
       "files": {
@@ -448,14 +448,14 @@
     {
       "schema_version": "agentdeobfbench-run-v1",
       "run_id": "webcrack/vm-l1",
-      "benchmark": "realworld104",
+      "benchmark": "realworld93",
       "system_slug": "webcrack",
       "system": "webcrack@S1",
       "model": null,
       "level": "traditional",
       "protection": "vm-l1",
-      "prediction_count": 104,
-      "score_count": 104,
+      "prediction_count": 93,
+      "score_count": 93,
       "unscored_sample_ids": [],
       "evaluator_schema": 4,
       "files": {

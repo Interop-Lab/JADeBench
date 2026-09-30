@@ -11,9 +11,10 @@ own notice follows that notice.
 
 ## Full metadata
 
-`corpus/manifest.jsonl` indexes 171 subjects. It records upstream projects,
+`corpus/manifest.jsonl` indexes the 93 screened subjects. It records upstream projects,
 commits, detected licenses, module/test paths, and bundle metadata.
-`obfuscators/builds/builds.jsonl` indexes 1,295 generated open-source builds.
+`obfuscators/builds/builds.jsonl` indexes 805 admitted construction records for
+85 of those subjects.
 
 The files referenced by those full manifests are not all present in Git.
 Metadata inclusion is not a claim that upstream source has been relicensed or
@@ -22,8 +23,8 @@ archive URLs and checksums.
 
 ## Public performance benchmark
 
-`benchmark/realworld104` is the materialized, paired v0.1 evaluation dataset.
-It includes 104 original programs, 104 JS-OB programs, 104 VM programs, pinned
+`benchmark/realworld93` is the materialized, screened v0.1 evaluation dataset.
+It includes 93 original programs, 93 JS-OB programs, 93 VM programs, pinned
 provenance, and copied upstream license texts. Unlike the broader construction
 metadata, every path referenced by its manifests is present in this checkout.
 
@@ -40,7 +41,7 @@ JsDeObsBench implementation code is included.
 
 `results/codenet100` contains 13 historical runs and 1,269 final outputs with
 legacy JsDeObsBench-compatible score records. Its generated leaderboard is
-independent from realworld104 because the data distribution, tests, protection
+independent from realworld93 because the data distribution, tests, protection
 configurations, and metric schema differ.
 
 ## Bundled diverse6 sample

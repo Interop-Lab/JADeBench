@@ -57,7 +57,7 @@ class Build(object):
         # How this build earned its place in the tier. `oracle` means the
         # subject's own suite re-ran and matched the reference; `L1_exports`
         # means only that the build loads and exports the same symbols, because
-        # the subject has no usable oracle. 150 of the 1295 builds are the
+        # the subject has no usable oracle. Some construction builds use the
         # latter, and behaviour equivalence was never established for them — so
         # the `identity` oracle's "must score 1.0 on execution" expectation does
         # not apply to those, and an analysis has to be able to exclude them.

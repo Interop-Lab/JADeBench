@@ -1,6 +1,6 @@
 {
   "schema_version": "agentdeobfbench-leaderboard-v1",
-  "benchmark": "realworld104",
+  "benchmark": "realworld93",
   "primary_metric": "execution",
   "runs": [
     {
@@ -10,17 +10,17 @@
       "model": "opus[1m]",
       "level": "claude_code",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.9808,
-      "execution": 0.8585,
-      "behaviour_exact": 0.63,
-      "simplification": 1.0682,
-      "codebleu3": 0.5125,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.9785,
+      "execution": 0.8439,
+      "behaviour_exact": 0.6067,
+      "simplification": 1.0646,
+      "codebleu3": 0.5164,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -30,17 +30,17 @@
       "model": "opus[1m]",
       "level": "claude_code",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
-      "execution": 0.683,
-      "behaviour_exact": 0.3431,
-      "simplification": 1.0262,
-      "codebleu3": 0.4202,
+      "execution": 0.6861,
+      "behaviour_exact": 0.3407,
+      "simplification": 1.0247,
+      "codebleu3": 0.4297,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -50,17 +50,17 @@
       "model": "openai-responses/gpt-5.6-sol",
       "level": "codex",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.9904,
-      "execution": 0.7567,
-      "behaviour_exact": 0.6139,
-      "simplification": 1.029,
-      "codebleu3": 0.5061,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.9892,
+      "execution": 0.7285,
+      "behaviour_exact": 0.5778,
+      "simplification": 1.0273,
+      "codebleu3": 0.5007,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -70,17 +70,17 @@
       "model": "gpt-5.6-sol",
       "level": "codex",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
-      "execution": 0.7527,
-      "behaviour_exact": 0.4216,
-      "simplification": 1.0156,
-      "codebleu3": 0.418,
+      "execution": 0.7597,
+      "behaviour_exact": 0.4286,
+      "simplification": 1.0139,
+      "codebleu3": 0.4201,
       "statuses": {
         "degraded": 2,
-        "ok": 101,
+        "ok": 90,
         "timeout": 1
       }
     },
@@ -91,16 +91,16 @@
       "model": "none",
       "level": "traditional",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 102,
-      "execution_n": 102,
-      "syntax": 0.8627,
-      "execution": 0.3647,
-      "behaviour_exact": 0.125,
-      "simplification": 0.3287,
-      "codebleu3": 0.2626,
+      "predictions": 93,
+      "scored": 91,
+      "execution_n": 91,
+      "syntax": 0.8681,
+      "execution": 0.323,
+      "behaviour_exact": 0.1266,
+      "simplification": 0.2838,
+      "codebleu3": 0.2608,
       "statuses": {
-        "ok": 97,
+        "ok": 86,
         "timeout": 5
       }
     },
@@ -111,16 +111,16 @@
       "model": "none",
       "level": "traditional",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 102,
-      "execution_n": 102,
+      "predictions": 93,
+      "scored": 91,
+      "execution_n": 91,
       "syntax": 1.0,
-      "execution": 0.328,
-      "behaviour_exact": 0.098,
-      "simplification": -0.0541,
-      "codebleu3": 0.0365,
+      "execution": 0.2797,
+      "behaviour_exact": 0.1099,
+      "simplification": -0.0552,
+      "codebleu3": 0.0348,
       "statuses": {
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -130,17 +130,17 @@
       "model": "openai/gpt-5.6-sol",
       "level": "kimi_code",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
-      "execution": 0.8263,
-      "behaviour_exact": 0.5392,
-      "simplification": 1.094,
-      "codebleu3": 0.4989,
+      "execution": 0.8099,
+      "behaviour_exact": 0.5055,
+      "simplification": 1.0933,
+      "codebleu3": 0.5087,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -150,17 +150,17 @@
       "model": "openai/gpt-5.6-sol",
       "level": "kimi_code",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
-      "execution": 0.7037,
-      "behaviour_exact": 0.3235,
-      "simplification": 1.0157,
-      "codebleu3": 0.3927,
+      "execution": 0.7172,
+      "behaviour_exact": 0.3077,
+      "simplification": 1.0131,
+      "codebleu3": 0.398,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -170,17 +170,17 @@
       "model": "DeepSeek-V4-Pro-0813",
       "level": "L0",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.7692,
-      "execution": 0.3417,
-      "behaviour_exact": 0.131,
-      "simplification": 0.9818,
-      "codebleu3": 0.5812,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.7742,
+      "execution": 0.3347,
+      "behaviour_exact": 0.1447,
+      "simplification": 0.9906,
+      "codebleu3": 0.5864,
       "statuses": {
         "degraded": 1,
-        "ok": 103
+        "ok": 92
       }
     },
     {
@@ -190,17 +190,17 @@
       "model": "DeepSeek-V4-Pro-0813",
       "level": "L0",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.9038,
-      "execution": 0.3788,
-      "behaviour_exact": 0.0206,
-      "simplification": 1.0237,
-      "codebleu3": 0.2498,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.914,
+      "execution": 0.3376,
+      "behaviour_exact": 0.0227,
+      "simplification": 1.0249,
+      "codebleu3": 0.2443,
       "statuses": {
         "degraded": 1,
-        "ok": 103
+        "ok": 92
       }
     },
     {
@@ -210,18 +210,18 @@
       "model": "GLM-5.2",
       "level": "L0",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 103,
-      "syntax": 0.7981,
-      "execution": 0.3528,
-      "behaviour_exact": 0.092,
-      "simplification": 1.024,
-      "codebleu3": 0.6608,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 92,
+      "syntax": 0.7849,
+      "execution": 0.3265,
+      "behaviour_exact": 0.1039,
+      "simplification": 1.0242,
+      "codebleu3": 0.6677,
       "statuses": {
         "defense_triggered": 1,
         "degraded": 1,
-        "ok": 101,
+        "ok": 90,
         "timeout": 1
       }
     },
@@ -232,17 +232,17 @@
       "model": "GLM-5.2",
       "level": "L0",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.9135,
-      "execution": 0.3652,
-      "behaviour_exact": 0.0417,
-      "simplification": 1.0424,
-      "codebleu3": 0.3254,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.9355,
+      "execution": 0.3439,
+      "behaviour_exact": 0.0455,
+      "simplification": 1.0415,
+      "codebleu3": 0.3288,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -252,17 +252,17 @@
       "model": "openai/gpt-5.6-sol",
       "level": "L0",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.8173,
-      "execution": 0.5797,
-      "behaviour_exact": 0.266,
-      "simplification": 1.1106,
-      "codebleu3": 0.4547,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.8387,
+      "execution": 0.5946,
+      "behaviour_exact": 0.2874,
+      "simplification": 1.1013,
+      "codebleu3": 0.4714,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -272,17 +272,17 @@
       "model": "openai/gpt-5.6-sol",
       "level": "L0",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.9327,
-      "execution": 0.4402,
-      "behaviour_exact": 0.0495,
-      "simplification": 1.0352,
-      "codebleu3": 0.3241,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.9247,
+      "execution": 0.4128,
+      "behaviour_exact": 0.0556,
+      "simplification": 1.0346,
+      "codebleu3": 0.3211,
       "statuses": {
         "degraded": 2,
-        "ok": 101,
+        "ok": 90,
         "timeout": 1
       }
     },
@@ -293,17 +293,17 @@
       "model": "Kimi-K2.5",
       "level": "L0",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.8269,
-      "execution": 0.3384,
-      "behaviour_exact": 0.0706,
-      "simplification": 1.0398,
-      "codebleu3": 0.5361,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.828,
+      "execution": 0.3139,
+      "behaviour_exact": 0.0789,
+      "simplification": 1.0372,
+      "codebleu3": 0.5396,
       "statuses": {
         "degraded": 1,
-        "ok": 102,
+        "ok": 91,
         "timeout": 1
       }
     },
@@ -314,17 +314,17 @@
       "model": "Kimi-K2.5",
       "level": "L0",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.5673,
-      "execution": 0.2174,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.5806,
+      "execution": 0.1997,
       "behaviour_exact": 0.0,
-      "simplification": 1.0242,
-      "codebleu3": 0.2594,
+      "simplification": 1.0245,
+      "codebleu3": 0.2601,
       "statuses": {
         "degraded": 1,
-        "ok": 103
+        "ok": 92
       }
     },
     {
@@ -334,17 +334,17 @@
       "model": "~openai/gpt-sol-latest",
       "level": "opencode",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
-      "execution": 0.8443,
-      "behaviour_exact": 0.6275,
-      "simplification": 1.0038,
-      "codebleu3": 0.4575,
+      "execution": 0.8377,
+      "behaviour_exact": 0.6154,
+      "simplification": 1.0046,
+      "codebleu3": 0.4628,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -354,17 +354,17 @@
       "model": "openai/gpt-5.6-sol",
       "level": "opencode",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
-      "execution": 0.7125,
-      "behaviour_exact": 0.3431,
-      "simplification": 1.0369,
-      "codebleu3": 0.3792,
+      "execution": 0.7054,
+      "behaviour_exact": 0.3516,
+      "simplification": 1.0367,
+      "codebleu3": 0.3838,
       "statuses": {
         "degraded": 2,
-        "ok": 100,
+        "ok": 89,
         "timeout": 2
       }
     },
@@ -375,17 +375,17 @@
       "model": "openai/gpt-5.6-sol",
       "level": "openhands",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.9904,
-      "execution": 0.9473,
-      "behaviour_exact": 0.8515,
-      "simplification": 1.0065,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.9892,
+      "execution": 0.9411,
+      "behaviour_exact": 0.8333,
+      "simplification": 1.0023,
       "codebleu3": 0.5864,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -395,17 +395,17 @@
       "model": "openai/gpt-5.6-sol",
       "level": "openhands",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
-      "syntax": 0.9904,
-      "execution": 0.8452,
-      "behaviour_exact": 0.6863,
-      "simplification": 0.8625,
-      "codebleu3": 0.4633,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
+      "syntax": 0.9892,
+      "execution": 0.8484,
+      "behaviour_exact": 0.6813,
+      "simplification": 0.876,
+      "codebleu3": 0.4778,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -415,17 +415,17 @@
       "model": null,
       "level": "traditional",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
-      "execution": 0.2901,
+      "execution": 0.2488,
       "behaviour_exact": 0.0,
-      "simplification": 0.395,
-      "codebleu3": 0.0702,
+      "simplification": 0.3858,
+      "codebleu3": 0.071,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -435,17 +435,17 @@
       "model": null,
       "level": "traditional",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
-      "execution": 0.2901,
+      "execution": 0.2488,
       "behaviour_exact": 0.0,
-      "simplification": 0.1984,
-      "codebleu3": 0.0277,
+      "simplification": 0.1963,
+      "codebleu3": 0.027,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -455,17 +455,17 @@
       "model": null,
       "level": "traditional",
       "protection": "jsob-full",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
       "execution": 1.0,
-      "behaviour_exact": 0.9706,
-      "simplification": 0.9968,
-      "codebleu3": 0.6955,
+      "behaviour_exact": 0.967,
+      "simplification": 0.9967,
+      "codebleu3": 0.6944,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     },
     {
@@ -475,17 +475,17 @@
       "model": null,
       "level": "traditional",
       "protection": "vm-l1",
-      "predictions": 104,
-      "scored": 104,
-      "execution_n": 104,
+      "predictions": 93,
+      "scored": 93,
+      "execution_n": 93,
       "syntax": 1.0,
       "execution": 1.0,
-      "behaviour_exact": 0.9706,
-      "simplification": 0.0728,
-      "codebleu3": 0.0405,
+      "behaviour_exact": 0.967,
+      "simplification": 0.0725,
+      "codebleu3": 0.0384,
       "statuses": {
         "degraded": 2,
-        "ok": 102
+        "ok": 91
       }
     }
   ]

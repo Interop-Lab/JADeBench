@@ -39,7 +39,7 @@ FILE_ARG_RE = re.compile(r"^[^-].*(\*|\.[cm]?[jt]sx?$)|^(test|tests|spec|__tests
 # The project's own test command, narrowed to one file, is assembled by the
 # corpus pipeline's implementation rather than a copy of it. This file used to
 # carry its own, and the two had already drifted: the copy did not re-quote a
-# non-file token containing a space. They happened to agree on all 171 subjects,
+# non-file token containing a space. They agreed on the reviewed corpus snapshot,
 # which is exactly why the drift would have gone unnoticed until a project's
 # invocation contained one.
 def _corpus_specialize():

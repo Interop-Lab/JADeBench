@@ -9,7 +9,7 @@ build only if its pass/fail result matches the recorded reference.
 
 Two things the paper calls for are handled here rather than hidden:
 
-  * Subjects whose oracle never runs test cases (38 of 171) cannot be admitted
+  * Subjects whose oracle never runs test cases cannot be admitted
     by re-running a suite. They fall back to an interface-level (L1) check:
     the build must load and export the same symbols as the original bundle.
 

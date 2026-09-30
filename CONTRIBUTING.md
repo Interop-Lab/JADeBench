@@ -22,6 +22,6 @@ license, copied license text, and an entry in the attribution files.
 Changes to evaluator thresholds or semantics must increment the schema version
 in `evaluators/config/eval.json` and document score compatibility.
 
-The public `realworld104` benchmark, broader 171-subject construction metadata,
+The public `realworld93` benchmark, screened construction metadata,
 and six-subject CI fixture serve different purposes. Never silently replace one
 population with another in reported results.

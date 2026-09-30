@@ -36,6 +36,6 @@ its dependencies, then set:
 export ADB_JSIMPLIFIER=/absolute/path/to/JSIMPLIFIER
 ```
 
-The 104-subject paired benchmark and released results are part of the Git
+The 93-subject paired benchmark and released results are part of the Git
 checkout. Project-specific dependency trees and full execution sandboxes are
 separate; see `DATA_RELEASE.md`.

@@ -15,10 +15,10 @@ No external research implementation is vendored in this source release:
   conflicting GPL-3.0 and MIT metadata. Users must obtain and review it
   separately, then set `ADB_JSIMPLIFIER`.
 
-The `benchmark/realworld104` programs are derived from 34 permissively licensed
+The `benchmark/realworld93` programs are derived from 33 permissively licensed
 upstream projects (MIT, ISC, Apache-2.0, or BSD-3-Clause). Subject-level pinned
 revisions and copied license texts are recorded in
-`benchmark/realworld104/THIRD_PARTY_NOTICES.md`. The JS-OB programs, VM programs,
+`benchmark/realworld93/THIRD_PARTY_NOTICES.md`. The JS-OB programs, VM programs,
 and released deobfuscation outputs remain derivatives of those subjects.
 
 The `benchmark/codenet100` program text and test cases originate from IBM

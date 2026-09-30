@@ -15,16 +15,16 @@ ROOT = Path(__file__).resolve().parents[1]
 FULL_CORPUS = ROOT / "corpus" / "manifest.jsonl"
 FULL_BUILDS = ROOT / "obfuscators" / "builds" / "builds.jsonl"
 SAMPLE = ROOT / "samples" / "diverse6"
-BENCHMARK = ROOT / "benchmark" / "realworld104"
+BENCHMARK = ROOT / "benchmark" / "realworld93"
 CODENET = ROOT / "benchmark" / "codenet100"
 RESULTS = ROOT / "results"
 EXPECTED_SAMPLE_IDS = {
     "adb-001",
     "adb-009",
-    "adb-027",
-    "adb-051",
-    "adb-079",
-    "adb-096",
+    "adb-025",
+    "adb-042",
+    "adb-069",
+    "adb-086",
 }
 
 REQUIRED_PATHS = (
@@ -40,13 +40,14 @@ REQUIRED_PATHS = (
     "docs/DATA_AND_RESULTS.md",
     "docs/DATA_RELEASE.md",
     "benchmark/README.md",
-    "benchmark/realworld104/README.md",
-    "benchmark/realworld104/sample_ids.jsonl",
-    "benchmark/realworld104/manifest.jsonl",
-    "benchmark/realworld104/builds-jsob.jsonl",
-    "benchmark/realworld104/builds-vm.jsonl",
-    "benchmark/realworld104/attributions.jsonl",
-    "benchmark/realworld104/THIRD_PARTY_NOTICES.md",
+    "benchmark/realworld93/README.md",
+    "benchmark/realworld93/sample_ids.jsonl",
+    "benchmark/realworld93/subject_paths.txt",
+    "benchmark/realworld93/manifest.jsonl",
+    "benchmark/realworld93/builds-jsob.jsonl",
+    "benchmark/realworld93/builds-vm.jsonl",
+    "benchmark/realworld93/attributions.jsonl",
+    "benchmark/realworld93/THIRD_PARTY_NOTICES.md",
     "benchmark/codenet100/README.md",
     "benchmark/codenet100/NOTICE",
     "benchmark/codenet100/sample_ids.jsonl",
@@ -149,7 +150,7 @@ def check_surface(report: Report) -> None:
         if not (ROOT / relative).exists():
             report.error("missing release path: %s" % relative)
 
-    forbidden = ("paper", "archive", "experiments")
+    forbidden = ("paper", "archive", "experiments", "benchmark/realworld104")
     for relative in forbidden:
         if (ROOT / relative).exists():
             report.error("forbidden release tree is present: %s/" % relative)
@@ -160,7 +161,7 @@ def check_surface(report: Report) -> None:
         "python3 scripts/check_release_safety.py",
         "python3 scripts/reproduce_results.py --check",
         "python3 scripts/reproduce_codenet_results.py --check",
-        "benchmark/realworld104",
+        "benchmark/realworld93",
         "benchmark/codenet100",
         "results/leaderboard.md",
         "samples/diverse6/builds.jsonl",
@@ -174,13 +175,19 @@ def check_full_metadata(report: Report) -> None:
     builds = read_jsonl(FULL_BUILDS, report)
     subject_ids = unique(subjects, "subject_id", "full corpus", report)
     unique(builds, "build_id", "full builds", report)
-    if len(subjects) != 171:
-        report.error("full corpus has %d records; expected 171" % len(subjects))
-    if len(builds) != 1295:
-        report.error("full build metadata has %d records; expected 1295" % len(builds))
+    if len(subjects) != 93:
+        report.error("screened corpus has %d records; expected 93" % len(subjects))
+    if len(builds) != 805:
+        report.error("build metadata has %d records; expected 805" % len(builds))
     unknown = {str(row.get("subject_id")) for row in builds} - subject_ids
     if unknown:
         report.error("full build metadata contains %d unknown subjects" % len(unknown))
+    release_subjects = {
+        str(row.get("subject_id"))
+        for row in read_jsonl(BENCHMARK / "sample_ids.jsonl", report)
+    }
+    if subject_ids != release_subjects:
+        report.error("construction corpus differs from realworld93 subjects")
     for row in subjects:
         if not safe_relative(row.get("bundle_path")):
             report.error(
@@ -191,7 +198,10 @@ def check_full_metadata(report: Report) -> None:
             report.error(
                 "full builds has unsafe path for %r" % row.get("build_id")
             )
-    report.note("full metadata: %d subjects, %d builds" % (len(subjects), len(builds)))
+    report.note(
+        "screened metadata: %d subjects, %d builds"
+        % (len(subjects), len(builds))
+    )
 
 
 def check_sample(report: Report) -> None:
@@ -293,42 +303,51 @@ def check_public_benchmark(report: Report) -> None:
     combined = read_jsonl(BENCHMARK / "builds.jsonl", report)
     attributions = read_jsonl(BENCHMARK / "attributions.jsonl", report)
 
-    sample_ids = unique(index, "sample_id", "realworld104 index", report)
-    subject_ids = unique(index, "subject_id", "realworld104 index", report)
-    if len(index) != 104 or sample_ids != {
-        "adb-%03d" % number for number in range(1, 105)
+    sample_ids = unique(index, "sample_id", "realworld93 index", report)
+    subject_ids = unique(index, "subject_id", "realworld93 index", report)
+    if len(index) != 93 or sample_ids != {
+        "adb-%03d" % number for number in range(1, 94)
     }:
-        report.error("realworld104 must contain adb-001 through adb-104")
+        report.error("realworld93 must contain adb-001 through adb-093")
+    selected_paths = [
+        line.strip()
+        for line in (BENCHMARK / "subject_paths.txt").read_text(
+            encoding="utf-8"
+        ).splitlines()
+        if line.strip()
+    ]
+    if selected_paths != [str(row.get("subject_id")) for row in index]:
+        report.error("realworld93 subject_paths.txt differs from sample_ids order")
     for label, rows in (
         ("manifest", subjects),
         ("JS-OB builds", jsob),
         ("VM builds", vm),
         ("attributions", attributions),
     ):
-        if len(rows) != 104:
-            report.error("realworld104 %s has %d rows; expected 104" % (label, len(rows)))
-        if unique(rows, "subject_id", "realworld104 " + label, report) != subject_ids:
-            report.error("realworld104 %s subject set differs from sample_ids" % label)
-    if len(combined) != 208:
-        report.error("realworld104 builds.jsonl has %d rows; expected 208" % len(combined))
+        if len(rows) != 93:
+            report.error("realworld93 %s has %d rows; expected 93" % (label, len(rows)))
+        if unique(rows, "subject_id", "realworld93 " + label, report) != subject_ids:
+            report.error("realworld93 %s subject set differs from sample_ids" % label)
+    if len(combined) != 186:
+        report.error("realworld93 builds.jsonl has %d rows; expected 186" % len(combined))
 
     for row in subjects:
         relative = row.get("bundle_path")
         if not safe_relative(relative) or not (BENCHMARK / relative).is_file():
-            report.error("missing realworld104 original for %r" % row.get("subject_id"))
+            report.error("missing realworld93 original for %r" % row.get("subject_id"))
     for label, rows in (("JS-OB", jsob), ("VM", vm)):
         for row in rows:
             relative = row.get("path")
             if not safe_relative(relative) or not (BENCHMARK / relative).is_file():
                 report.error(
-                    "missing realworld104 %s build for %r"
+                    "missing realworld93 %s build for %r"
                     % (label, row.get("subject_id"))
                 )
     for row in attributions:
         relative = row.get("license_file")
         if not safe_relative(relative) or not (BENCHMARK / relative).is_file():
-            report.error("missing realworld104 license for %r" % row.get("project"))
-    report.note("realworld104: 104 subjects, 208 protected builds")
+            report.error("missing realworld93 license for %r" % row.get("project"))
+    report.note("realworld93: 93 subjects, 186 protected builds")
 
 
 def check_codenet_benchmark(report: Report) -> None:
@@ -368,6 +387,10 @@ def check_released_results(report: Report) -> None:
     runs = manifest.get("runs", []) if isinstance(manifest, dict) else []
     if len(runs) != 24:
         report.error("released result manifest has %d runs; expected 24" % len(runs))
+    if sum(int(row.get("prediction_count", 0)) for row in runs) != 2232:
+        report.error("released result manifest must cover 2,232 predictions")
+    if sum(int(row.get("score_count", 0)) for row in runs) != 2228:
+        report.error("released result manifest must cover 2,228 scores")
     completed = subprocess.run(
         [sys.executable, str(ROOT / "scripts" / "reproduce_results.py"), "--check"],
         cwd=ROOT,
@@ -381,7 +404,7 @@ def check_released_results(report: Report) -> None:
             % (completed.stderr.strip() or completed.stdout.strip())
         )
     else:
-        report.note("released results: 24 runs over realworld104")
+        report.note("released results: 24 runs over realworld93")
 
     codenet_manifest = read_json(RESULTS / "codenet100" / "manifest.json", report)
     codenet_runs = (

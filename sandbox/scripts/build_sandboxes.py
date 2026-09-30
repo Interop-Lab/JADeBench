@@ -244,7 +244,7 @@ def find_package(name, project_root):
 def link_package(name, project_root, sandbox_nm):
     """Symlink one installed package into the sandbox.
 
-    Symlinks rather than copies: the closures are small but 171 sandboxes would
+    Symlinks rather than copies: the closures are small but a full corpus would
     still duplicate gigabytes, and the packages are read-only inputs.
     """
     src = find_package(name, project_root)

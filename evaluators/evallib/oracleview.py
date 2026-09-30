@@ -14,7 +14,7 @@ not change" a checkable claim rather than a hope:
 
   * the shim's module flavour still comes from `corpus/work/<project>/<module>`,
     the file the shim stands in for. The manifest's `module_format` describes
-    the *bundle* and disagrees with the module's own source on 59 of 171
+    the *bundle* and can disagree with the module's own source
     subjects, so reading it here would silently reformat a third of the corpus.
   * the esbuild platform still comes from the manifest's `platform`, not from
     `sandbox.json`'s `runtime`. The latter describes the agent view's host

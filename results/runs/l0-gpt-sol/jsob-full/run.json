@@ -1,14 +1,14 @@
 {
   "schema_version": "agentdeobfbench-run-v1",
   "run_id": "l0-gpt-sol/jsob-full",
-  "benchmark": "realworld104",
+  "benchmark": "realworld93",
   "system_slug": "l0-gpt-sol",
   "system": "openai/gpt-5.6-sol@L0",
   "model": "openai/gpt-5.6-sol",
   "level": "L0",
   "protection": "jsob-full",
-  "prediction_count": 104,
-  "score_count": 104,
+  "prediction_count": 93,
+  "score_count": 93,
   "unscored_sample_ids": [],
   "evaluator_schema": 4,
   "files": {

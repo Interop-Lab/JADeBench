@@ -1,17 +1,17 @@
 {
   "schema_version": "agentdeobfbench-run-v1",
   "run_id": "jsimplifier/jsob-full",
-  "benchmark": "realworld104",
+  "benchmark": "realworld93",
   "system_slug": "jsimplifier",
   "system": "jsimplifier",
   "model": "none",
   "level": "traditional",
   "protection": "jsob-full",
-  "prediction_count": 104,
-  "score_count": 102,
+  "prediction_count": 93,
+  "score_count": 91,
   "unscored_sample_ids": [
     "adb-007",
-    "adb-041"
+    "adb-033"
   ],
   "evaluator_schema": 4,
   "files": {

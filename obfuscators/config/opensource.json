@@ -31,8 +31,8 @@
     "js-confuser": {
       "version": "2.1.3",
       "note": "A maintained open-source obfuscator with no public deobfuscator written against it; separates 'reversible because weak' from 'reversible because the community invested in reversing js-obfuscator'.",
-      "max_subjects": 171,
-      "_max_subjects_rationale": "JSConfuser's heavy rungs (controlFlowFlattening, deadCode, stringConcealing at high thresholds) are super-linear on real code — tens of seconds per build, versus sub-second for javascript-obfuscator — so applying the full ladder to all 171 subjects is not tractable within a practical budget. This tool's role is the weak-vs-community-invested contrast, which a stratified sample serves; the ablation ladder itself is carried by javascript-obfuscator at full scale. The sample is deterministic (evenly spaced across subjects sorted by domain, runner, format, id) and is logged to stats/jsconfuser_sample.json. Raise this to 171 to cover the whole corpus if time permits.",
+      "max_subjects": 93,
+      "_max_subjects_rationale": "The release corpus contains 93 screened subjects. JSConfuser's heavy rungs are super-linear on real code, so the default pipeline uses one strongest pre-defense rung per subject while javascript-obfuscator carries the full ablation ladder.",
       "base": {
         "target": "node",
         "compact": true,

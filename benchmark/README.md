@@ -1,6 +1,6 @@
 # Benchmark data
 
-The versioned public benchmark is [`realworld104`](realworld104/): 104 aligned
+The versioned public benchmark is [`realworld93`](realworld93/): 93 aligned
 real-world JavaScript subjects, each released as an original bundle, a
 JavaScript Obfuscator build, and a VM-protected build.
 
@@ -13,17 +13,17 @@ tasks and a legacy evaluator schema.
 `samples/diverse6` remains the small integration fixture used by CI. It is not
 the dataset used for the released performance results.
 
-The larger 171-subject construction corpus and 1,295-build registry under
-`corpus/` and `obfuscators/` document how the benchmark was constructed. They
-are not the denominator of the v0.1 leaderboard. This distinction is deliberate:
+The construction metadata under `corpus/` is screened to these same 93
+subjects. The `obfuscators/` registry retains 805 admitted configuration records
+for 85 of them, but it is not the denominator of the v0.1 leaderboard:
 
-- **104 subjects**: paired, fully materialized public evaluation dataset;
+- **93 subjects**: screened, paired, fully materialized public evaluation dataset;
 - **100 CodeNet subjects**: fully materialized legacy/reference comparison;
-- **171 subjects**: corpus-construction population;
-- **1,295 builds**: admitted open-source transformation registry across
+- **93 subjects**: screened corpus-construction population;
+- **805 builds**: admitted open-source transformation registry across
   configurations, retained as metadata for construction analysis;
 - **6 subjects**: fast smoke-test fixture only.
 
-See [`realworld104/README.md`](realworld104/README.md) and
+See [`realworld93/README.md`](realworld93/README.md) and
 [`codenet100/README.md`](codenet100/README.md) for their distinct schemas,
 results, and intended comparisons.

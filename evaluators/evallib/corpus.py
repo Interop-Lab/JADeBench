@@ -58,7 +58,7 @@ def box_index():
 
 
 def oracle_usable_set():
-    """Subjects whose sandbox oracle actually runs test cases (133 of 171).
+    """Subjects whose sandbox oracle actually runs test cases.
 
     This is *not* the same criterion as the evaluators' own `unsupported`: the
     sandbox asks whether the suite started, this harness asks whether the module
@@ -164,8 +164,8 @@ class Subject(object):
         """The format the *bundle* was emitted in.
 
         Not the same thing as the module's own flavour, and not a substitute for
-        it: on 59 of 171 subjects the manifest says `cjs` while the module's
-        source is ESM, because the corpus emits every bundle in the format the
+        it: the manifest can say `cjs` while the module's source is ESM,
+        because the corpus emits every bundle in the format the
         project's tooling resolves. The shim has to match the file it replaces,
         so `execution.module_flavour()` reads the module, not this.
         """

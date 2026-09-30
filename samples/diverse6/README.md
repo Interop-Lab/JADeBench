@@ -2,7 +2,7 @@
 
 `diverse6` is a compact integration sample, not the population used for
 headline benchmark results. It contains six subjects selected from the
-104-subject paired dataset to cover multiple domains, runtimes, and module
+93-subject paired dataset to cover multiple domains, runtimes, and module
 formats.
 
 ## Contents
@@ -62,7 +62,7 @@ licenses and pinned revisions are listed in `THIRD_PARTY_NOTICES.md`.
 License texts are also placed beside each retained source module under
 `corpus/work/<project>/LICENSE`.
 
-`adb-096` (`spite/ccapture.js`) has a red reference suite: the recorded
+`adb-086` (`spite/ccapture.js`) has a red reference suite: the recorded
 reference exits non-zero. It remains usable because admission and execution
 scoring use a differential oracle—the transformed program must match the same
 reference outcome. Do not reinterpret `suite_green: false` as a missing oracle
@@ -70,5 +70,5 @@ or as a deobfuscation-system failure.
 
 For this paired sample, `builds.jsonl` and the manifests under `corpus/jsob`
 and `corpus/vm` are authoritative. Two selected JS-OB full builds were not
-registered in the separate 1,295-row open-source ladder manifest, so consumers
+registered in the separate 805-row open-source ladder manifest, so consumers
 must not reconstruct diverse6 membership by filtering that full registry.

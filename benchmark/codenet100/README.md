@@ -2,7 +2,7 @@
 
 This directory releases the 100-program Project CodeNet reference set used for
 comparison with JsDeObsBench. It is intentionally separate from the primary
-`realworld104` benchmark: CodeNet100 contains competitive-programming solutions,
+`realworld93` benchmark: CodeNet100 contains competitive-programming solutions,
 uses stdin/stdout test cases, and retains the legacy JsDeObsBench-compatible
 score schema.
 
@@ -38,7 +38,7 @@ Regenerate the independent CodeNet100 leaderboard with:
 python3 scripts/reproduce_codenet_results.py --check
 ```
 
-Do not compare its aggregate values directly with `realworld104`: the program
+Do not compare its aggregate values directly with `realworld93`: the program
 distribution, protection configurations, tests, and evaluator schema differ.
 
 ## Provenance and licensing

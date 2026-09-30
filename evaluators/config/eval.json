@@ -16,7 +16,7 @@
     "2": [
       "Execution traces no longer carry renameable identifiers. A function value serialised as '@fn:<name>' made a returned function's identifier part of its observable behaviour, so a behaviourally perfect answer scored as divergent unless it happened to reproduce the developer's original name — scoring identifier recovery inside the primary measure, and scoring it backwards. Function values are now '@fn/<arity>'; a constructor name is kept only when the constructor is ambient (globalThis[name] === ctor), which is true of built-ins an obfuscator cannot rename and false of a class the subject declares.",
       "Reference-run caches are additionally keyed on the tracer checksum, so a serialisation change invalidates them instead of silently comparing a new-format candidate trace against an old-format cached reference.",
-      "The syntax evaluator's export-surface check now reads CommonJS exports as well as ESM. It recognised only 'export' statements, which made it a no-op on 131 of the 171 subjects — every CommonJS bundle had an empty expected surface, so the check passed vacuously and syntax correctness silently meant only 'it parses'.",
+      "The syntax evaluator's export-surface check now reads CommonJS exports as well as ESM. An earlier implementation recognised only 'export' statements, making the check vacuous for CommonJS bundles.",
       "Every score produced under schema_version 1 must be regenerated."
     ]
   },

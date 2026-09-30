@@ -1,7 +1,7 @@
 # CodeNet100 reference results
 
 These values are regenerated from the released JsDeObsBench-compatible
-`scores.jsonl` records. Results are reported separately from realworld104
+`scores.jsonl` records. Results are reported separately from realworld93
 because the datasets and evaluator schemas are different.
 
 ## JavaScript Obfuscator / full

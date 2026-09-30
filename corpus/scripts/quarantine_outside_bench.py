@@ -13,7 +13,7 @@ RESULTS = ROOT / "results"
 ARCHIVE = RESULTS / "_outside_bench"
 SAMPLE_IDS = ROOT / "corpus" / "build_dataset" / "sample_ids.jsonl"
 
-# Entire trees that are never part of the 104-subject bench.
+# Entire trees that are never part of the screened 93-subject bench.
 WHOLE_MOVE_DIRS = [
     "codenet_sample_results",
 ]
@@ -243,7 +243,7 @@ def main() -> None:
         """# Outside Bench Archive
 
 Entries removed from active `results/` run directories because they are **not**
-part of the 104-subject `corpus/build_dataset` bench.
+part of the 93-subject `corpus/build_dataset` bench.
 
 ## Layout
 

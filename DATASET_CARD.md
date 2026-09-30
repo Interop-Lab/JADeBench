@@ -2,15 +2,16 @@
 
 ## Dataset summary
 
-AgentDeobfBench `realworld104` is a paired JavaScript deobfuscation benchmark
-containing 104 executable application modules from 34 open-source projects.
+AgentDeobfBench `realworld93` is a screened, paired JavaScript deobfuscation
+benchmark containing 93 executable application modules from 33 open-source
+projects.
 Each subject has three aligned forms:
 
 1. the original dependency-bundled program;
 2. a JavaScript Obfuscator 5.5.0 full-minus-protect program;
 3. a VM L1 protected program.
 
-Stable identifiers `adb-001` through `adb-104` join programs, predictions, and
+Stable identifiers `adb-001` through `adb-093` join programs, predictions, and
 scores across the repository.
 
 The release also contains `codenet100`, a distinct 100-program Project CodeNet
@@ -32,24 +33,24 @@ certification and does not show that any protection resists every analyst.
 
 ## Data composition
 
-- Subjects: 104
-- Projects: 34
+- Subjects: 93
+- Projects: 33
 - Protection families: 2
-- Protected programs: 208
+- Protected programs: 186
 - Released evaluated runs: 24
-- Released final system outputs: 2,496
-- Upstream subject licenses: 96 MIT, 6 ISC, 1 Apache-2.0, 1 BSD-3-Clause
+- Released final system outputs: 2,232
+- Upstream subject licenses: 86 MIT, 6 ISC, 1 BSD-3-Clause
 
 CodeNet100 adds 100 original programs, 200 protected programs, 13 historical
-runs, and 1,269 outputs/scores. It is not included in any realworld104 count or
+runs, and 1,269 outputs/scores. It is not included in any realworld93 count or
 aggregate. CodeNet program text and tests retain CDLA-Permissive-2.0 terms.
 
-The 104-subject set is distinct from the broader 171-subject construction
-population and the six-subject CI fixture.
+The construction metadata has been screened to the same 93 subjects. The
+six-subject CI fixture is separate and is not a performance denominator.
 
 ## Data fields
 
-`benchmark/realworld104/sample_ids.jsonl` is the canonical join table. Important
+`benchmark/realworld93/sample_ids.jsonl` is the canonical join table. Important
 fields include:
 
 - `sample_id`: stable public identifier;
@@ -75,6 +76,11 @@ admitted only after alignment and execution-gate checks. JS-OB programs disable
 self-defense and debug protection because source-rewriting test runners would
 otherwise measure defense activation instead of semantic preservation.
 
+The final publication screen retained 93 of 104 materialized candidates. The
+canonical retained paths and order are recorded in
+`benchmark/realworld93/subject_paths.txt`; excluded candidates and their results
+are not part of this release.
+
 ## Limitations
 
 - The dataset contains open-source projects and may not represent proprietary
@@ -87,7 +93,7 @@ otherwise measure defense activation instead of semantic preservation.
   Git.
 - Controlled L1/L2, commercial, and model-generated protection studies are not
   part of v0.1.
-- CodeNet100 and realworld104 have different task distributions, protection
+- CodeNet100 and realworld93 have different task distributions, protection
   configurations, test harnesses, and evaluator schemas; cross-dataset rank
   comparisons are not controlled.
 
@@ -95,7 +101,7 @@ otherwise measure defense activation instead of semantic preservation.
 
 Repository-authored code is MIT licensed. Subject programs and their generated
 derivatives retain upstream terms. Pinned revisions and license texts are in
-`benchmark/realworld104/THIRD_PARTY_NOTICES.md`.
+`benchmark/realworld93/THIRD_PARTY_NOTICES.md`.
 Project CodeNet artifacts are separately attributed in
 `benchmark/codenet100/NOTICE`.
 
