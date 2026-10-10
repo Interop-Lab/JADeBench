@@ -77,7 +77,7 @@ results/**/checkpoints/
 results/**/_archive/
 
 # Never publish internal workspaces from this release tree
-paper/
+/paper/
 archive/
 experiments/
 third_party/JsDeObsBench/

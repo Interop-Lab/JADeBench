@@ -7,12 +7,12 @@ The complete v0.1 performance benchmark is versioned directly in Git:
 - 93 original bundles: `benchmark/realworld93/original/`
 - 93 JavaScript Obfuscator builds: `benchmark/realworld93/jsob_corpus_full/`
 - 93 VM L1 builds: `benchmark/realworld93/vm_corpus/`
-- 24 released runs, 2,232 final outputs, and per-subject scores: `results/`
+- 22 final-paper runs and 2,046 per-output records: `results/paper/`; 24 historical output directories: `results/runs/`
 - subject provenance and 33 upstream license texts:
   `benchmark/realworld93/THIRD_PARTY_NOTICES.md`
 - CodeNet100 reference data: 100 originals, 100 JS-OB/full builds, 100 C77-0
   builds, and stdin/stdout tests under `benchmark/codenet100/`
-- 13 CodeNet100 historical runs with 1,269 outputs and scores under
+- 13 historical CodeNet100 runs with 1,269 outputs and scores under
   `results/codenet100/`
 
 No download is required to inspect the benchmark, reproduce the leaderboard, or
@@ -46,8 +46,8 @@ materialized programs under `benchmark/realworld93`.
 
 The canonical publishable performance denominator is the materialized,
 license-attributed 93-subject paired dataset under `benchmark/realworld93`.
-The fully materialized CodeNet100 data is a separately reported reference
-benchmark, not an addition to that denominator.
+The fully materialized CodeNet100 data is a historical reference archive,
+not an addition to that denominator or the paper's fixed 93-program RQ1 cohort.
 
 Never publish credentials, logs, transcripts, temporary checkpoints, package
 environments, provider request identifiers, or machine-specific absolute paths

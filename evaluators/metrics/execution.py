@@ -1,34 +1,11 @@
-"""Execution correctness (paper §3.2), by differential comparison of behaviour.
+"""Workload execution correctness, with traces retained as diagnostics.
 
-The original bundle is the semantic oracle. The subject's own tests drive that
-bundle and the candidate through the same shim. A test the bundle passed must
-still pass on the candidate; that fraction is ``suite_recall``. The shim also
-records calls into the exported surface (and host-API traffic those calls
-produce) so a coarse assertion cannot hide a wrong return value; that prefix
-is ``behaviour_match`` / ``trace_match``. The score is the test fraction.
-The trace is kept as a diagnostic when it disagrees with the tests, so a
-failure can be read; it does not change the score. The reference is run a
-second time, so the subject's own nondeterminism is measured rather than
-charged to the candidate.
-
-The export-surface prefix is still recorded so a coarse assertion cannot hide
-a wrong return value, but it is diagnostic only. Scoring the trace as the
-headline (or taking the minimum with the tests) was rejected: a single early
-mismatch collapses the prefix to 0 and the published score becomes a coin
-flip. Recording call arguments and replaying them offline needs stateful
-arguments — sockets, DOM nodes, database handles — to be reconstructed, which
-cannot be done faithfully; letting the test drive both sides sidesteps
-reconstruction entirely.
-
-Module substitution is in-place at the module's own path, because that is the
-only interception point all four test runners share: jest resolves through its
-own registry, vitest through Vite aliases, mocha and node:test through Node's
-loader. That path is inside the subject's sandbox oracle view
-(`sandbox/sandboxes/<box>/oracle/<entry>`) rather than inside the shared project
-checkout: the rest of the pipeline already mounts there, one box belongs to one
-subject, and a crash can damage at most that box. The slot is emptied in a
-`finally`, any previous occupant restored and re-checksummed, and a journal on
-disk allows `score.py --repair` afterwards.
+The primary full_suite_v2 score requires a reference that passes a nonempty
+workload. A candidate receives one only if it passes the same number of tests,
+exits successfully, reports no failed tests, and does not time out. Partial
+passed-test fractions and differential traces describe divergence separately.
+Module substitution takes place in the isolated subject oracle view and is
+restored in a finally block, with a repair journal for interrupted runs.
 """
 import atexit
 import errno
@@ -53,6 +30,9 @@ _SCOPE_LOCKS = {}
 _LOCKS_GUARD = threading.Lock()
 _LIVE_SUBSTITUTIONS = {}
 _LIVE_GUARD = threading.Lock()
+_REFERENCE_RUNS = {}
+_REFERENCE_LOCKS = {}
+_REFERENCE_GUARD = threading.Lock()
 
 
 # --------------------------------------------------------------------------- #
@@ -90,10 +70,6 @@ def sha256(path):
 
 
 _TRACER_DIGEST = None
-# Bump when how two reference traces are compared changes. The tracer checksum
-# does not move for a Python-side comparison change, and stale `usable=false`
-# caches would otherwise keep a now-measurable subject unsupported.
-STABILITY_VERSION = 2
 
 
 def tracer_digest():
@@ -319,7 +295,7 @@ def module_flavour(subject):
     marpit leaves `type` unset while writing ESM compiled by babel-jest, and
     OpenContext declares `commonjs`. The manifest's `module_format` is a
     different fact entirely: it describes the *bundle*, and it says `cjs` while
-    the module's own source can disagree with the bundled module format. The shim has to
+    the module's own source is ESM on 59 of the 171 subjects. The shim has to
     match the file it replaces, because the project's tooling was configured for
     that file, so this stays anchored to the checkout even though the run now
     happens in the sandbox.
@@ -351,8 +327,7 @@ def run_once(subject, view, impl_source, cfg, tag, keep=False, timeout=None):
     found, including when the run raises.
     """
     result = {"tag": tag, "events": [], "exit_code": None, "timed_out": False,
-              "error": None, "stdout": "", "stderr": "", "dropped": False,
-              "elapsed_sec": None}
+              "error": None, "stdout": "", "stderr": "", "dropped": False}
 
     mountable, why = view.mountable()
     if not mountable:
@@ -421,10 +396,9 @@ def run_once(subject, view, impl_source, cfg, tag, keep=False, timeout=None):
         command = ("%s %s" % (env_prefix, command)).strip()
         env = view.env({"ADB_TRACE": str(trace_path)})
         run = nodeenv.run(command, view.cwd, env=env,
-                          timeout=timeout or cfg.get("timeout_sec", 300))
+                          timeout=timeout or cfg.get("timeout_sec", 900))
         result["exit_code"] = run["exit_code"]
         result["timed_out"] = run["timed_out"]
-        result["elapsed_sec"] = run.get("elapsed_sec")
         result["stdout"] = run["stdout"][-20000:]
         result["stderr"] = run["stderr"][-20000:]
         result["command"] = command
@@ -486,12 +460,6 @@ _STACK_RE = re.compile(r"\n\s+at\s.*")
 # An ephemeral port in a URL: mongodb-memory-server binds a fresh one per run,
 # so migrate-mongo's config differs from itself between runs.
 _PORT_RE = re.compile(r"(://[^/\s\"']{1,80}?):\d{2,5}\b")
-# The same port without a scheme: HTTP `Host: localhost:37161`, Node's
-# `_originalHostOrSocketPath`. The URL regex above requires `://`.
-_LOCAL_PORT_RE = re.compile(r"\b(localhost|127\.0\.0\.1|\[::1\]):\d{2,5}\b")
-# WebSocket handshake nonce (16 random bytes, base64). Not hex, so `_HEX_RE`
-# misses it, and two reference runs of websockets/ws then look unstable.
-_WS_KEY_RE = re.compile(r"(Sec-WebSocket-(?:Key|Accept):\s*)[A-Za-z0-9+/]+=*")
 
 # Epoch milliseconds appearing as a JSON *number* rather than inside a string —
 # a cache entry's expiry, for instance. Bounded to a range no plausible domain
@@ -519,27 +487,9 @@ def _normalize_text(text, roots, flags):
         text = _EPOCH_RE.sub("@epoch", text)
     if flags.get("ephemeral_ports", True):
         text = _PORT_RE.sub(r"\1:@port", text)
-        text = _LOCAL_PORT_RE.sub(r"\1:@port", text)
-    text = _WS_KEY_RE.sub(r"\1@wskey", text)
     text = _UUID_RE.sub("@uuid", text)
     text = _HEX_RE.sub("@hex", text)
     return text
-
-
-# Constructor names that are language/host behaviour. Anything else on `@class`
-# is a subject-declared identifier and must not decide execution score.
-_INTRINSIC_CLASSES = frozenset((
-    "Object", "Function", "Boolean", "Symbol", "Number", "BigInt", "String",
-    "Array", "Date", "RegExp", "Error", "EvalError", "RangeError",
-    "ReferenceError", "SyntaxError", "TypeError", "URIError",
-    "Map", "Set", "WeakMap", "WeakSet", "Promise",
-    "ArrayBuffer", "DataView",
-    "Uint8Array", "Int8Array", "Uint16Array", "Int16Array",
-    "Uint32Array", "Int32Array", "Float32Array", "Float64Array",
-    "URL", "URLSearchParams", "Headers", "Request", "Response",
-    "AbortController", "AbortSignal", "Event",
-    "@custom",
-))
 
 
 def _normalize(value, roots, flags):
@@ -553,16 +503,8 @@ def _normalize(value, roots, flags):
     if isinstance(value, list):
         return [_normalize(v, roots, flags) for v in value]
     if isinstance(value, dict):
-        out = {}
-        for key, item in value.items():
-            if key == "seq":
-                continue
-            normalized = _normalize(item, roots, flags)
-            if (key == "@class" and isinstance(normalized, str)
-                    and normalized not in _INTRINSIC_CLASSES):
-                normalized = "@custom"
-            out[key] = normalized
-        return out
+        return dict((k, _normalize(v, roots, flags)) for k, v in value.items()
+                    if k != "seq")
     return value
 
 
@@ -571,138 +513,81 @@ def _key(event, roots, flags):
                       ensure_ascii=False)
 
 
-def _dump(value):
-    return json.dumps(value, sort_keys=True, ensure_ascii=False)
-
-
-def _mask_nondet(left, right):
-    """Keep leaves that both reference runs agree on; replace the rest with `@nondet`.
-
-    A subject that returns `Date.now()`, a short random id, or the tracer's own
-    `ADB_TRACE` path produces two traces with the same calls and different
-    values. Treating that as `unstable` throws the whole subject out of
-    execution scoring even though the suite is green. Masking only the disagreeing
-    leaves keeps the stable behaviour comparable.
-    """
-    if left == right:
-        return left
-    if isinstance(left, dict) and isinstance(right, dict):
-        return dict((k, _mask_nondet(left.get(k, "@missing"), right.get(k, "@missing")))
-                    for k in set(left) | set(right))
-    if isinstance(left, list) and isinstance(right, list):
-        n = max(len(left), len(right))
-        out = []
-        for i in range(n):
-            a = left[i] if i < len(left) else "@missing"
-            b = right[i] if i < len(right) else "@missing"
-            out.append(_mask_nondet(a, b))
-        return out
-    return "@nondet"
-
-
-def _apply_template(value, template):
-    """Force candidate leaves to `@nondet` wherever the two references disagreed."""
-    if template == "@nondet":
-        return "@nondet"
-    if isinstance(template, dict):
-        if not isinstance(value, dict):
-            return value
-        return dict((k, _apply_template(value.get(k, "@missing"), t))
-                    for k, t in template.items())
-    if isinstance(template, list):
-        if not isinstance(value, list):
-            return value
-        return [_apply_template(value[i] if i < len(value) else "@missing", t)
-                for i, t in enumerate(template)]
-    return value
-
-
-def _skeletons(events):
-    return [(e.get("kind"), e.get("name")) for e in events]
-
-
-def _mask_templates(first, second, roots, cfg):
-    flags = cfg.get("normalize", {})
-    left = [_normalize(e, roots, flags) for e in first.get("events") or []]
-    right = [_normalize(e, roots, flags) for e in second.get("events") or []]
-    if not left or len(left) != len(right) or _skeletons(left) != _skeletons(right):
-        return None
-    return [_mask_nondet(a, b) for a, b in zip(left, right)]
-
-
-_TEST_PATTERNS = [
-    ("mocha", re.compile(r"(\d+) passing"), re.compile(r"(\d+) failing")),
-    ("jest", re.compile(r"Tests:.*?(\d+) passed"), re.compile(r"Tests:.*?(\d+) failed")),
-    ("vitest", re.compile(r"Tests\s+(?:\d+ failed \| )?(\d+) passed"),
-     re.compile(r"Tests\s+(\d+) failed")),
-    ("node:test", re.compile(r"^# pass (\d+)", re.M), re.compile(r"^# fail (\d+)", re.M)),
-]
+EXECUTION_POLICY = "full_suite_v2"
+_ANSI = re.compile(r"\x1b\[[0-?]*[ -/]*[@-~]")
 
 
 def _test_counts(run):
-    """Best-effort pass/fail counts from the runner's own output.
+    """Read terminal test summaries, not trace events or suite counts.
 
-    Deliberately parsed rather than requested: adding `--json` or a reporter flag
-    to the project's command risks overriding a reporter the project configured,
-    which is the failure mode that ruled out injecting `--setupFiles`. When a
-    format is not recognised the counts are null and suite recall falls back to
-    whether both runs exited the same way.
+    All-failed runs, ANSI colours, reordered Jest/Vitest fields and nested TAP
+    summaries are supported. Ambiguous multiple workloads are not guessed or
+    summed: without test identities they could double-count a repeated run.
+    Unknown/incomplete reference summaries remain ineligible, never a zero.
     """
-    text = (run.get("stdout") or "") + "\n" + (run.get("stderr") or "")
-    for _name, passing, failing in _TEST_PATTERNS:
-        match = passing.search(text)
-        if not match:
-            continue
-        fail_match = failing.search(text)
-        return {"passed": int(match.group(1)),
-                "failed": int(fail_match.group(1)) if fail_match else 0}
+    text = _ANSI.sub("", (run.get("stdout") or "") + "\n" + (run.get("stderr") or ""))
+    # Node TAP: child summaries are indented; only the outermost final block
+    # establishes the workload. Require both pass and fail counters.
+    tap = re.findall(r"^# tests (\d+)\s*$([\s\S]*?)(?=^# tests |\Z)", text, re.M)
+    if len(tap) == 1:
+        total, block = tap[0]
+        passed = re.search(r"^# pass (\d+)\s*$", block, re.M)
+        failed = re.search(r"^# fail (\d+)\s*$", block, re.M)
+        if passed and failed:
+            counts = {"passed": int(passed[1]), "failed": int(failed[1]),
+                      "total": int(total), "runner": "node:test"}
+            for key in ("cancelled", "skipped", "todo"):
+                m = re.search(r"^# " + key + r" (\d+)\s*$", block, re.M)
+                counts[key] = int(m[1]) if m else 0
+            return counts if _valid_counts(counts) else None
+        return None
+    if tap:
+        return None
+    # Jest and Vitest have one test summary line (not 'Test Suites/Files').
+    summaries = re.findall(r"^\s*Tests(?::|\s+)\s*([^\n]+)$", text, re.M)
+    if len(summaries) == 1:
+        fields = dict((name, int(n)) for n, name in re.findall(
+            r"(\d+)\s+(passed|failed|skipped|todo|total)\b", summaries[0]))
+        if not fields or not any(k in fields for k in ("passed", "failed")):
+            return None
+        counts = {"passed": fields.get("passed", 0), "failed": fields.get("failed", 0),
+                  "skipped": fields.get("skipped", 0), "todo": fields.get("todo", 0),
+                  "cancelled": 0, "runner": "jest/vitest"}
+        counts["total"] = fields.get("total", sum(counts[k] for k in
+                                                ("passed", "failed", "skipped", "todo")))
+        return counts if _valid_counts(counts) else None
+    if summaries:
+        return None
+    # Mocha may omit '0 passing' on an all-failed run. Pending is recorded.
+    fields = re.findall(r"^\s*(\d+)\s+(passing|failing|pending)(?:\s+\([^\n]*\))?\s*$", text, re.M)
+    if fields:
+        if len({name for _, name in fields}) != len(fields):
+            return None
+        values = {name: int(n) for n, name in fields}
+        counts = {"passed": values.get("passing", 0), "failed": values.get("failing", 0),
+                  "skipped": values.get("pending", 0), "cancelled": 0, "todo": 0,
+                  "runner": "mocha"}
+        counts["total"] = sum(counts[k] for k in ("passed", "failed", "skipped"))
+        return counts if _valid_counts(counts) else None
     return None
 
 
-def suite_recall(tests_reference, tests_candidate, exit_match):
-    """Fraction of tests the original bundle passed that still pass on the candidate.
-
-    Extra failures on the candidate, beyond those already present on the bundle,
-    are treated as originally-passing tests that broke. Tests the bundle itself
-    failed are not charged to the candidate. Without parsed counts, fall back to
-    whether both runs exited the same way.
-    """
-    if not tests_reference or tests_reference.get("passed") is None:
-        return 1.0 if exit_match else 0.0
-    if not tests_candidate or tests_candidate.get("passed") is None:
-        return 1.0 if exit_match else 0.0
-    ref_pass = int(tests_reference["passed"])
-    cand_pass = int(tests_candidate["passed"])
-    if ref_pass <= 0:
-        return 1.0 if exit_match else 0.0
-    ref_fail = int(tests_reference.get("failed") or 0)
-    cand_fail = int(tests_candidate.get("failed") or 0)
-    extra_fail = max(0, cand_fail - ref_fail)
-    still_pass = min(cand_pass, max(0, ref_pass - extra_fail))
-    return min(1.0, still_pass / float(ref_pass))
+def _valid_counts(counts):
+    if not isinstance(counts, dict):
+        return False
+    for key in ("passed", "failed"):
+        if type(counts.get(key)) is not int or counts[key] < 0:
+            return False
+    for key in ("total", "cancelled", "skipped", "todo"):
+        if key in counts and (type(counts[key]) is not int or counts[key] < 0):
+            return False
+    counted = sum(counts.get(k, 0) for k in ("passed", "failed", "cancelled", "skipped", "todo"))
+    return "total" not in counts or counts["total"] == counted
 
 
-def combine_score(behaviour_match, suite_recall_value):
-    """Headline is originally-passing tests that still pass (a fraction).
-
-    ``behaviour_match`` is recorded for diagnosis and is ignored here. Using
-    the export-surface prefix as a score (or as a gate on 1.0) collapses most
-    subjects to 0 or 1; the test fraction is the number we actually want.
-    """
-    return float(suite_recall_value)
-
-
-def trace_keys(run, roots, cfg, templates=None):
+def trace_keys(run, roots, cfg):
     flags = cfg.get("normalize", {})
-    if templates is None:
-        return [_key(e, roots, flags) for e in run["events"]]
-    keys = []
-    for i, event in enumerate(run["events"]):
-        value = _normalize(event, roots, flags)
-        if i < len(templates):
-            value = _apply_template(value, templates[i])
-        keys.append(_dump(value))
-    return keys
+    return [_key(e, roots, flags) for e in run["events"]]
 
 
 def stability(first, second, roots, cfg):
@@ -714,31 +599,19 @@ def stability(first, second, roots, cfg):
     in a different order every time. Comparing such a trace as a sequence would
     score a perfect candidate at 0.0002.
 
-    Outcomes, in decreasing strength: identical (compare as a sequence),
-    same events in a different order (compare as a multiset), same call
-    sequence with noisy values (mask the disagreeing leaves, still sequence),
-    or a different call sequence (nothing can be measured).
+    Three outcomes, in decreasing strength: identical (compare as a sequence),
+    same events in a different order (compare as a multiset), or different
+    events altogether (nothing can be measured — run-to-run noise would be
+    indistinguishable from a candidate's error).
     """
     first_keys = trace_keys(first, roots, cfg)
     second_keys = trace_keys(second, roots, cfg)
     identical = first_keys == second_keys
     same_multiset = Counter(first_keys) == Counter(second_keys)
-    templates = None if identical or same_multiset else _mask_templates(
-        first, second, roots, cfg)
-    masked = templates is not None
-    if identical:
-        mode = "sequence"
-    elif same_multiset:
-        mode = "multiset"
-    elif masked:
-        mode = "sequence"
-    else:
-        mode = "unstable"
     return {
         "identical": identical,
         "same_multiset": same_multiset,
-        "masked": masked,
-        "mode": mode,
+        "mode": "sequence" if identical else ("multiset" if same_multiset else "unstable"),
         "events_first": len(first_keys),
         "events_second": len(second_keys),
     }
@@ -746,16 +619,8 @@ def stability(first, second, roots, cfg):
 
 def compare(reference, candidate, roots, cfg, mode="sequence"):
     """Score a candidate run against the reference run."""
-    templates = None
-    if (reference.get("stability") or {}).get("masked") and reference.get("events_repeat"):
-        templates = _mask_templates(
-            reference, {"events": reference["events_repeat"]}, roots, cfg)
-    if templates is not None:
-        ref_keys = [_dump(t) for t in templates]
-        cand_keys = trace_keys(candidate, roots, cfg, templates=templates)
-    else:
-        ref_keys = trace_keys(reference, roots, cfg)
-        cand_keys = trace_keys(candidate, roots, cfg)
+    ref_keys = trace_keys(reference, roots, cfg)
+    cand_keys = trace_keys(candidate, roots, cfg)
 
     matched = 0
     for a, b in zip(ref_keys, cand_keys):
@@ -789,10 +654,6 @@ def compare(reference, candidate, roots, cfg, mode="sequence"):
     # information and the multiset overlap is the strongest sound comparison.
     behaviour_match = trace_match if mode == "sequence" else (f1 if span else None)
 
-    tests_reference = _test_counts(reference)
-    tests_candidate = _test_counts(candidate)
-    suite = suite_recall(tests_reference, tests_candidate, exit_match)
-
     return {
         "behaviour_match": round(behaviour_match, 6) if behaviour_match is not None else None,
         "comparison_mode": mode,
@@ -808,12 +669,70 @@ def compare(reference, candidate, roots, cfg, mode="sequence"):
         "exit_code_candidate": candidate["exit_code"],
         "exit_code_match": bool(exit_match),
         "reference_suite_green": reference.get("suite_green"),
-        "tests_reference": tests_reference,
-        "tests_candidate": tests_candidate,
-        "suite_recall": round(suite, 6),
+        "tests_reference": _test_counts(reference),
+        "tests_candidate": _test_counts(candidate),
         "timed_out": candidate["timed_out"],
-        "nondet_masked": bool(templates is not None),
     }
+
+
+def full_suite_score(reference_exit, reference_counts, candidate_exit,
+                     candidate_counts, timed_out=False, reference_timed_out=False,
+                     reference_consistent=True):
+    """Return a workload pass, never credit matching failures or zero tests.
+
+    None means the reference is not eligible for the executable scoring set.
+    A candidate must complete the same nonempty test workload without failures.
+    Trace agreement is a separate diagnostic, not a substitute for test success.
+    """
+    if (not reference_consistent or reference_timed_out or reference_exit != 0 or not _valid_counts(reference_counts)
+            or reference_counts.get("passed", 0) <= 0
+            or reference_counts.get("failed", 0) != 0
+            or reference_counts.get("cancelled", 0) != 0):
+        return None
+    complete = (not timed_out and candidate_exit == 0
+                and _valid_counts(candidate_counts)
+                and candidate_counts.get("failed", 0) == 0
+                and candidate_counts.get("cancelled", 0) == 0
+                and candidate_counts.get("passed", 0)
+                    == reference_counts["passed"])
+    if complete:
+        # Prevent extra skipped/todo tests from disguising a changed workload.
+        complete = all(reference_counts[k] == candidate_counts[k]
+                       for k in ("total", "skipped", "todo")
+                       if k in reference_counts and k in candidate_counts)
+    return 1.0 if complete else 0.0
+
+
+def workload_diagnostics(reference_exit, reference_counts, candidate_exit,
+                         candidate_counts, timed_out=False, reference_timed_out=False,
+                         reference_consistent=True):
+    """Separate complete recovery from partial test counts and trace similarity."""
+    score = full_suite_score(reference_exit, reference_counts, candidate_exit,
+                             candidate_counts, timed_out, reference_timed_out, reference_consistent)
+    out = {"score": score, "score_policy": EXECUTION_POLICY,
+           "reference_eligible": score is not None,
+           "reference_test_count": reference_counts.get("passed")
+                                     if _valid_counts(reference_counts) else None,
+           "reported_test_pass_fraction": None}
+    if score is None:
+        out["reason"] = "reference workload failed, timed out, was empty or had unrecognized counts"
+    elif timed_out:
+        out["reason"] = "candidate timed out"
+    elif not _valid_counts(candidate_counts):
+        out["reason"] = "candidate test counts unavailable or invalid"
+    elif candidate_counts["passed"] > reference_counts["passed"]:
+        out["reason"] = "candidate passed more tests than the reference; workload mismatch"
+    else:
+        out["reported_test_pass_fraction"] = candidate_counts["passed"] / reference_counts["passed"]
+        if score == 1:
+            out["reason"] = "complete reference workload passed"
+        elif candidate_exit != 0:
+            out["reason"] = "candidate exited unsuccessfully"
+        elif candidate_counts["failed"] or candidate_counts.get("cancelled", 0):
+            out["reason"] = "candidate has failed or cancelled tests"
+        else:
+            out["reason"] = "candidate did not complete the same reference workload"
+    return out
 
 
 # --------------------------------------------------------------------------- #
@@ -821,28 +740,28 @@ def compare(reference, candidate, roots, cfg, mode="sequence"):
 # --------------------------------------------------------------------------- #
 
 def reference_run(subject, view, cfg, refresh=False, keep=False):
-    """Run the subject's tests against its own reference bundle.
+    """Revalidate once per scoring process; disk caches cannot establish eligibility.
 
-    Cached per (subject, bundle checksum): it is identical for every prediction
-    of that subject, and it is the expensive half of the measurement.
-
-    This run is also the admission gate, but the bar is *a usable trace*, not a
-    green suite. The oracle is differential: the reference run defines the
-    expected behaviour, and both runs go through the same substitution, so a
-    test that fails for the reference fails identically for the candidate and
-    the two traces still align.
-
-    That distinction decides whether the harness keeps a subject or throws it
-    away. The bundle inlines the subject's first-party modules, which duplicates
-    anything the project's tests compare by identity — an error class checked
-    with `instanceof`, a React context read through a provider. Requiring a
-    green suite discarded 17 of 44 subjects on that alone, including one where
-    184 of 185 tests passed and the failure was two structurally identical error
-    classes. What genuinely cannot be measured is a reference run that produced
-    no trace: then the module never really ran, and there is nothing to compare
-    against. `reference_suite_green` records the difference so an analysis can
-    filter on it.
+    Bundle/tracer hashes miss changed fixtures, dependencies and host state.
+    Process-local memoization shares only this invocation's fresh control run.
     """
+    context = json.dumps({'bundle': sha256(subject.bundle), 'tracer': tracer_digest(),
+                          'invocation': view.invocation, 'runner': view.runner,
+                          'test': view.test_rel, 'config': cfg, 'keep': keep},
+                         sort_keys=True, default=str)
+    key = (str(view.work), hashlib.sha256(context.encode()).hexdigest())
+    with _REFERENCE_GUARD:
+        lock = _REFERENCE_LOCKS.setdefault(key, threading.Lock())
+    with lock:
+        if not refresh and key in _REFERENCE_RUNS:
+            return _REFERENCE_RUNS[key]
+        result = _run_fresh_reference(subject, view, cfg, refresh=True, keep=keep)
+        _REFERENCE_RUNS[key] = result
+        return result
+
+
+def _run_fresh_reference(subject, view, cfg, refresh=True, keep=False):
+    """Run current reference controls and write an audit snapshot, never reuse disk green status."""
     # Named `reference-run.json` rather than `reference.json`: the box already
     # has a `reference.json` at its top level, recording whether the sandbox's
     # oracle suite starts. Two different schemas one directory apart under one
@@ -851,25 +770,6 @@ def reference_run(subject, view, cfg, refresh=False, keep=False):
     digest = sha256(subject.bundle)
     tracer = tracer_digest()
     roots = view.normalize_roots()
-    if cache_path.exists() and not refresh:
-        try:
-            cached = json.loads(cache_path.read_text(encoding="utf-8"))
-            # All three keys are required. The bundle checksum catches a changed
-            # subject; the tracer checksum catches a changed *serialisation*,
-            # which would otherwise compare a candidate's new-format trace
-            # against a reference's cached old-format one and report every
-            # difference as the candidate's fault; the layout tag catches a
-            # reference recorded somewhere else entirely, whose events carry
-            # paths this run's normalisation has never heard of. Each was added
-            # after the corresponding failure was silent.
-            if (cached.get("bundle_sha256") == digest
-                    and cached.get("tracer_sha256") == tracer
-                    and cached.get("layout") == oracleview.LAYOUT
-                    and cached.get("stability_version") == STABILITY_VERSION):
-                return cached["run"]
-        except (ValueError, KeyError):
-            pass
-
     with _ScopeLock(view.lock_scope()):
         run = run_once(subject, view, subject.bundle, cfg, "reference", keep=keep)
     # A trace, or a green suite for a subject whose exports are never called
@@ -881,12 +781,14 @@ def reference_run(subject, view, cfg, refresh=False, keep=False):
     # The reference is run a second time to establish how reproducible the
     # subject is. Without this the harness cannot tell a candidate's divergence
     # from the subject's own nondeterminism. Paid once per subject and cached.
-    if run["usable"] and run["events"]:
+    if run["usable"] and (run["events"] or
+                          full_suite_score(run["exit_code"], _test_counts(run), None, None) is not None):
         with _ScopeLock(view.lock_scope()):
             repeat = run_once(subject, view, subject.bundle, cfg, "reference2", keep=keep)
         run["stability"] = stability(run, repeat, roots, cfg)
-        if run["stability"].get("masked"):
-            run["events_repeat"] = repeat.get("events") or []
+        run["workload_repeat_green"] = full_suite_score(
+            run["exit_code"], _test_counts(run), repeat["exit_code"],
+            _test_counts(repeat), repeat.get("timed_out", False), run.get("timed_out", False)) == 1
         if run["stability"]["mode"] == "unstable":
             run["usable"] = False
             run["error"] = ("the subject does not behave reproducibly: two runs of "
@@ -895,14 +797,11 @@ def reference_run(subject, view, cfg, refresh=False, keep=False):
                                run["stability"]["events_second"]))
     else:
         run["stability"] = {"identical": True, "same_multiset": True,
-                            "masked": False,
                             "mode": "sequence", "events_first": len(run["events"]),
                             "events_second": len(run["events"])}
     cache_path.parent.mkdir(parents=True, exist_ok=True)
     cache_path.write_text(json.dumps({"bundle_sha256": digest, "tracer_sha256": tracer,
-                                      "layout": oracleview.LAYOUT,
-                                      "stability_version": STABILITY_VERSION,
-                                      "run": run},
+                                      "layout": oracleview.LAYOUT, "run": run},
                                      ensure_ascii=False, indent=1), encoding="utf-8")
     return run
 
@@ -929,7 +828,20 @@ def evaluate(subject, candidate_path, cfg, refresh_reference=False, keep=False,
         return schema.STATUS_UNSUPPORTED, {"score": None, "reason": why}
 
     reference = reference_run(subject, view, cfg, refresh=refresh_reference, keep=keep)
-    if not reference.get("usable"):
+    primary = cfg.get("primary", "full_suite")
+    if primary == "full_suite" and full_suite_score(
+            reference.get("exit_code"), _test_counts(reference), None, None,
+            reference_timed_out=reference.get("timed_out", False),
+            reference_consistent=reference.get("workload_repeat_green", True)) is None:
+        return schema.STATUS_UNSUPPORTED, {
+            **workload_diagnostics(reference.get("exit_code"), _test_counts(reference), None, None,
+                                   reference_timed_out=reference.get("timed_out", False),
+                                   reference_consistent=reference.get("workload_repeat_green", True)),
+            "reason": "reference did not pass a nonempty test workload",
+            "exit_code_reference": reference.get("exit_code"),
+            "tests_reference": _test_counts(reference),
+        }
+    if not reference.get("usable") and primary != "full_suite":
         return schema.STATUS_UNSUPPORTED, {
             "score": None,
             "reason": reference.get("error")
@@ -952,58 +864,57 @@ def evaluate(subject, candidate_path, cfg, refresh_reference=False, keep=False,
     # announced in its own configuration. `obfuscators/scripts/02_admit.py` caps
     # these at 15 seconds for exactly this reason.
     anti = str(config_id) in set(cfg.get("anti_rungs") or [])
-    timeout = None
-    if anti:
-        # The short leash is for infinite-loop self-defending code. It must
-        # not be shorter than the reference suite itself: websocket.test.js
-        # needs tens of seconds even on the original bundle, and a 15s cap
-        # would mark every candidate `defense_triggered`.
-        defense = int(cfg.get("defense_timeout_sec", 15) or 15)
-        try:
-            ref_elapsed = float(reference.get("elapsed_sec") or 0)
-        except (TypeError, ValueError):
-            ref_elapsed = 0.0
-        timeout = max(defense, int(ref_elapsed) + 30)
+    timeout = cfg.get("defense_timeout_sec", 15) if anti else None
 
     with _ScopeLock(view.lock_scope()):
         candidate = run_once(subject, view, candidate_path, cfg, "candidate",
                              keep=keep, timeout=timeout)
 
     if candidate["error"]:
-        return schema.STATUS_OK, {"score": 0.0, "reason": candidate["error"],
-                                  "exit_code_candidate": candidate["exit_code"]}
+        diagnostics = (workload_diagnostics(reference.get("exit_code"),
+                                  _test_counts(reference), candidate.get("exit_code"),
+                                  _test_counts(candidate), candidate.get("timed_out", False))
+                       if primary == "full_suite" else {"score": 0.0})
+        return schema.STATUS_OK, {**diagnostics,
+                                  "reason": candidate["error"],
+                                  "exit_code_candidate": candidate["exit_code"],
+                                  "exit_code_reference": reference.get("exit_code"),
+                                  "tests_reference": _test_counts(reference),
+                                  "tests_candidate": _test_counts(candidate),
+                                  "timed_out": candidate.get("timed_out", False),
+                                  "score_policy": EXECUTION_POLICY}
 
-    defense = _defense_signal(reference, candidate, anti, config_id, view)
+    defense = (_defense_signal(reference, candidate, anti, config_id, view)
+               if primary != "full_suite" else None)
     if defense is not None:
         return schema.STATUS_DEFENSE, defense
 
     mode = (reference.get("stability") or {}).get("mode", "sequence")
     detail = compare(reference, candidate, view.normalize_roots(), cfg, mode=mode)
+    if primary == "full_suite":
+        detail.update(workload_diagnostics(
+            detail["exit_code_reference"], detail["tests_reference"],
+            detail["exit_code_candidate"], detail["tests_candidate"],
+            detail["timed_out"], reference.get("timed_out", False),
+            reference.get("workload_repeat_green", True)))
+        return (schema.STATUS_TIMEOUT if candidate["timed_out"] else schema.STATUS_OK), detail
     if candidate["timed_out"]:
         detail["score"] = 0.0
         return schema.STATUS_TIMEOUT, detail
 
-    detail["score"] = round(
-        combine_score(detail["behaviour_match"], detail["suite_recall"]), 6)
-
     if detail["behaviour_match"] is None:
         # The tests exercise the module without calling its exports directly —
         # a React component rendered by JSX, for instance. There is no trace to
-        # compare, so the oracle is the tests the original bundle passed.
-        detail["reason"] = "no traced calls; scored on tests the original bundle passed"
+        # compare, so the oracle degrades to whether the suite still agrees.
+        detail["score"] = 1.0 if detail["exit_code_match"] else 0.0
+        detail["reason"] = "no traced calls; scored on suite agreement alone"
         return schema.STATUS_DEGRADED, detail
 
-    notes = []
-    if detail["suite_recall"] < 1.0:
-        notes.append("tests the original bundle passed did not all pass on the candidate")
+    detail["score"] = detail["behaviour_match"]
     if mode == "multiset":
-        notes.append("the subject's call order is not reproducible; "
-                     "trace compared as event overlap rather than sequence")
-        if notes:
-            detail["reason"] = "; ".join(notes)
+        detail["reason"] = ("the subject's call order is not reproducible; scored on "
+                            "event overlap rather than sequence")
         return schema.STATUS_DEGRADED, detail
-    if notes:
-        detail["reason"] = notes[0]
     return schema.STATUS_OK, detail
 
 

@@ -1,6 +1,6 @@
 # Data and result boundaries
 
-AgentDeobfBench separates repository-authored source, upstream benchmark
+JADeBench separates repository-authored source, upstream benchmark
 subjects, generated transformations, and system outputs.
 
 ## Repository-authored source
@@ -28,21 +28,26 @@ It includes 93 original programs, 93 JS-OB programs, 93 VM programs, pinned
 provenance, and copied upstream license texts. Unlike the broader construction
 metadata, every path referenced by its manifests is present in this checkout.
 
-`results/runs` contains the corresponding released prediction indexes, final
-programs, and evaluator records. `results/leaderboard.json` is generated from
-those records and is not an independent source of truth.
+`results/runs` contains the submitted final programs and historical diagnostic
+scores. `results/paper/ja93.jsonl` contains the final-paper per-output metrics;
+`results/leaderboard.json` reports manuscript Table RQ2 values. Its
+CodeBLEU-R means are verified against the complete per-output scores;
+Readability uses each system's paired set of rated JSO/full and VM subjects.
+The RQ4 attempt-level resource archive in `results/paper/rq4_attempts.jsonl`
+reproduces the printed resource table with metric-specific denominators given in
+`results/paper/rq4_cost.json`.
 
 ## CodeNet100 reference benchmark
 
-`benchmark/codenet100` materializes the paper's separate Project CodeNet
-comparison: 100 original programs and test sets, 100 JS-OB/full builds, and 100
+`benchmark/codenet100` materializes a historical Project CodeNet
+reference set: 100 original programs and test sets, 100 JS-OB/full builds, and 100
 C77-0 builds. Project CodeNet data remains under CDLA-Permissive-2.0; no
 JsDeObsBench implementation code is included.
 
-`results/codenet100` contains 13 historical runs and 1,269 final outputs with
-legacy JsDeObsBench-compatible score records. Its generated leaderboard is
-independent from realworld93 because the data distribution, tests, protection
-configurations, and metric schema differ.
+`results/codenet100` contains 13 historical runs and 1,269 outputs. The final
+paper instead uses a fixed separate 93-program JsDeObsBench subset, recorded
+in `results/paper/jsdeobsbench93.jsonl`. The cohorts and scoring schemas must
+not be pooled.
 
 ## Bundled diverse6 sample
 

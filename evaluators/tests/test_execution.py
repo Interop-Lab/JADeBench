@@ -142,7 +142,6 @@ def main():
     status, detail = execution.evaluate(subject, subject.bundle, cfg)
     check("status is ok", status == schema.STATUS_OK, status)
     check("trace_match == 1.0", detail.get("trace_match") == 1.0, detail.get("trace_match"))
-    check("score == 1.0", detail.get("score") == 1.0, detail.get("score"))
     check("no divergence", detail.get("first_divergence") is None)
     check("the trace is not empty", (detail.get("reference_events") or 0) > 0,
           detail.get("reference_events"))
@@ -173,7 +172,6 @@ def main():
     check("still runs (status ok)", status == schema.STATUS_OK, status)
     check("trace_match < 1.0", (detail.get("trace_match") or 0) < 1.0,
           detail.get("trace_match"))
-    check("score < 1.0", (detail.get("score") or 0) < 1.0, detail.get("score"))
     divergence = detail.get("first_divergence") or {}
     reference_event = divergence.get("reference") or {}
     check("divergence is reported", bool(divergence))

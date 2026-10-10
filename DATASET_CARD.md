@@ -1,21 +1,22 @@
-# AgentDeobfBench dataset card
+# JADeBench dataset card
 
 ## Dataset summary
 
-AgentDeobfBench `realworld93` is a screened, paired JavaScript deobfuscation
+JADeBench `realworld93` is a screened, paired JavaScript deobfuscation
 benchmark containing 93 executable application modules from 33 open-source
 projects.
 Each subject has three aligned forms:
 
 1. the original dependency-bundled program;
-2. a JavaScript Obfuscator 5.5.0 full-minus-protect program;
-3. a VM L1 protected program.
+2. a JSO/full source-level protected program;
+3. a VM-protected program.
 
 Stable identifiers `adb-001` through `adb-093` join programs, predictions, and
 scores across the repository.
 
-The release also contains `codenet100`, a distinct 100-program Project CodeNet
-reference set used for comparison with JsDeObsBench. Stable IDs
+The paper's RQ1 comparison uses a distinct fixed set of 93 JsDeObsBench
+programs recorded in `results/paper/jsdeobsbench93.jsonl`. The release also
+contains the older `codenet100` 100-program Project CodeNet reference archive. Stable IDs
 `codenet-001` through `codenet-100` join its original programs, stdin/stdout
 tests, two protected variants, predictions, and legacy score records.
 
@@ -23,8 +24,9 @@ tests, two protected variants, predictions, and legacy score records.
 
 The dataset supports evaluation of systems that return one
 behavior-preserving, readable JavaScript program for each protected input.
-Execution correctness is the primary metric. Syntax, simplification,
-similarity, exact behavioral agreement, and resource usage provide diagnostic
+Execution correctness is the primary complete-workload metric. Syntax,
+CodeBLEU-R, ROUGE-L, and exploratory readability are reported. Historical
+simplification, exact behavioral agreement, and resource usage provide diagnostic
 signals.
 
 The dataset is intended for research on deobfuscation, program understanding,
@@ -37,8 +39,9 @@ certification and does not show that any protection resists every analyst.
 - Projects: 33
 - Protection families: 2
 - Protected programs: 186
-- Released evaluated runs: 24
-- Released final system outputs: 2,232
+- Final-paper evaluated runs: 22
+- Final-paper system outputs: 2,046 (11 systems × 2 protections × 93 modules)
+- Historical output directories: 24, including two Synchrony runs
 - Upstream subject licenses: 86 MIT, 6 ISC, 1 BSD-3-Clause
 
 CodeNet100 adds 100 original programs, 200 protected programs, 13 historical
@@ -88,7 +91,11 @@ are not part of this release.
 - Project size, domain, runtime, and test quality vary.
 - Released runs use different tool interfaces and budgets; leaderboard values
   are not automatically controlled model comparisons.
-- Two JSIMPLIFIER outputs per protection family lack historical score records.
+- Two JSimplifier outputs per protection family lack historical diagnostic score
+  records; final-paper per-output metrics cover all 93.
+- Final-paper CodeBLEU-R scores parser-valid outputs even if their module
+  interface fails the broader Syntax check; parser-invalid outputs score zero.
+  Readability means use subjects rated under both protection conditions.
 - Full execution re-scoring requires project test environments not committed to
   Git.
 - Controlled L1/L2, commercial, and model-generated protection studies are not

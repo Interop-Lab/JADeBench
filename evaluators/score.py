@@ -34,6 +34,7 @@ from metrics import execution, similarity, simplification, syntax  # noqa: E402
 
 
 def score_one(prediction, subject, build, cfg, skip_execution=False,
+              skip_similarity=False,
               refresh_reference=False, keep=False):
     """Apply every evaluator to one prediction."""
     candidate_code = prediction.code()
@@ -41,24 +42,52 @@ def score_one(prediction, subject, build, cfg, skip_execution=False,
     obfuscated_code = build.code() if build is not None else None
 
     syntax_score = syntax.evaluate(candidate_code, reference_code, cfg["syntax"])
-    similarity_score = similarity.evaluate(candidate_code, reference_code,
-                                           cfg["similarity"])
-    # JsDeObsBench only scores simplification on programs that parse. Export
-    # surface is a separate check and must not gate HLoC.
-    simplification_score = simplification.evaluate(
-        candidate_code, obfuscated_code, reference_code, cfg["simplification"],
-        parses=syntax_score.get("parses"))
+    similarity_score = ({} if skip_similarity else
+                        similarity.evaluate(candidate_code, reference_code,
+                                            cfg["similarity"],
+                                            parse_status=syntax_score["parses"]))
+    simplification_score = simplification.evaluate(candidate_code, obfuscated_code,
+                                                   reference_code,
+                                                   cfg["simplification"])
 
     status = schema.STATUS_OK
     execution_score = None
     note = None
 
-    if candidate_code is None:
+    # Establish eligibility before candidate parsing or missing-output failures.
+    # Otherwise a malformed candidate silently turns an invalid reference into
+    # a scored zero and changes the denominator across systems.
+    reference_detail = None
+    if not skip_execution and cfg["execution"].get("primary", "full_suite") == "full_suite":
+        if subject.is_runnable() and subject.view is not None:
+            mountable, _ = subject.view.mountable()
+            if mountable:
+                ref = execution.reference_run(subject, subject.view, cfg["execution"],
+                                              refresh=refresh_reference, keep=keep)
+                reference_detail = {"exit_code_reference": ref.get("exit_code"),
+                                    "tests_reference": execution._test_counts(ref),
+                                    "reference_timed_out": ref.get("timed_out", False),
+                                    "reference_workload_consistent": ref.get("workload_repeat_green", True)}
+        eligible = reference_detail is not None and execution.full_suite_score(
+            reference_detail["exit_code_reference"], reference_detail["tests_reference"],
+            None, None, reference_timed_out=reference_detail["reference_timed_out"],
+            reference_consistent=reference_detail["reference_workload_consistent"]) is not None
+        if not eligible:
+            status = schema.STATUS_UNSUPPORTED
+            note = "reference did not pass a nonempty test workload"
+            execution_score = dict(reference_detail or {}, score=None, reason=note,
+                                   reference_eligible=False,
+                                   reported_test_pass_fraction=None,
+                                   score_policy=execution.EXECUTION_POLICY)
+
+    if execution_score is not None:
+        pass
+    elif skip_execution:
+        note = "execution skipped (--no-execution)"
+    elif candidate_code is None:
         status = schema.STATUS_OK
         note = "the system returned no program"
         execution_score = {"score": 0.0, "reason": note}
-    elif skip_execution:
-        note = "execution skipped (--no-execution)"
     elif not subject.is_runnable():
         status = schema.STATUS_UNSUPPORTED
         note = subject.unrunnable_reason()
@@ -77,6 +106,16 @@ def score_one(prediction, subject, build, cfg, skip_execution=False,
                 subject, candidate_path, cfg["execution"],
                 refresh_reference=refresh_reference, keep=keep,
                 config_id=build.config_id if build is not None else None)
+
+    if execution_score is not None and reference_detail is not None:
+        for key, value in reference_detail.items():
+            execution_score.setdefault(key, value)
+        execution_score.setdefault("score_policy", execution.EXECUTION_POLICY)
+        execution_score.setdefault("reference_eligible", execution_score.get("score") is not None)
+        counts = reference_detail.get("tests_reference")
+        execution_score.setdefault("reference_test_count", counts.get("passed") if isinstance(counts, dict) else None)
+        execution_score.setdefault("reported_test_pass_fraction",
+                                   0.0 if execution_score["reference_eligible"] else None)
 
     return schema.score_record(
         prediction, status=status, syntax=syntax_score, execution=execution_score,
@@ -123,6 +162,8 @@ def main():
                         help="re-score predictions already present in --out")
     parser.add_argument("--no-execution", action="store_true",
                         help="static evaluators only; no project checkout needed")
+    parser.add_argument("--no-similarity", action="store_true",
+                        help="defer similarity scoring for a separate batch")
     parser.add_argument("--refresh-reference", action="store_true",
                         help="re-run the cached reference execution for each subject")
     parser.add_argument("--keep", action="store_true",
@@ -132,6 +173,10 @@ def main():
     parser.add_argument("--verify-clean", action="store_true",
                         help="report any outstanding substitution or generated file")
     args = parser.parse_args()
+
+    if (not args.no_similarity and not (args.repair or args.verify_clean)
+            and os.environ.get("PYTHONHASHSEED") != "0"):
+        parser.error("set PYTHONHASHSEED=0 for deterministic CodeBLEU-R data-flow scores")
 
     cfg = corpus.load_config()
     subjects = dict((s.id, s) for s in corpus.load_manifest(path=args.manifest))
@@ -177,6 +222,7 @@ def main():
         try:
             return score_one(prediction, subject, builds.get(prediction.build_id),
                              cfg, skip_execution=args.no_execution,
+                             skip_similarity=args.no_similarity,
                              refresh_reference=args.refresh_reference, keep=args.keep)
         except Exception as exc:  # noqa: BLE001 — one bad prediction must not stop the run
             return schema.score_record(
@@ -210,10 +256,13 @@ def _progress(record, done, total):
           % (done, total, record["prediction_id"], record["status"],
              (record.get("syntax") or {}).get("score"),
              "-" if execution_score is None else round(execution_score, 3),
-             (record.get("similarity") or {}).get("codebleu3")))
+             (record.get("similarity") or {}).get("codebleu")))
 
 
 if __name__ == "__main__":
+    if os.environ.get("PYTHONHASHSEED") != "0":
+        os.execvpe(sys.executable, [sys.executable, *sys.argv],
+                   {**os.environ, "PYTHONHASHSEED": "0"})
     try:
         sys.exit(main())
     except KeyboardInterrupt:

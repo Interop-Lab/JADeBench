@@ -1,7 +1,8 @@
 # CodeNet100 reference benchmark
 
-This directory releases the 100-program Project CodeNet reference set used for
-comparison with JsDeObsBench. It is intentionally separate from the primary
+This directory releases a historical 100-program Project CodeNet reference set.
+The final paper's RQ1 comparison uses a separate fixed 93-program cohort in
+`results/paper/jsdeobsbench93.jsonl`. This archive is separate from the primary
 `realworld93` benchmark: CodeNet100 contains competitive-programming solutions,
 uses stdin/stdout test cases, and retains the legacy JsDeObsBench-compatible
 score schema.

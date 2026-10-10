@@ -1,6 +1,6 @@
 cff-version: 1.2.0
-message: "If you use AgentDeobfBench, please cite this software and the archival paper when available."
-title: "AgentDeobfBench: A Benchmark for JavaScript Deobfuscation Agents"
+message: "If you use JADeBench, please cite this software and the paper when available."
+title: "JADeBench: Benchmarking Coding Agents on Real-World JavaScript Deobfuscation"
 type: software
 version: 0.1.0
 date-released: 2026-09-29
@@ -8,9 +8,8 @@ license: MIT
 authors:
   - family-names: "AgentDeobfBench Contributors"
 abstract: >-
-  A benchmark connecting real-world executable JavaScript subjects,
-  reproducible obfuscation tiers, static and agentic deobfuscation baselines,
-  isolated runtime sandboxes, and fixed evaluators.
+  A benchmark of coding agents on 93 JavaScript application modules from 33
+  projects under paired source-level and VM protection.
 keywords:
   - JavaScript
   - deobfuscation
@@ -19,8 +18,8 @@ keywords:
   - benchmark
 preferred-citation:
   type: article
-  title: "JADeBench: Benchmarking JavaScript Deobfuscation Agents on Real-World Code and Modern Obfuscation"
+  title: "JADeBench: Benchmarking Coding Agents on Real-World JavaScript Deobfuscation"
   authors:
     - family-names: "Anonymous"
-  year: 2026
+  year: 2027
   notes: "Anonymous manuscript; replace with archival venue metadata after acceptance."

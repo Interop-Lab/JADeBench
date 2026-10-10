@@ -4,11 +4,11 @@ The versioned public benchmark is [`realworld93`](realworld93/): 93 aligned
 real-world JavaScript subjects, each released as an original bundle, a
 JavaScript Obfuscator build, and a VM-protected build.
 
-The paper's [`codenet100`](codenet100/) reference benchmark is also included:
+The historical [`codenet100`](codenet100/) reference benchmark is also included:
 100 IBM Project CodeNet programs with test cases, JavaScript Obfuscator full
-builds, C77-0 builds, and the selection record used for comparison with
-JsDeObsBench. It is reported separately because it uses competitive-programming
-tasks and a legacy evaluator schema.
+builds, C77-0 builds, and an earlier selection record. The final paper's RQ1
+comparison instead uses a separate fixed 93-program JsDeObsBench cohort in
+`results/paper/jsdeobsbench93.jsonl`.
 
 `samples/diverse6` remains the small integration fixture used by CI. It is not
 the dataset used for the released performance results.

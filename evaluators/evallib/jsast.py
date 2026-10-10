@@ -172,42 +172,7 @@ def complexity(tree):
             stack.append((child, depth))
     return {"ast_nodes": ast_nodes,
             "cyclomatic": decisions + 1,
-            "max_depth": max_depth,
-            "halstead_length": halstead_length(tree)}
-
-
-# Leaves counted as Halstead operands. Everything else that `tokens()` yields
-# is an operator. Length is N = N1 + N2 (totals, not distinct), matching
-# JsDeObsBench Equation 1's HLoC: `aggregate.halstead.length` from escomplex.
-_HALSTEAD_OPERANDS = frozenset([
-    "identifier", "property_identifier", "shorthand_property_identifier",
-    "private_property_identifier", "number", "string_fragment", "escape_sequence",
-    "true", "false", "null", "undefined", "this", "super",
-    "regex_pattern", "regex_flags", "template_chars",
-])
-
-
-def halstead_length(tree):
-    """Halstead length N = total operators + total operands.
-
-    JsDeObsBench reports simplification as 1 - HLoC(deobf)/HLoC(obf) using
-    typhonjs-escomplex's aggregate length. This walks the same token stream the
-    other static evaluators see, so a program that parses for syntax has a
-    defined HLoC here. Distinct counts are not needed for that equation.
-    """
-    operators = 0
-    operands = 0
-    for node in walk(tree.root_node):
-        if node.child_count != 0 or _is_comment(node.type):
-            continue
-        text = node.text.decode("utf-8", "replace")
-        if not text.strip():
-            continue
-        if node.type in _HALSTEAD_OPERANDS:
-            operands += 1
-        else:
-            operators += 1
-    return operators + operands
+            "max_depth": max_depth}
 
 
 def loc(code):
@@ -349,7 +314,7 @@ def _assigned_surface(node, root=None):
     hypothetical — webcrack answers `module.exports = _0x5cddf9` on the `full`
     rung, and the module exports all ten names correctly at run time. Execution
     correctness scored 1.0 on the very artifact syntax correctness scored 0, and
-    Many reference bundles carry named exports, which is exactly the
+    99 of the 171 reference bundles carry named exports, which is exactly the
     population the false claim bites.
 
     Answering `*` for every identifier is sound but throws away a contract that

@@ -23,16 +23,7 @@ const __adb_ns = (function () {
   const keys = Object.keys(__adb_raw);
   const only_default = keys.length === 1 && keys[0] === 'default';
   const inner = __adb_raw && __adb_raw.default;
-  // Narrow case: namespace is solely `default`, and that value is a CJS
-  // `module.exports` object marked `__esModule`.
-  if (only_default && inner && inner.__esModule) return inner;
-  // babel-jest's `import *` of an esbuild CJS→ESM wrapper often exposes more
-  // than `['default']` (interop helpers / non-enumerable copies). Without this
-  // second unwrap, `__adb_pick('default')` returns the CJS namespace object and
-  // the subject's `import x from './mod'` then fails with
-  // "default is not a function" (seen on redux-requests cache-reducer).
-  if (inner && inner.__esModule && typeof inner !== 'function') return inner;
-  return __adb_raw;
+  return (only_default && inner && inner.__esModule) ? inner : __adb_raw;
 })();
 
 const __adb = globalThis[Symbol.for('adb.tracer')];

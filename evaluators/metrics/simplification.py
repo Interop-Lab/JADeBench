@@ -1,21 +1,20 @@
 """Simplification (paper §3.2): how much structure the system removed.
 
-Two formulations are reported.
+Complexity is the vector V = (ast_nodes, cyclomatic, max_depth), scaled so that
+the obfuscated build sits at C = 1. Two scores come out of it, and the second is
+the point of the module.
 
-`jsdeobs` is JsDeObsBench Equation 1, the score that paper's leaderboard calls
-decomplexity:
+`rel_obf` = 1 - C(candidate) is the prior-work formulation, normalised against
+the obfuscated input alone. It is biased in a way that matters here: it rewards
+deletion without bound, so a system that returns an empty program scores near 1,
+and it inflates with obfuscation strength because the denominator grows. It is
+reported only because dropping it would make results incomparable with the
+benchmark this one is measured against.
 
-    S = 1 - HLoC(candidate) / HLoC(obfuscated)
-
-HLoC is Halstead length (total operators + total operands). Only programs that
-parse are scored — the same syntax gate their pipeline applies before
-simplification. An empty or unparseable return is `null`, not ~1.
-
-`rel_obf` / `anchored` keep the earlier reduction-vector formulation so stored
-scores remain re-interpretable. `anchored` is 1.0 when the candidate matches
-the original's complexity; it clusters near 1 whenever a system actually
-recovers the program, which is why `jsdeobs` is the number to compare across
-systems.
+`anchored` divides the same reduction by the reduction the original actually
+represents, so 1.0 means "as simple as the developer's program" rather than "as
+simple as possible", and over-deletion overshoots and is flagged instead of
+rewarded.
 """
 from evallib import jsast
 
@@ -37,8 +36,7 @@ COMPONENTS = ("ast_nodes", "cyclomatic", "max_depth")
 def complexity_vector(code):
     if code is None:
         return None
-    tree = jsast.parse(code)
-    vector = jsast.complexity(tree)
+    vector = jsast.complexity(jsast.parse(code))
     vector["loc"] = jsast.loc(code)
     # Bytes, not lines, is what `size_ratio` is derived from. Every obfuscated
     # build in the suite is emitted with `compact: true`, so its `loc` is 1 and
@@ -46,22 +44,15 @@ def complexity_vector(code):
     # the scored predictions it ranged from 44 to 24384. `loc` stays in the
     # vector because it describes the program, but nothing is divided by it.
     vector["bytes"] = len(code.encode("utf-8"))
-    vector["parses"] = not jsast.syntax_errors(tree)
     return vector
 
 
-def evaluate(candidate_code, obfuscated_code, original_code, cfg=None,
-             parses=None):
+def evaluate(candidate_code, obfuscated_code, original_code, cfg=None):
     """Score a candidate against the build it was given and the original.
 
     Returns None when there is no obfuscated input to measure against — during
     corpus bring-up there are no builds yet, and a fabricated baseline would be
     worse than an absent score.
-
-    `parses` is the syntax evaluator's parse bit when the caller already has
-    it. When omitted, this module asks the same tree-sitter the other static
-    evaluators use. Empty source is treated as not parsing, matching
-    JsDeObsBench's `is_valid_js`.
     """
     cfg = cfg or {}
     weights = cfg.get("weights") or dict((c, 1.0 / len(COMPONENTS)) for c in COMPONENTS)
@@ -84,8 +75,6 @@ def evaluate(candidate_code, obfuscated_code, original_code, cfg=None,
         "anchored": None,
         "over_simplified": None,
         "size_ratio": None,
-        "jsdeobs": None,
-        "jsdeobs_original": None,
     }
     if v_cand is None:
         return result
@@ -108,25 +97,7 @@ def evaluate(candidate_code, obfuscated_code, original_code, cfg=None,
         # there is no scale on which to express progress.
         if abs(span) > 1e-6:
             result["anchored"] = round((1.0 - c_cand) / span, 6)
-
-    h_obf = float(v_obf.get("halstead_length") or 0)
-    if h_obf > eps:
-        if v_orig is not None:
-            result["jsdeobs_original"] = round(
-                1.0 - float(v_orig.get("halstead_length") or 0) / h_obf, 6)
-        cand_parses = _candidate_parses(candidate_code, v_cand, parses)
-        if cand_parses:
-            result["jsdeobs"] = round(
-                1.0 - float(v_cand.get("halstead_length") or 0) / h_obf, 6)
     return result
-
-
-def _candidate_parses(code, vector, parses):
-    if code is None or not str(code).strip():
-        return False
-    if parses is not None:
-        return bool(parses)
-    return bool(vector.get("parses"))
 
 
 def _scaled(vector, reference, weights, eps):

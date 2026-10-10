@@ -157,14 +157,11 @@ def check_surface(report: Report) -> None:
 
     readme = (ROOT / "README.md").read_text(encoding="utf-8")
     for command in (
-        "python3 scripts/benchmark.py check",
         "python3 scripts/check_release_safety.py",
         "python3 scripts/reproduce_results.py --check",
-        "python3 scripts/reproduce_codenet_results.py --check",
         "benchmark/realworld93",
-        "benchmark/codenet100",
         "results/leaderboard.md",
-        "samples/diverse6/builds.jsonl",
+        "results/paper/ja93.jsonl",
     ):
         if command not in readme:
             report.error("README.md is missing %r" % command)
@@ -404,7 +401,7 @@ def check_released_results(report: Report) -> None:
             % (completed.stderr.strip() or completed.stdout.strip())
         )
     else:
-        report.note("released results: 24 runs over realworld93")
+        report.note("final paper: 22 runs over realworld93; 24 historical run directories retained")
 
     codenet_manifest = read_json(RESULTS / "codenet100" / "manifest.json", report)
     codenet_runs = (

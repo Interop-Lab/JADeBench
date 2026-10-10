@@ -2,14 +2,7 @@
    after the run; if this file is still here, run `score.py --repair`. */
 'use strict';
 require('__ADB_TRACER_SPEC__');
-/* Tests that `delete require.cache[subject]` and re-require to pick up a
-   changed global (sockjs utils/event's pagehide vs unload) only evict this
-   shim. The implementation lives at `.adb_impl.js` and would otherwise stay
-   cached, so the subject's top-level would not run again and the trace would
-   be empty. */
-var __adb_impl_id = require.resolve('__ADB_IMPL_SPEC__');
-delete require.cache[__adb_impl_id];
-var __adb_ns = require(__adb_impl_id);
+var __adb_ns = require('__ADB_IMPL_SPEC__');
 var __adb = globalThis[Symbol.for('adb.tracer')];
 
 /* esbuild marks a converted ES module with __esModule; the subject bundle's

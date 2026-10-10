@@ -1,121 +1,48 @@
-# AgentDeobfBench
+# JADeBench
 
-AgentDeobfBench is an executable benchmark for evaluating JavaScript
-deobfuscation systems on real-world application code. The repository ships the
-benchmark programs, ground truth, released system outputs, fixed evaluators,
-baseline adapters, and machine-readable scores.
+JADeBench evaluates coding agents on recovering JavaScript from protected real-world application modules. This checkout contains the fixed **93-module, 33-project** cohort used in the final FSE 2027 manuscript, its paired source-level and VM-protected inputs, candidate programs, evaluators, and per-output results.
 
-## At a glance
+## Paper experiment
 
-- **93** aligned real-world JavaScript subjects from **33** projects.
-- **2** protection families: JavaScript Obfuscator full-minus-protect and VM L1.
-- **12** evaluated systems and **24** released runs.
-- **2,232** final deobfuscated programs with per-subject evaluator records.
-- A separate **CodeNet100** reference benchmark with **13** historical runs and
-  **1,269** released outputs for comparison with JsDeObsBench.
-- Execution correctness as the primary metric, plus syntax, simplification,
-  similarity, exact behavioral agreement, and cost metadata.
+Every module is bundled with first-party dependencies and paired with its developer test workload. The evaluated system receives the protected module and a public execution/debug harness; the original and tests stay in a private oracle view. Each system returns one complete replacement program.
 
-The public performance benchmark is exactly `adb-001` through `adb-093`.
-The release metadata is screened to the same 93 subjects; 805 admitted
-construction records cover 85 of them. The six-subject `diverse6` fixture is
-only for CI.
+The final paper compares **eleven systems**: webcrack and JSimplifier; four static LLMs (GPT-5.6-sol, GLM-5.2, DeepSeek-V4-Pro-0813, Kimi-K2.5); and five coding agents (OpenHands, Claude Code, OpenCode, Kimi Code, Codex) configured with the GPT-5.6-sol model family. Every system has one output for each of 93 modules under both **JSO/full** source-level obfuscation and **VM** protection, giving 2,046 paper cells. The older Synchrony runs are retained only as historical material.
 
-## Released results
+The primary metric, **Execution correctness**, is binary per module: the candidate must pass the complete nonempty developer workload, with a successful exit and no failed, cancelled, or missing tests. Trace comparisons and partial test counts are diagnostics. **Syntax correctness** requires a parseable, loadable program with the statically resolvable export surface. **CodeBLEU-R** and **ROUGE-L** measure source recovery over all 93 outputs, including failed executions. CodeBLEU-R uses JavaScript-token BLEU, candidate-precision weighted n-grams, and clipped-multiset F1 for AST subtrees and normalized data flow. The reference-guided **Readability** score is exploratory: DeepSeek-V4-Pro-0813 rates four dimensions from 1 to 10, summed to 4–40. It is available for 2,037 of the 2,046 JADeBench cells; missing ratings are excluded and shown with their denominators.
 
-Selected execution-correctness means over the public 93-subject set:
+## Results
 
-| System | Access | JS-OB | VM L1 |
-| --- | --- | ---: | ---: |
-| webcrack | traditional | 1.0000 | 1.0000 |
-| OpenHands | shipped agent | 0.9411 | 0.8484 |
-| Claude Code | shipped agent | 0.8439 | 0.6861 |
-| OpenCode | shipped agent | 0.8377 | 0.7054 |
-| Kimi Code | shipped agent | 0.8099 | 0.7172 |
-| Codex | shipped agent | 0.7285 | 0.7597 |
-| GPT-sol | static L0 | 0.5946 | 0.4128 |
+The paper's execution pass counts under JSO/full and VM, respectively, include webcrack **86/93 and 93/93**, OpenHands **78/93 and 54/93**, and static GPT-5.6-sol **17/93 and 3/93**. Under VM, webcrack's output preserves behavior while leaving the interpreter in place, with mean ROUGE-L **0.055**. See the [complete generated leaderboard](results/leaderboard.md), [per-output records](results/paper/ja93.jsonl), and [result provenance](results/paper/manifest.json).
 
-See the complete, denominator-aware
-[`results/leaderboard.md`](results/leaderboard.md) and machine-readable
-[`results/leaderboard.json`](results/leaderboard.json). Regenerate both from
-the released `scores.jsonl` files:
+**Metric provenance:** all 2,046 per-output JADeBench records have numeric CodeBLEU-R and ROUGE-L scores, and their aggregates reproduce the final manuscript table at its published precision. CodeBLEU-R scores parser-valid outputs even when the broader Syntax check fails on loading or exports; parser-invalid and empty outputs score zero. Readability means use each system's paired JSO/full–VM rated subjects; original rating coverage is reported separately. See [the scoring provenance](results/paper/README.md).
+
+RQ1 uses a **separate fixed set of 93 JsDeObsBench competitive-programming programs** and seven of the systems above. The comparison is in [results/paper/jsdeobsbench93.md](results/paper/jsdeobsbench93.md); the 100-program CodeNet material in `benchmark/codenet100` is a historical reference archive, not the paper's RQ1 denominator.
+
+RQ4's manuscript resource summaries for the nine model-based systems are in [results/paper/rq4_cost.json](results/paper/rq4_cost.json), with the [per-attempt resource records](results/paper/rq4_attempts.jsonl). Input tokens include prompt and cache tokens. The resource summaries use the recorded token cohorts and runtime observations; their exact denominators are given with the results.
+
+## Verify
+
+Python 3.9+ validates the committed records and candidate hashes:
 
 ```bash
 python3 scripts/reproduce_results.py --check
-```
-
-The shipped-agent rows are product-defined toolchains, not a controlled
-model-only comparison. Null execution records are excluded with the
-denominator reported, never converted to zero.
-
-The paper's CodeNet comparison is also released, not just described. Its
-independent [CodeNet100 leaderboard](results/codenet100/leaderboard.md) includes
-full-protection and C77-0 results. For example, OpenCode scores 0.8800 execution
-on the 100-program full set, while the historical GPT-sol C77-0 run scores
-0.9565 over its 69-program subset. These values must not be merged with the
-realworld93 leaderboard because the data and evaluator schemas differ.
-
-## Five-minute verification
-
-Python 3.9 or newer is sufficient to validate the dataset and published
-results:
-
-```bash
-python3 scripts/benchmark.py check
+python3 scripts/audit_rq4_cost.py
 python3 scripts/check_repository.py
 python3 scripts/check_release_safety.py
-python3 scripts/reproduce_results.py --check
-python3 scripts/reproduce_codenet_results.py --check
 ```
 
-For evaluator development, install Node.js 22 and the metric dependencies:
+For evaluator development, install Node.js 22 and the pinned Python dependencies:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
 python3 -m pip install -r evaluators/requirements.txt
 npm ci --prefix corpus/tools
+PYTHONHASHSEED=0 python3 scripts/audit_codebleu_r.py
 ```
 
-Run the deterministic six-subject evaluator smoke test:
+The public 93-module data is under `benchmark/realworld93`. Score a new JSO/full prediction set with:
 
 ```bash
-ADB_CORPUS="$PWD/samples/diverse6/corpus" \
-python3 evaluators/score.py \
-  --manifest samples/diverse6/corpus/manifest.jsonl \
-  --builds samples/diverse6/builds.jsonl \
-  --predictions samples/diverse6/predictions/identity.jsonl \
-  --out /tmp/agentdeobfbench-smoke.jsonl \
-  --no-execution
-```
-
-## Benchmark data
-
-[`benchmark/realworld93`](benchmark/realworld93/) is self-contained for
-static evaluation. The collection protocol, intended use, composition, and
-limitations are summarized in [`DATASET_CARD.md`](DATASET_CARD.md).
-
-[`benchmark/codenet100`](benchmark/codenet100/) contains the 100 Project
-CodeNet programs, stdin/stdout test cases, JS-OB/full and C77-0 protected
-inputs used by the paper's reference comparison. It has its own stable IDs,
-results, and leaderboard.
-
-```text
-benchmark/realworld93/
-├── original/             93 reference programs
-├── jsob_corpus_full/     93 JavaScript Obfuscator programs
-├── vm_corpus/            93 VM-protected programs
-├── manifest.jsonl        evaluator-ready subject records
-├── builds-jsob.jsonl     JS-OB build records
-├── builds-vm.jsonl       VM build records
-├── sample_ids.jsonl      adb-001 ... adb-093 mapping
-└── licenses/             upstream license texts
-```
-
-Score a new JS-OB prediction set with the static evaluators:
-
-```bash
-ADB_CORPUS="$PWD/benchmark/realworld93" \
+ADB_CORPUS="$PWD/benchmark/realworld93" PYTHONHASHSEED=0 \
 python3 evaluators/score.py \
   --manifest benchmark/realworld93/manifest.jsonl \
   --builds benchmark/realworld93/builds-jsob.jsonl \
@@ -124,52 +51,15 @@ python3 evaluators/score.py \
   --no-execution
 ```
 
-Full execution scoring additionally needs project test environments. See
-[`docs/REPRODUCING.md`](docs/REPRODUCING.md) and
-[`docs/DATA_RELEASE.md`](docs/DATA_RELEASE.md).
+Full execution scoring requires the project-specific oracle environments; see [reproduction details](docs/REPRODUCING.md). The released paper records are frozen outputs from the original experiment. Re-running models or an LLM judge can produce different results.
 
 ## Repository layout
 
-```text
-benchmark/       versioned public benchmark programs and provenance
-results/         released outputs, scores, and generated leaderboard
-baselines/       static, model, and shipped-agent adapters
-evaluators/      syntax, execution, simplification, and similarity scoring
-corpus/          screened 93-subject construction metadata and tooling
-obfuscators/     transformation pipeline and 805-build metadata registry
-sandbox/         isolated execution harness and construction code
-samples/         small redistributable CI fixture
-scripts/         validation and result-reproduction entry points
-```
+- `benchmark/realworld93`: the 93 originals, 93 JSO/full builds, 93 VM builds, manifests, and licenses.
+- `results/paper`: final-paper per-output metrics and the separate RQ1 cohort.
+- `results/runs`: submitted candidate programs and historical diagnostic scores.
+- `evaluators`: full-workload execution, syntax, CodeBLEU-R, ROUGE-L, and judge protocols.
+- `baselines`, `sandbox`, `corpus`, `obfuscators`: adapters and construction/evaluation tooling.
+- `samples/diverse6`: a six-subject integration fixture, not a performance result.
 
-## Scope and current limitations
-
-Version 0.1 reports the materialized 93-subject JS-OB/VM study and existing L0,
-traditional, and shipped-agent runs. It does **not** claim completed controlled
-L1/L2 capability-ladder experiments, commercial-obfuscator experiments, or
-model-generated-obfuscation experiments. Those interfaces remain research
-scaffolding until corresponding results are released.
-
-No prompts, transcripts, checkpoints, logs, credentials, package environments,
-provider request identifiers, or private workspaces are part of this release.
-
-## Data and licensing
-
-The root MIT license covers repository-authored code and documentation only.
-Benchmark programs and generated derivatives retain the licenses of their 33
-upstream projects. Subject-level provenance, pinned revisions, and copied
-license texts are in
-[`benchmark/realworld93/THIRD_PARTY_NOTICES.md`](benchmark/realworld93/THIRD_PARTY_NOTICES.md).
-
-Model and agent outputs may also be subject to provider terms. See
-[`docs/DATA_AND_RESULTS.md`](docs/DATA_AND_RESULTS.md) and
-[`third_party/THIRD_PARTY_NOTICES.md`](third_party/THIRD_PARTY_NOTICES.md).
-
-## Citation and contributing
-
-Citation metadata is provided in [`CITATION.cff`](CITATION.cff). Replace the
-placeholder contributor entry with the archival paper authors and DOI before
-the final non-anonymous publication.
-
-Contributions are welcome; read [`CONTRIBUTING.md`](CONTRIBUTING.md) and run
-the three verification commands above before opening a pull request.
+The MIT license covers repository-authored code and documentation. Upstream programs and derivatives retain their own licenses; see [third-party notices](benchmark/realworld93/THIRD_PARTY_NOTICES.md). No credentials, prompts, transcripts, or private workspaces are included. Citation metadata is in [CITATION.cff](CITATION.cff).

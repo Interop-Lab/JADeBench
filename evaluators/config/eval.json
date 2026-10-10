@@ -1,9 +1,9 @@
 {
-  "schema_version": 4,
+  "schema_version": 7,
   "_comment": "Frozen evaluator configuration for AgentDeobfBench (paper §3.2). Every threshold and weight the evaluators use lives here, so a result can be reproduced from the artifact alone. Changing a value changes reported scores: bump schema_version and say so in README.md.",
   "_changelog": {
-    "4": [
-      "Syntax correctness is parse-only. tree-sitter and node --check still both have to accept the program, but a missing or unreadable export name no longer sets the score to 0. Export names stay in the record for diagnosis. Obfuscated modules hide those names in string tables while still loading, and charging that to syntax contradicted an execution score of 1.0 on the same program."
+    "5": [
+      "full_suite_v2 retains binary complete-workload correctness. Test-summary parsing now strips ANSI colours, accepts all-failed Mocha/Jest/Vitest runs and uses outermost TAP counts. Invalid or ambiguous counts are not guessed. Negative counts, cancellations, reference timeouts and known skipped/total workload mismatches cannot produce a full score. reported_test_pass_fraction is a separate diagnostic, not the paper metric. Reference controls are freshly evaluated once per scoring process rather than trusting disk snapshots; green controls are repeated, including those with empty traces, and inconsistent workloads are ineligible. Re-score old predictions with this version; preserve raw archives."
     ],
     "3": [
       "Execution correctness now runs against the sandbox's per-subject oracle view (sandbox/sandboxes/<box>/oracle) instead of mutating the shared project checkout under corpus/work. The rest of the pipeline — differential admission in obfuscators/02_admit.py, agent mounting in baselines/lib/mount.py — already operated there; the evaluators were the only consumer still writing into the corpus. Scores are expected to be unchanged where a subject is measurable in both, and that is checked rather than assumed; the measurable population itself may shift, so the migration reports every status transition per subject.",
@@ -16,11 +16,19 @@
     "2": [
       "Execution traces no longer carry renameable identifiers. A function value serialised as '@fn:<name>' made a returned function's identifier part of its observable behaviour, so a behaviourally perfect answer scored as divergent unless it happened to reproduce the developer's original name — scoring identifier recovery inside the primary measure, and scoring it backwards. Function values are now '@fn/<arity>'; a constructor name is kept only when the constructor is ambient (globalThis[name] === ctor), which is true of built-ins an obfuscator cannot rename and false of a class the subject declares.",
       "Reference-run caches are additionally keyed on the tracer checksum, so a serialisation change invalidates them instead of silently comparing a new-format candidate trace against an old-format cached reference.",
-      "The syntax evaluator's export-surface check now reads CommonJS exports as well as ESM. An earlier implementation recognised only 'export' statements, making the check vacuous for CommonJS bundles.",
+      "The syntax evaluator's export-surface check now reads CommonJS exports as well as ESM. It recognised only 'export' statements, which made it a no-op on 131 of the 171 subjects — every CommonJS bundle had an empty expected surface, so the check passed vacuously and syntax correctness silently meant only 'it parses'.",
       "Every score produced under schema_version 1 must be regenerated."
+    ],
+    "4": [
+      "Execution correctness is the complete nonempty workload pass rate. References must exit zero and pass at least one test with no failures. Candidates must pass the same number of tests with no failures, a zero exit status, and no timeout. Matching failed suites, zero-test runs, partial pass counts, and trace agreement cannot receive a full execution score. Traces remain diagnostic. Imported results are derived from recorded test and exit fields; raw archives are preserved."
+    ],
+    "6": [
+      "Final-paper similarity adds CodeBLEU-R: JavaScript-token BLEU, candidate-precision weighted n-grams, clipped-multiset AST and data-flow F1, with the data-flow component omitted if both sides have no edges. Whole-module token ROUGE-L remains separate. Empty or parser-invalid outputs score zero for both; a parser-valid output may score similarity even when it fails the broader Syntax axis."
+    ],
+    "7": [
+      "Final-paper parity: similarity uses parser acceptance independently of the broader Syntax verdict, preserving nonzero CodeBLEU-R and ROUGE-L for 69 parser-valid outputs that fail loading or export checks. Valid JSX is accepted through the pinned esbuild JSX loader."
     ]
   },
-
   "toolchain": {
     "python": "3.9",
     "tree_sitter": "0.22.3",
@@ -28,33 +36,45 @@
     "node": "22",
     "esbuild": "corpus/tools/node_modules/esbuild (^0.24.0)"
   },
-
   "syntax": {
-    "_comment": "A returned program counts as syntactically correct when it parses. tree-sitter must report no ERROR or MISSING node, and node --check must accept it. Export names are still recorded when require_export_surface is true, and they do not affect the score.",
+    "_comment": "A returned program counts as syntactically correct only if it parses AND keeps the module contract of the subject it replaces. Both are required: a program that parses but drops an export cannot be substituted for the subject, so scoring it as correct would overstate the system.",
     "cross_check_with_node": true,
     "node_check_timeout_sec": 30,
     "require_export_surface": true
   },
-
   "simplification": {
-    "_comment": "Complexity vector V = (ast_nodes, cyclomatic, max_nesting_depth), each scaled by the obfuscated build's value so that C(obfuscated) = 1. jsdeobs is JsDeObsBench Equation 1 (1 - HLoC_cand/HLoC_obf, syntax-gated). rel_obf/anchored keep the reduction-vector formulation. See README.md §Simplification.",
-    "weights": {"ast_nodes": 0.5, "cyclomatic": 0.5, "max_depth": 0.0},
+    "_comment": "Complexity vector V = (ast_nodes, cyclomatic, max_nesting_depth), each scaled by the obfuscated build's value so that C(obfuscated) = 1. rel_obf is the JsDeObsBench-style score, kept only for comparability with prior work; anchored is the corrected one. See README.md §Simplification.",
+    "weights": {
+      "ast_nodes": 0.5,
+      "cyclomatic": 0.5,
+      "max_depth": 0.0
+    },
     "_weights_comment": "max_depth is measured and reported but weighted 0: this obfuscation suite barely moves it (no increase at all on 26 of 57 scored records; median inflation 1.17x against 6.10x for ast_nodes), so at an equal third it acted as a near-constant term in both numerator and denominator and compressed anchored's usable range by close to half. Restore it to 1/3 to reproduce schema_version 2 numbers.",
-    "epsilon": 1e-9
+    "epsilon": 1e-09
   },
-
   "similarity": {
-    "_comment": "CodeBLEU minus its dataflow component (codebleu3). Components are reported separately so a different weighting can be applied post hoc without rescoring.",
-    "weights": {"bleu": 0.3334, "weighted_bleu": 0.3333, "ast_match": 0.3333},
+    "_comment": "Primary final-paper similarity metrics are CodeBLEU-R and JavaScript-leaf-token ROUGE-L. Standard CodeBLEU and CodeBLEU3 remain diagnostic fields.",
+    "weights": {
+      "bleu": 0.3334,
+      "weighted_bleu": 0.3333,
+      "ast_match": 0.3333
+    },
     "max_ngram": 4,
     "keyword_weight": 4.0,
-    "ast_ngram_orders": [1, 2, 3, 4]
+    "ast_ngram_orders": [
+      1,
+      2,
+      3,
+      4
+    ]
   },
-
   "execution": {
-    "_comment": "Differential comparison of observable behaviour: the subject's own test file drives both the reference bundle and the candidate, and the two traces are compared. trace_match is the primary score.",
-    "timeout_sec": 300,
-    "anti_rungs": ["anti", "full"],
+    "_comment": "Primary: complete nonempty workload pass (binary per subject). Reference suites must pass completely; trace metrics are auxiliary diagnostics.",
+    "timeout_sec": 900,
+    "anti_rungs": [
+      "anti",
+      "full"
+    ],
     "defense_timeout_sec": 15,
     "_defense_comment": "Rungs carrying selfDefending / debugProtection. The differential harness substitutes a tracing shim, which is a source rewrite, which is what those options exist to detect — so a candidate on these rungs that never exits or produces no events at all, while the reference run of the same subject through the same substitution was fine, is scored `defense_triggered` with a null score rather than charged to the system. Keyed on the rung, so it is a heuristic and must be reported separately, never averaged into behaviour_match. The short cap matches obfuscators/scripts/02_admit.py's CAP_ANTI: a self-defending build never exits, so waiting the full timeout_sec only lengthens the wait.",
     "max_events": 5000,
@@ -91,9 +111,9 @@
       "temp_dirs": true,
       "stack_traces": true,
       "ephemeral_ports": true
-    }
+    },
+    "primary": "full_suite"
   },
-
   "identifier": {
     "_comment": "Not implemented in this release. Variable alignment between the original and a returned program is unresolved (paper §3.2 TODO); the field stays null in scores.jsonl so the record schema does not change when it lands.",
     "implemented": false

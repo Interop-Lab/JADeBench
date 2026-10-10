@@ -26,51 +26,21 @@ function __adbInstall(write, options) {
 
   var state = { seq: 0, depth: 0, dropped: 0, budget: BUDGET };
 
-  // Is this constructor a language/host intrinsic rather than one the subject
-  // declares?
+  // Is this constructor ambient — a built-in or a host class — rather than one
+  // the subject declares?
   //
-  // `TypeError` and `Map` are intrinsics: an obfuscator cannot rename them, and
-  // which one came back is genuine observable behaviour. A class declared
-  // inside the subject is a local identifier. The old test
-  // `globalThis[ctor.name] === ctor` treated a subject class that leaked onto
-  // `globalThis` (VM wrappers do this) as ambient, so `JSONRPCClient` compared
-  // unequal to `@custom` and a 13/13-green candidate scored 1/26.
-  var INTRINSICS = {
-    Object: Object, Function: Function, Boolean: Boolean, Symbol: Symbol,
-    Number: Number, String: String, Array: Array, Date: Date, RegExp: RegExp,
-    Error: Error, EvalError: EvalError, RangeError: RangeError,
-    ReferenceError: ReferenceError, SyntaxError: SyntaxError,
-    TypeError: TypeError, URIError: URIError,
-    Map: typeof Map !== 'undefined' ? Map : undefined,
-    Set: typeof Set !== 'undefined' ? Set : undefined,
-    WeakMap: typeof WeakMap !== 'undefined' ? WeakMap : undefined,
-    WeakSet: typeof WeakSet !== 'undefined' ? WeakSet : undefined,
-    Promise: typeof Promise !== 'undefined' ? Promise : undefined,
-    ArrayBuffer: typeof ArrayBuffer !== 'undefined' ? ArrayBuffer : undefined,
-    DataView: typeof DataView !== 'undefined' ? DataView : undefined,
-    Uint8Array: typeof Uint8Array !== 'undefined' ? Uint8Array : undefined,
-    Int8Array: typeof Int8Array !== 'undefined' ? Int8Array : undefined,
-    Uint16Array: typeof Uint16Array !== 'undefined' ? Uint16Array : undefined,
-    Int16Array: typeof Int16Array !== 'undefined' ? Int16Array : undefined,
-    Uint32Array: typeof Uint32Array !== 'undefined' ? Uint32Array : undefined,
-    Int32Array: typeof Int32Array !== 'undefined' ? Int32Array : undefined,
-    Float32Array: typeof Float32Array !== 'undefined' ? Float32Array : undefined,
-    Float64Array: typeof Float64Array !== 'undefined' ? Float64Array : undefined,
-    URL: typeof URL !== 'undefined' ? URL : undefined,
-    URLSearchParams: typeof URLSearchParams !== 'undefined' ? URLSearchParams : undefined,
-    Headers: typeof Headers !== 'undefined' ? Headers : undefined,
-    Request: typeof Request !== 'undefined' ? Request : undefined,
-    Response: typeof Response !== 'undefined' ? Response : undefined,
-    AbortController: typeof AbortController !== 'undefined' ? AbortController : undefined,
-    AbortSignal: typeof AbortSignal !== 'undefined' ? AbortSignal : undefined,
-    Event: typeof Event !== 'undefined' ? Event : undefined
-  };
-  if (typeof BigInt !== 'undefined') INTRINSICS.BigInt = BigInt;
-
+  // The distinction decides whether its name may enter the trace. `TypeError`
+  // and `Map` are intrinsics: an obfuscator cannot rename them, and which one
+  // came back is genuine observable behaviour. A class declared inside the
+  // subject is a local identifier, and renaming it is precisely what a
+  // deobfuscation system is asked to do — comparing that name for equality
+  // would score identifier recovery inside the execution measure, and score it
+  // backwards, since only a system that guessed the developer's original name
+  // would match.
   function ambientName(ctor) {
     if (!ctor || !ctor.name) return null;
     try {
-      return INTRINSICS[ctor.name] === ctor ? ctor.name : null;
+      return globalThis[ctor.name] === ctor ? ctor.name : null;
     } catch (err) {
       return null;
     }

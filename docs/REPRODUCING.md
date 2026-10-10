@@ -1,74 +1,24 @@
-# Reproducing benchmark operations
+# Reproducing JADeBench results
 
-## Verify the released results
-
-The fastest reproduction starts from the committed per-subject scores rather
-than rerunning model APIs:
+## Verify the final paper archive
 
 ```bash
 python3 scripts/reproduce_results.py --check
-python3 scripts/reproduce_codenet_results.py --check
-```
-
-This validates all 24 run directories, checks that every prediction maps to
-`adb-001` through `adb-093`, verifies output files, and regenerates the
-leaderboard in memory. Remove `--check` to rewrite the generated JSON and
-Markdown summaries.
-
-The second command validates all 13 CodeNet100 reference runs, 1,269 released
-outputs, stable IDs, and the separate legacy-schema leaderboard.
-
-## Validate this source release
-
-```bash
+python3 scripts/audit_rq4_cost.py
 python3 scripts/check_repository.py
 python3 scripts/check_release_safety.py
-python3 evaluators/tests/test_metrics.py
-python3 evaluators/tests/test_suite_recall.py
-python3 evaluators/tests/test_trace_mask.py
 ```
 
-## Run the bundled sample
+The first command validates 2,046 JADeBench result records (93 modules × 11 systems × two protections), checks every released candidate's SHA-256, validates the separate 651-cell RQ1 comparison, and verifies the generated leaderboards. Remove `--check` to regenerate `results/leaderboard.{json,md}` and the RQ1 table. All released per-output means must round to the final manuscript's Table RQ2 values in `results/paper/manuscript_table.json`. Run `PYTHONHASHSEED=0 python3 scripts/audit_codebleu_r.py` to recompute the 69 parser-valid outputs that fail the broader Syntax axis, or add `--all` to recompute every JADeBench CodeBLEU-R value.
 
-The deterministic identity smoke test exercises all static evaluators:
+Run `python3 scripts/audit_rq4_cost.py` to recompute all 18 RQ4 rows from 1,674 released attempt records; pass `--check-workspace /path/to/FSE` to verify the original source archive hashes. Agent token means use 76 JSO/full and 74 VM subjects with complete usage across all five agents, while runtime denominators are recorded separately. The final-paper scores are frozen observations. The 24 older `results/runs` directories contain candidate outputs and historical diagnostic `scores.jsonl` records, but their earlier execution and CodeBLEU metrics are not the final paper results. The separate 100-program CodeNet archive can be checked with `python3 scripts/reproduce_codenet_results.py --check`; its leaderboard is not the paper's 93-program RQ1 comparison.
 
-```bash
-ADB_CORPUS="$PWD/samples/diverse6/corpus" \
-python3 evaluators/score.py \
-  --manifest samples/diverse6/corpus/manifest.jsonl \
-  --builds samples/diverse6/builds.jsonl \
-  --predictions samples/diverse6/predictions/identity.jsonl \
-  --out /tmp/agentdeobfbench-smoke.jsonl \
-  --no-execution
-```
+## Score a new prediction
 
-For execution scoring, first run
-`python3 scripts/setup_sample.py --execute`, then set `ADB_CORPUS` and
-`ADB_SANDBOX` to the sample roots. Execution is optional because one upstream
-sample lacks a dependency lock file.
-
-## Run a baseline on the sample
-
-Install the static tools and preview the command:
+Install Node.js 22 and the pinned Python packages from `evaluators/requirements.txt`. Use `PYTHONHASHSEED=0` for deterministic CodeBLEU-R data-flow normalization:
 
 ```bash
-npm ci --prefix baselines/static_tools
-python3 scripts/benchmark.py baseline static_tools -- \
-  --builds samples/diverse6/corpus/jsob/manifest.jsonl \
-  --run-root /tmp/adb-static --dry-run
-```
-
-Remove `--dry-run` only after reviewing the selected inputs and output path.
-Model baselines can consume paid quota and must receive credentials only through
-environment variables.
-
-## Score the 93-subject benchmark
-
-The original, JS-OB, and VM programs are included in
-`benchmark/realworld93`. Static evaluation is immediately reproducible:
-
-```bash
-ADB_CORPUS="$PWD/benchmark/realworld93" \
+ADB_CORPUS="$PWD/benchmark/realworld93" PYTHONHASHSEED=0 \
 python3 evaluators/score.py \
   --manifest benchmark/realworld93/manifest.jsonl \
   --builds benchmark/realworld93/builds-jsob.jsonl \
@@ -77,40 +27,18 @@ python3 evaluators/score.py \
   --no-execution
 ```
 
-Use `builds-vm.jsonl` for VM predictions. Prediction records must use the
-released `subject_id` and `build_id` values; `sample_id` is recommended for
-analysis but ignored by the evaluator.
+Use `builds-vm.jsonl` for VM candidates. Static scoring needs only the materialized 93-module benchmark. Full execution scoring additionally needs the original project test environments and generated oracle sandboxes. The system view receives the protected module and a public harness; the original and test assertions remain in the oracle view. See `sandbox/README.md` for setup and isolation checks.
 
-## Inspect the CodeNet100 reference benchmark
-
-`benchmark/codenet100` includes 100 originals, stdin/stdout test cases,
-JS-OB/full inputs, and C77-0 inputs. Released final programs and historical
-JsDeObsBench-compatible score records are under `results/codenet100/runs`.
+## Bundled integration fixture
 
 ```bash
-python3 scripts/reproduce_codenet_results.py --check
+ADB_CORPUS="$PWD/samples/diverse6/corpus" PYTHONHASHSEED=0 \
+python3 evaluators/score.py \
+  --manifest samples/diverse6/corpus/manifest.jsonl \
+  --builds samples/diverse6/builds.jsonl \
+  --predictions samples/diverse6/predictions/identity.jsonl \
+  --out /tmp/jadebench-smoke.jsonl \
+  --no-execution
 ```
 
-Remove `--check` to regenerate
-`results/codenet100/leaderboard.{json,md}`. This aggregation uses the legacy
-`syntax_pass`, `exe_pass`, and `codebleu` fields and remains separate from the
-realworld93 evaluator.
-
-## Execution reproduction
-
-Released execution scores and final returned programs are committed under
-`results/runs`. Re-running execution additionally needs project-specific test
-environments and generated sandboxes. Their archive status and limitations are
-documented in `DATA_RELEASE.md`.
-
-## Broader construction metadata
-
-The construction manifests remain in `corpus/manifest.jsonl` and
-`obfuscators/builds/builds.jsonl`. They describe the 93 screened subjects and
-805 admitted builds across configurations for 85 of them; the public
-leaderboard still uses exactly the two materialized inputs per subject under
-`benchmark/realworld93`.
-
-Every reported result should record the repository revision, evaluator schema,
-manifest checksums, selected subject/build IDs, model or tool version, and raw
-per-build score records. Do not report only an aggregate.
+The six subjects are a smoke fixture and are not included in paper percentages.

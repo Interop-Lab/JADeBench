@@ -1,0 +1,164 @@
+{
+  "source": "FSE final manuscript main.tex, Table RQ2, 2026-10-04",
+  "note": "Authoritative rounded Table RQ2 values; every reported aggregate is checked against per-output records",
+  "protections": {
+    "jsob-full": {
+      "webcrack": {
+        "codebleu_r": 0.586,
+        "rouge_l": 0.798,
+        "readability": 14.0,
+        "syntax_percent": 100.0,
+        "execution_percent": 92.5
+      },
+      "jsimplifier": {
+        "codebleu_r": 0.208,
+        "rouge_l": 0.326,
+        "readability": 11.9,
+        "syntax_percent": 69.9,
+        "execution_percent": 8.6
+      },
+      "l0-gpt-sol": {
+        "codebleu_r": 0.391,
+        "rouge_l": 0.54,
+        "readability": 31.0,
+        "syntax_percent": 83.9,
+        "execution_percent": 18.3
+      },
+      "l0-glm": {
+        "codebleu_r": 0.52,
+        "rouge_l": 0.662,
+        "readability": 26.3,
+        "syntax_percent": 78.5,
+        "execution_percent": 5.4
+      },
+      "l0-deepseek": {
+        "codebleu_r": 0.477,
+        "rouge_l": 0.618,
+        "readability": 25.5,
+        "syntax_percent": 77.4,
+        "execution_percent": 5.4
+      },
+      "l0-kimi": {
+        "codebleu_r": 0.433,
+        "rouge_l": 0.565,
+        "readability": 22.6,
+        "syntax_percent": 82.8,
+        "execution_percent": 4.3
+      },
+      "openhands": {
+        "codebleu_r": 0.485,
+        "rouge_l": 0.66,
+        "readability": 32.3,
+        "syntax_percent": 98.9,
+        "execution_percent": 83.9
+      },
+      "claude-code": {
+        "codebleu_r": 0.426,
+        "rouge_l": 0.591,
+        "readability": 33.0,
+        "syntax_percent": 97.8,
+        "execution_percent": 62.4
+      },
+      "opencode": {
+        "codebleu_r": 0.383,
+        "rouge_l": 0.539,
+        "readability": 30.8,
+        "syntax_percent": 100.0,
+        "execution_percent": 63.4
+      },
+      "kimi-code": {
+        "codebleu_r": 0.421,
+        "rouge_l": 0.588,
+        "readability": 33.5,
+        "syntax_percent": 100.0,
+        "execution_percent": 50.5
+      },
+      "codex": {
+        "codebleu_r": 0.411,
+        "rouge_l": 0.581,
+        "readability": 31.1,
+        "syntax_percent": 98.9,
+        "execution_percent": 58.1
+      }
+    },
+    "vm-l1": {
+      "webcrack": {
+        "codebleu_r": 0.026,
+        "rouge_l": 0.055,
+        "readability": 5.4,
+        "syntax_percent": 100.0,
+        "execution_percent": 100.0
+      },
+      "jsimplifier": {
+        "codebleu_r": 0.025,
+        "rouge_l": 0.051,
+        "readability": 7.1,
+        "syntax_percent": 95.7,
+        "execution_percent": 8.6
+      },
+      "l0-gpt-sol": {
+        "codebleu_r": 0.262,
+        "rouge_l": 0.37,
+        "readability": 29.6,
+        "syntax_percent": 92.5,
+        "execution_percent": 3.2
+      },
+      "l0-glm": {
+        "codebleu_r": 0.268,
+        "rouge_l": 0.396,
+        "readability": 22.9,
+        "syntax_percent": 93.5,
+        "execution_percent": 2.2
+      },
+      "l0-deepseek": {
+        "codebleu_r": 0.202,
+        "rouge_l": 0.331,
+        "readability": 23.0,
+        "syntax_percent": 91.4,
+        "execution_percent": 2.2
+      },
+      "l0-kimi": {
+        "codebleu_r": 0.189,
+        "rouge_l": 0.262,
+        "readability": 17.8,
+        "syntax_percent": 58.1,
+        "execution_percent": 2.2
+      },
+      "openhands": {
+        "codebleu_r": 0.399,
+        "rouge_l": 0.553,
+        "readability": 30.8,
+        "syntax_percent": 98.9,
+        "execution_percent": 58.1
+      },
+      "claude-code": {
+        "codebleu_r": 0.354,
+        "rouge_l": 0.502,
+        "readability": 32.6,
+        "syntax_percent": 100.0,
+        "execution_percent": 21.5
+      },
+      "opencode": {
+        "codebleu_r": 0.314,
+        "rouge_l": 0.46,
+        "readability": 32.4,
+        "syntax_percent": 100.0,
+        "execution_percent": 25.8
+      },
+      "kimi-code": {
+        "codebleu_r": 0.323,
+        "rouge_l": 0.468,
+        "readability": 31.7,
+        "syntax_percent": 100.0,
+        "execution_percent": 25.8
+      },
+      "codex": {
+        "codebleu_r": 0.345,
+        "rouge_l": 0.497,
+        "readability": 31.1,
+        "syntax_percent": 100.0,
+        "execution_percent": 26.9
+      }
+    }
+  }
+}

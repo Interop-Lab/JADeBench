@@ -8,13 +8,12 @@ subject would fail for reasons that have nothing to do with the candidate.
 """
 import importlib.util
 import os
+import signal
 import subprocess
 import sys
-import tempfile
-import time
 from pathlib import Path
 
-from . import corpus, jsast
+from . import corpus
 
 _TOOLS = "tools/node_modules/.bin"
 
@@ -95,146 +94,32 @@ def project_env(project_dir, extra=None):
     return env
 
 
-def run(command, cwd, env=None, timeout=300):
+def run(command, cwd, env=None, timeout=900):
     """Run a shell command, capturing output. Never raises on a non-zero exit."""
-    started = time.monotonic()
+    proc = subprocess.Popen(command, cwd=str(cwd), shell=True, env=env,
+                            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                            text=True, start_new_session=True)
     try:
-        proc = subprocess.run(command, cwd=str(cwd), shell=True, env=env,
-                              capture_output=True, text=True, timeout=timeout)
-        return {"exit_code": proc.returncode, "stdout": proc.stdout,
-                "stderr": proc.stderr, "timed_out": False,
-                "elapsed_sec": time.monotonic() - started}
-    except subprocess.TimeoutExpired as exc:
-        return {"exit_code": None,
-                "stdout": exc.stdout.decode("utf-8", "replace") if isinstance(exc.stdout, bytes) else (exc.stdout or ""),
-                "stderr": exc.stderr.decode("utf-8", "replace") if isinstance(exc.stderr, bytes) else (exc.stderr or ""),
-                "timed_out": True,
-                "elapsed_sec": time.monotonic() - started}
-
-
-# esbuild picks the loader from the extension. A `.cjs` / `.js` / `.mjs`
-# candidate that a deobfuscator restored to JSX is rejected before any test
-# runs, and that refusal was being scored as execution 0.
-_JSX_LOADER_HINT = "JSX syntax extension is not currently enabled"
-_JS_SUFFIXES = (".js", ".mjs", ".cjs")
-
-
-def _esbuild(cmd, timeout):
-    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
-    detail = (proc.stderr or proc.stdout or "esbuild failed")[:2000]
-    return proc.returncode == 0, detail
-
-
-def _jsx_loader_flag(source):
-    """`--loader` that parses this extension as JSX. `.jsx` already does."""
-    suffix = Path(source).suffix.lower()
-    if suffix not in _JS_SUFFIXES:
-        return None
-    return "--loader:%s=jsx" % suffix
-
-
-def _walk_subtree(root):
-    """Pre-order walk that does not climb out of `root`.
-
-    `jsast.walk` follows the parent pointer, so starting it on a child visits
-    the rest of the file. Name restoration has to stay inside one expression.
-    """
-    cursor = root.walk()
-    while True:
-        yield cursor.node
-        if cursor.goto_first_child():
-            continue
-        while True:
-            if cursor.node == root:
-                return
-            if cursor.goto_next_sibling():
-                break
-            if not cursor.goto_parent():
-                return
-
-
-def _expression_name(node):
-    """The inner name of a class or function expression, if it has one."""
-    if node is None or node.type not in ("class", "function_expression"):
-        return None
-    name = node.child_by_field_name("name")
-    if name is None or name.type != "identifier":
-        return None
-    return name.text.decode("utf-8")
-
-
-def _same_name_bindings(code):
-    """Bindings written as `binding = class binding` or `binding = function binding`.
-
-    The inner name is scoped to the expression, so `constructor.name` and
-    `function.name` are that name. esbuild's ESM/CJS printer treats it as a
-    collision with the outer binding and renames it (`Foo` becomes `Foo2`),
-    which changes `.name` before any test runs.
-    """
-    found = set()
-    tree = jsast.parse(code)
-    for node in jsast.walk(tree.root_node):
-        if node.type != "variable_declarator":
-            continue
-        binding = node.child_by_field_name("name")
-        value = node.child_by_field_name("value")
-        if binding is None or binding.type != "identifier":
-            continue
-        inner = _expression_name(value)
-        if inner is not None and inner == binding.text.decode("utf-8"):
-            found.add(inner)
-    return found
-
-
-def _restore_esbuild_expression_names(source_text, output_text):
-    """Put back class and function names esbuild suffixed during printing.
-
-    Only bindings whose source text used the same inner and outer name are
-    restored, and only when the printed inner name is that name plus digits.
-    `var Foo = class Foo2` in the input is left alone.
-    """
-    if not source_text or not output_text:
-        return output_text
-    wanted = _same_name_bindings(source_text)
-    if not wanted:
-        return output_text
-    tree = jsast.parse(output_text)
-    raw = output_text.encode("utf-8")
-    spans = []
-    for node in jsast.walk(tree.root_node):
-        if node.type != "variable_declarator":
-            continue
-        binding_node = node.child_by_field_name("name")
-        value = node.child_by_field_name("value")
-        if binding_node is None or binding_node.type != "identifier":
-            continue
-        binding = binding_node.text.decode("utf-8")
-        inner = _expression_name(value)
-        if binding not in wanted or not inner or inner == binding:
-            continue
-        if not (inner.startswith(binding) and inner[len(binding):].isdigit()):
-            continue
-        old = inner.encode("utf-8")
-        new = binding.encode("utf-8")
-        for sub in _walk_subtree(value):
-            if sub.type == "identifier" and sub.text == old:
-                spans.append((sub.start_byte, sub.end_byte, new))
-    if not spans:
-        return output_text
-    spans.sort()
-    out = bytearray()
-    cursor = 0
-    for start, end, new in spans:
-        if start < cursor or end > len(raw):
-            return output_text
-        out += raw[cursor:start]
-        out += new
-        cursor = end
-    out += raw[cursor:]
-    restored = out.decode("utf-8")
-    if jsast.syntax_errors(jsast.parse(restored)):
-        return output_text
-    return restored
+        stdout, stderr = proc.communicate(timeout=timeout)
+        return {"exit_code": proc.returncode, "stdout": stdout,
+                "stderr": stderr, "timed_out": False}
+    except subprocess.TimeoutExpired:
+        # Test scripts often launch a shell, a runner and then a Node worker.
+        # Stopping only the shell leaves the worker running after the score.
+        try:
+            os.killpg(proc.pid, signal.SIGTERM)
+        except ProcessLookupError:
+            pass
+        try:
+            stdout, stderr = proc.communicate(timeout=3)
+        except subprocess.TimeoutExpired:
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)
+            except ProcessLookupError:
+                pass
+            stdout, stderr = proc.communicate()
+        return {"exit_code": None, "stdout": stdout or "",
+                "stderr": stderr or "", "timed_out": True}
 
 
 def transform(source, dest, fmt, platform="node", root=None, timeout=120):
@@ -242,75 +127,16 @@ def transform(source, dest, fmt, platform="node", root=None, timeout=120):
 
     Bundling is off: the candidate must run with exactly the dependencies the
     subject bundle has, and inlining more would change what is being measured.
-
-    When the default loader rejects JSX, retry once with that extension parsed
-    as JSX. esbuild's classic JSX transform emits `React.createElement`, which
-    is what these React subjects already call; the automatic runtime is not
-    selected, so no `react/jsx-runtime` import is injected.
-
-    esbuild renames `var Foo = class Foo` to `class Foo2` when printing a
-    module, which changes `constructor.name`. Those names are restored from
-    the input so the harness does not fail tests that read `.name`.
     """
     dest = Path(dest)
     dest.parent.mkdir(parents=True, exist_ok=True)
     cmd = [str(esbuild_bin(root)), str(source), "--format=%s" % fmt,
            "--platform=%s" % platform, "--log-level=warning",
            "--outfile=%s" % dest]
-    ok, detail = _esbuild(cmd, timeout)
-    if (not ok or not dest.exists()) and _JSX_LOADER_HINT in (detail or ""):
-        flag = _jsx_loader_flag(source)
-        if flag:
-            ok, detail = _esbuild(cmd + [flag], timeout)
-    if not ok or not dest.exists():
-        return False, detail or "esbuild failed"
-    source_text = Path(source).read_text(encoding="utf-8", errors="replace")
-    output_text = dest.read_text(encoding="utf-8", errors="replace")
-    restored = _restore_esbuild_expression_names(source_text, output_text)
-    if restored != output_text:
-        dest.write_text(restored, encoding="utf-8")
+    proc = subprocess.run(cmd, capture_output=True, text=True, timeout=timeout)
+    if proc.returncode != 0 or not dest.exists():
+        return False, (proc.stderr or proc.stdout or "esbuild failed")[:2000]
     return True, ""
-
-
-def compiles_as_jsx(code, root=None, timeout=30):
-    """Whether `code` is JSX that esbuild accepts once the loader is enabled.
-
-    False for plain JavaScript and for errors that are not the JSX-loader
-    refusal. Callers use this to avoid treating a restored JSX program as
-    syntactically invalid just because `node --check` and the JavaScript
-    grammar do not understand JSX.
-    """
-    if not code or not isinstance(code, str):
-        return False
-    src = None
-    out = None
-    try:
-        handle = tempfile.NamedTemporaryFile("w", suffix=".cjs", delete=False,
-                                             encoding="utf-8")
-        handle.write(code)
-        handle.close()
-        src = Path(handle.name)
-        out = Path(str(src) + ".out.js")
-        cmd = [str(esbuild_bin(root)), str(src), "--format=cjs",
-               "--platform=neutral", "--log-level=warning",
-               "--outfile=%s" % out]
-        ok, detail = _esbuild(cmd, timeout)
-        if ok:
-            return False
-        if _JSX_LOADER_HINT not in (detail or ""):
-            return False
-        ok, _detail = _esbuild(cmd + ["--loader:.cjs=jsx"], timeout)
-        return bool(ok and out.exists())
-    except (OSError, subprocess.TimeoutExpired, ToolchainError):
-        return False
-    finally:
-        for path in (src, out):
-            if path is None:
-                continue
-            try:
-                path.unlink()
-            except OSError:
-                pass
 
 
 def node_check(path, timeout=30):

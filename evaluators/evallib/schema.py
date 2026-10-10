@@ -12,6 +12,7 @@ valid input.
 Paths inside a record are resolved relative to the file that contained it, so a
 prediction set can be moved as a directory without rewriting it.
 """
+import os
 from pathlib import Path
 
 from .corpus import read_jsonl
@@ -35,6 +36,13 @@ class RecordError(ValueError):
 
 
 def _resolve(base, value):
+    # JSONL artifacts are intentionally movable across machines.  A run
+    # produced on Windows uses backslashes even when it is later scored on
+    # POSIX; pathlib otherwise treats the entire value as one literal filename.
+    # Normalize only on POSIX so genuine Windows absolute paths retain their
+    # native interpretation when evaluated on Windows.
+    if os.name != "nt" and "\\" in str(value):
+        value = str(value).replace("\\", "/")
     path = Path(value)
     return path if path.is_absolute() else (Path(base).parent / path).resolve()
 
@@ -57,7 +65,7 @@ class Build(object):
         # How this build earned its place in the tier. `oracle` means the
         # subject's own suite re-ran and matched the reference; `L1_exports`
         # means only that the build loads and exports the same symbols, because
-        # the subject has no usable oracle. Some construction builds use the
+        # the subject has no usable oracle. 36 of the 203 retained builds are the
         # latter, and behaviour equivalence was never established for them — so
         # the `identity` oracle's "must score 1.0 on execution" expectation does
         # not apply to those, and an analysis has to be able to exclude them.
